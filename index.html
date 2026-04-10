@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IA × Immo — L'IA concrète pour agences immobilières indépendantes</title>
+<title>Domus-AI — L'IA concrète pour agences immobilières indépendantes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
@@ -1183,13 +1183,16 @@ footer {
   display: flex;
   gap: 2rem;
 }
-.footer-links a {
+.footer-links a,
+.footer-links span {
   font-family: var(--mono);
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   color: var(--text-dim);
-  transition: color 0.25s ease;
   text-transform: uppercase;
+}
+.footer-links a {
+  transition: color 0.25s ease;
 }
 .footer-links a:hover { color: var(--gold); }
 
@@ -1368,7 +1371,7 @@ footer {
      NAVIGATION
      ============================================================ -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">IA <span class="x">×</span> IMMO</a>
+  <a href="#navbar" class="nav-logo">Domus-AI</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#navbar">Accueil</a></li>
     <li><a href="#solution">Solutions</a></li>
@@ -1855,12 +1858,12 @@ footer {
      FOOTER
      ============================================================ -->
 <footer>
-  <span class="footer-logo">IA <span class="x">×</span> IMMO</span>
+  <span class="footer-logo">Domus-AI</span>
   <span class="footer-copy">© 2026 — Tous droits réservés</span>
   <ul class="footer-links">
-    <li><a href="#">Mentions légales</a></li>
-    <li><a href="#">LinkedIn</a></li>
-    <li><a href="mailto:contact@example.com">Contact</a></li>
+    <li><span>Mentions légales</span></li>
+    <li><span>LinkedIn</span></li>
+    <li><a href="mailto:contact@domus-ai.fr">Contact</a></li>
   </ul>
 </footer>
 

@@ -1,6 +1,6 @@
 # DOMUS-AI PROJECT CHECKLIST
 
-**Last Updated:** 10 Apr 2026, 18:05  
+**Last Updated:** 10 Apr 2026, 19:31  
 **Current Phase:** PHASE 2 — LAUNCH  
 **Overall Progress:** 35% → 70%
 
@@ -41,7 +41,7 @@
 ✅ Define brand & positioning  
 ✅ Create about-me.md profile  
 ✅ Create my-company.md with 2026 goals  
-✅ Design website landing page (site.html)  
+✅ Design website landing page (index.html)  
 ✅ Build blog infrastructure (blog/index.html + 3 articles)  
 ✅ Align logo design & navigation  
 
@@ -51,7 +51,7 @@
 
 ### CRITICAL 🔴 (Must do today)
 
-- ✅ Add contact form to site.html with Formspree integration
+- ✅ Add contact form to index.html with Formspree integration
 - 🔄 Create Vercel account & deploy website
 - ⏳ Point domus-ai.fr domain to Vercel (DNS configuration)
 - ⏳ Test website live + contact form functionality
@@ -60,8 +60,8 @@
 ### HIGH 🟠 (This week)
 
 - ⏳ Create contact@domus-ai.fr email address
-- ⏳ Test all navigation links (site → blog → back)
-- ⏳ Verify all article CTAs work
+- 🔄 Test all navigation links (index → blog → back) — internal links updated while working with Codex; live testing still pending
+- 🔄 Verify all article CTAs work — CTA targets updated while working with Codex; live testing still pending
 - ⏳ Add Google Analytics to website
 - ⏳ Create simple robots.txt & sitemap.xml for SEO
 
