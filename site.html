@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA × Immo — L'IA concrète pour agences immobilières indépendantes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root {
+  --bg:          #0D0D0B;
+  --bg-alt:      #111110;
+  --bg-surface:  #181816;
+  --bg-elevated: #1F1F1C;
+  --text:        #F0EAD8;
+  --text-muted:  #8C857A;
+  --text-dim:    #4A4742;
+  --gold:        #C8922A;
+  --gold-light:  #DFB05A;
+  --gold-pale:   rgba(200,146,42,0.12);
+  --gold-border: rgba(200,146,42,0.35);
+  --border:      rgba(240,234,216,0.07);
+  --border-mid:  rgba(240,234,216,0.12);
+  --serif:       'DM Serif Display', Georgia, serif;
+  --mono:        'IBM Plex Mono', 'Courier New', monospace;
+  --sans:        'DM Sans', system-ui, sans-serif;
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto !important; }
+}
+
+::selection { background: var(--gold); color: #0D0D0B; }
+
+a { text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ============================================================
+   BACKGROUND TEXTURE — subtle grain via SVG filter
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 1;
+}
+
+/* Dot grid in hero area */
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(200,146,42,0.12) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+@keyframes slideLeft {
+  from { opacity:0; transform:translateX(-32px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollLine {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+@keyframes pulseGold {
+  0%,100% { opacity:0.6; }
+  50%      { opacity:1; }
+}
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 68px;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(13,13,11,0);
+  border-bottom: 1px solid transparent;
+  transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+nav.scrolled {
+  background: rgba(13,13,11,0.9);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom-color: var(--border);
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 0.8s ease 0.2s forwards;
+}
+.nav-logo .x { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  transition: color 0.25s ease;
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+}
+.nav-links li:nth-child(1) a { animation-delay: 0.3s; }
+.nav-links li:nth-child(2) a { animation-delay: 0.38s; }
+.nav-links li:nth-child(3) a { animation-delay: 0.46s; }
+.nav-links li:nth-child(4) a { animation-delay: 0.54s; }
+.nav-links li:nth-child(5) a { animation-delay: 0.62s; }
+.nav-links li:nth-child(6) a { animation-delay: 0.70s; }
+.nav-links li:nth-child(7) a { animation-delay: 0.78s; }
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta-btn {
+  font-family: var(--mono) !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--gold) !important;
+  border: 1px solid var(--gold-border) !important;
+  padding: 0.55rem 1.2rem !important;
+  border-radius: 2px !important;
+  transition: all 0.25s ease !important;
+  animation-delay: 0.78s !important;
+}
+.nav-cta-btn:hover {
+  background: var(--gold) !important;
+  color: #0D0D0B !important;
+  border-color: var(--gold) !important;
+}
+
+/* Mobile toggle */
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.nav-mobile-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(8rem, 14vh, 12rem) clamp(1.5rem, 7vw, 7rem) clamp(6rem, 10vh, 8rem);
+  overflow: hidden;
+}
+
+.hero-watermark {
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--serif);
+  font-size: clamp(10rem, 22vw, 22rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,146,42,0.07);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  letter-spacing: -0.04em;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease-out) 0.4s forwards;
+}
+.hero-label::before { content: '// '; opacity: 0.5; }
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6.5vw, 6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 900px;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out) 0.6s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.85s forwards;
+}
+
+.hero-sub {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out) 0.9s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease-out) 1.1s forwards;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 5rem;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeIn 0.8s ease 1.4s forwards;
+}
+
+.hero-stats > div {
+  padding: 2rem clamp(1.5rem, 3vw, 3rem) 0 0;
+  border-right: 1px solid var(--border);
+}
+.hero-stats > div:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+.hero-stats > div:not(:first-child) {
+  padding-left: clamp(1.5rem, 3vw, 3rem);
+}
+
+.hero-stat-value {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.hero-stat-value span { color: var(--gold); }
+
+.hero-stat-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* Scroll indicator — removed (conflicts with hero stats) */
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  background: var(--gold);
+  color: #0D0D0B;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-height: 44px;
+  letter-spacing: 0.02em;
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(200,146,42,0.25);
+}
+.btn-primary svg { transition: transform 0.25s ease; }
+.btn-primary:hover svg { transform: translateX(4px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  border-radius: 2px;
+  border: 1px solid var(--border-mid);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-height: 44px;
+}
+.btn-secondary:hover {
+  color: var(--text);
+  border-color: var(--border-mid);
+  background: rgba(240,234,216,0.04);
+}
+
+/* ============================================================
+   SECTION COMMON
+   ============================================================ */
+section { position: relative; z-index: 1; }
+
+.section-inner {
+  padding: clamp(5rem, 10vh, 8rem) clamp(1.5rem, 7vw, 7rem);
+}
+
+.section-head {
+  margin-bottom: 4rem;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 680px;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+
+.section-desc {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  max-width: 540px;
+  line-height: 1.75;
+  margin-top: 1.25rem;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Section divider */
+.divider {
+  height: 1px;
+  background: var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   TICKER / MARQUEE
+   ============================================================ */
+.ticker-wrap {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  padding: 1rem 0;
+  position: relative;
+  z-index: 1;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: tickerScroll 22s linear infinite;
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0 3rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.ticker-item .dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   PROBLEM SECTION
+   ============================================================ */
+.problem { background: var(--bg-alt); }
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.problem-card {
+  background: var(--bg-alt);
+  padding: 2.5rem;
+  transition: background 0.35s ease;
+  cursor: default;
+  position: relative;
+}
+.problem-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px;
+  height: 0;
+  background: var(--gold);
+  transition: height 0.4s var(--ease-out);
+}
+.problem-card:hover { background: var(--bg-surface); }
+.problem-card:hover::before { height: 100%; }
+
+.problem-num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  margin-bottom: 2rem;
+}
+
+.problem-card h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+.problem-card p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ============================================================
+   SOLUTION SECTION
+   ============================================================ */
+.solution { background: var(--bg); }
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.solution-card {
+  padding: 2rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  transition: all 0.35s ease;
+}
+.solution-card:hover {
+  border-color: var(--gold-border);
+  background: var(--bg-elevated);
+}
+
+.solution-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+}
+.solution-icon-wrap svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--gold);
+}
+
+.solution-card h3 {
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
+}
+.solution-card p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ============================================================
+   STEPS / APPROACH
+   ============================================================ */
+.steps { background: var(--bg-alt); }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.step-card {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+  transition: background 0.3s ease;
+}
+.step-card:last-child { border-right: none; }
+.step-card:hover { background: rgba(200,146,42,0.04); }
+
+.step-card-num {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  font-weight: 400;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,146,42,0.25);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.step-card h3 {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.step-card p {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ============================================================
+   SERVICES / PRICING
+   ============================================================ */
+.services { background: var(--bg); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  transition: all 0.35s ease;
+  position: relative;
+}
+.service-card:hover {
+  border-color: var(--border-mid);
+  background: var(--bg-elevated);
+}
+.service-card.featured {
+  border-color: var(--gold-border);
+  background: var(--bg-elevated);
+}
+.service-card.featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+
+.service-tier {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.service-tier::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.service-card h3 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.service-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  flex-grow: 0;
+}
+
+.service-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+.service-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.5;
+}
+.service-features li::before {
+  content: '→';
+  color: var(--gold);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 0.05em;
+}
+
+.service-price-block {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+.service-price {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.5vw, 2.5rem);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.service-price sub {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  vertical-align: middle;
+  color: var(--text-muted);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  margin-left: 0.25rem;
+}
+.service-price-note {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+.service-cta {
+  display: block;
+  text-align: center;
+  padding: 0.85rem 1.5rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 2px;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+  min-height: 44px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-cta.outline {
+  color: var(--text-muted);
+  border: 1px solid var(--border-mid);
+  background: transparent;
+}
+.service-cta.outline:hover {
+  color: var(--text);
+  border-color: var(--gold-border);
+}
+.service-cta.filled {
+  background: var(--gold);
+  color: #0D0D0B;
+  border: 1px solid var(--gold);
+}
+.service-cta.filled:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  box-shadow: 0 8px 30px rgba(200,146,42,0.2);
+}
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+.results { background: var(--bg-alt); }
+
+.results-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-bottom: 4rem;
+}
+
+.result-stat {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  text-align: left;
+}
+.result-stat:last-child { border-right: none; }
+
+.result-stat-num {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.result-stat-num .accent { color: var(--gold); }
+
+.result-stat-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.results-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.result-item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.75rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s ease;
+}
+.result-item:last-child { border-bottom: none; }
+.result-item:hover { background: rgba(200,146,42,0.04); }
+
+.result-item-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1em;
+}
+.result-item-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--gold);
+}
+
+.result-item h4 {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+.result-item p {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about { background: var(--bg); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+.about-image-wrap {
+  position: relative;
+}
+.about-image-frame {
+  position: relative;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  border-radius: 2px;
+}
+.about-image-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(13,13,11,0.6) 100%
+  );
+  pointer-events: none;
+}
+.about-image-frame img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: grayscale(15%);
+  transition: filter 0.4s ease;
+}
+.about-image-wrap:hover .about-image-frame img { filter: grayscale(0%); }
+
+.about-image-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 1;
+}
+.about-image-caption-name {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--text);
+  display: block;
+}
+.about-image-caption-role {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.about-text h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 2rem;
+}
+.about-text p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 1.25rem;
+}
+.about-text p:last-of-type { margin-bottom: 2rem; }
+
+.about-credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.credential-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  padding: 0.35rem 0.75rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+  background: var(--gold-pale);
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq { background: var(--bg-alt); }
+
+.faq-list {
+  max-width: 720px;
+  border: 1px solid var(--border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.faq-item:last-child { border-bottom: none; }
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.25s ease;
+}
+.faq-question:hover { background: rgba(200,146,42,0.04); }
+
+.faq-question-text {
+  font-family: var(--sans);
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.faq-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--gold);
+  position: relative;
+  transition: transform 0.35s var(--ease-out);
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  border-radius: 1px;
+}
+.faq-icon::before { top: 50%; left: 0; right: 0; height: 1.5px; transform: translateY(-50%); }
+.faq-icon::after { left: 50%; top: 0; bottom: 0; width: 1.5px; transform: translateX(-50%); transition: transform 0.35s ease, opacity 0.25s ease; }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease-out);
+}
+.faq-answer-inner {
+  padding: 0 2rem 1.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-weight: 300;
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+}
+
+/* Open state */
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-item.open .faq-question { background: rgba(200,146,42,0.04); }
+.faq-item.open .faq-answer { max-height: 400px; }
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+.cta-section {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  padding: clamp(6rem, 12vh, 10rem) clamp(1.5rem, 7vw, 7rem);
+  position: relative;
+  overflow: hidden;
+}
+.cta-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(200,146,42,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section .section-label {
+  justify-content: center;
+}
+.cta-section .section-label::before { display: none; }
+.cta-section .section-label::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.cta-section .section-title {
+  max-width: 560px;
+  margin: 0 auto 1.25rem;
+}
+.cta-section .section-desc {
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.cta-note {
+  margin-top: 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--bg-alt);
+  padding: 2.5rem clamp(1.5rem, 7vw, 7rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+}
+
+.footer-logo {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.footer-logo .x { color: var(--gold); }
+
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  transition: color 0.25s ease;
+  text-transform: uppercase;
+}
+.footer-links a:hover { color: var(--gold); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .about-grid { grid-template-columns: 300px 1fr; gap: 4rem; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .step-card { border-bottom: 1px solid var(--border); }
+  .step-card:nth-child(2) { border-right: none; }
+  .step-card:nth-child(3) { border-bottom: none; }
+  .step-card:nth-child(4) { border-right: none; border-bottom: none; }
+}
+
+@media (max-width: 1024px) {
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .solution-grid { grid-template-columns: 1fr 1fr; }
+  .services-grid { grid-template-columns: 1fr; max-width: 560px; }
+  .results-stats { grid-template-columns: repeat(2, 1fr); }
+  .result-stat:nth-child(2) { border-right: none; }
+  .result-stat:nth-child(3) { border-top: none; border-right: 1px solid var(--border); }
+  .result-stat:nth-child(4) { border-top: none; border-right: none; }
+  .about-grid { grid-template-columns: 1fr; max-width: 560px; }
+  .hero-stats { gap: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: flex; }
+
+  .nav-links.open {
+    display: flex;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(13,13,11,0.97);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    animation: fadeIn 0.25s ease;
+  }
+  .nav-links.open li { border-bottom: 1px solid var(--border); }
+  .nav-links.open a {
+    display: block;
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  .problem-grid { grid-template-columns: 1fr; }
+  .solution-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; border: 1px solid var(--border); }
+  .step-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .step-card:last-child { border-bottom: none; }
+  .results-stats { grid-template-columns: 1fr 1fr; }
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .hero-stats > div {
+    padding: 1.5rem 1.25rem 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-stats > div:nth-child(odd) {
+    border-right: 1px solid var(--border);
+  }
+  .hero-stats > div:nth-child(even) {
+    padding-left: 1.25rem;
+    padding-right: 0;
+    border-right: none;
+  }
+  .hero-stats > div:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .footer-links { justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; width: 100%; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  .results-stats { grid-template-columns: 1fr; }
+  .result-stat { border-right: none; border-top: 1px solid var(--border); }
+  .result-stat:first-child { border-top: none; }
+}
+
+/* Contact Form Styles */
+.contact-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-mid);
+  background: var(--bg-surface);
+  color: var(--text);
+  border-radius: 2px;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold-border);
+  background: var(--bg-elevated);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-submit-btn {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 2rem;
+  background: var(--gold);
+  color: #0D0D0B;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+}
+
+.form-submit-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.form-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">IA <span class="x">×</span> IMMO</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#navbar">Accueil</a></li>
+    <li><a href="#solution">Solutions</a></li>
+    <li><a href="#approche">Approche</a></li>
+    <li><a href="#offres">Offres</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="blog/index.html">Blog</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta-btn">Prendre rendez-vous</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="dot-grid"></div>
+  <div class="hero-watermark" aria-hidden="true">IMMO</div>
+
+  <p class="hero-label">Conseil IA pour agences immobilières indépendantes</p>
+
+  <h1>Vos collaborateurs passent des heures sur des tâches que <em>l'IA fait en minutes.</em></h1>
+
+  <div class="hero-rule"></div>
+
+  <p class="hero-sub">La plupart des outils IA sont trop génériques pour être utiles. Je construis des assistants calibrés sur vos vrais workflows — annonces, emails, comptes-rendus — et je forme votre équipe à s'en servir. Opérationnel dès la première journée.</p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">
+      Réserver un appel gratuit
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#approche" class="btn-secondary">Voir l'approche</a>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-value">10<span>+</span></div>
+      <div class="hero-stat-label">Ans d'expérience<br>en IA appliquée</div>
+    </div>
+    <div>
+      <div class="hero-stat-value">2–15</div>
+      <div class="hero-stat-label">La taille idéale<br>pour cette intervention</div>
+    </div>
+    <div>
+      <div class="hero-stat-value">30<span>min</span></div>
+      <div class="hero-stat-label">Récupérées par<br>collaborateur, chaque jour</div>
+    </div>
+    <div>
+      <div class="hero-stat-value"><span>J+</span>7</div>
+      <div class="hero-stat-label">Pour observer<br>les premiers gains</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="dot"></span>Une annonce en 3 minutes, pas en 2 heures</span>
+    <span class="ticker-item"><span class="dot"></span>Zéro prospect laissé sans réponse</span>
+    <span class="ticker-item"><span class="dot"></span>Comptes-rendus prêts en 2 minutes</span>
+    <span class="ticker-item"><span class="dot"></span>Formation pratique sur vos vrais cas</span>
+    <span class="ticker-item"><span class="dot"></span>Assistants calibrés sur votre agence</span>
+    <span class="ticker-item"><span class="dot"></span>Autonomie totale dès la première semaine</span>
+    <span class="ticker-item"><span class="dot"></span>Résultats mesurables dès J+7</span>
+    <span class="ticker-item"><span class="dot"></span>Claude & ChatGPT configurés pour vous</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><span class="dot"></span>Une annonce en 3 minutes, pas en 2 heures</span>
+    <span class="ticker-item"><span class="dot"></span>Zéro prospect laissé sans réponse</span>
+    <span class="ticker-item"><span class="dot"></span>Comptes-rendus prêts en 2 minutes</span>
+    <span class="ticker-item"><span class="dot"></span>Formation pratique sur vos vrais cas</span>
+    <span class="ticker-item"><span class="dot"></span>Assistants calibrés sur votre agence</span>
+    <span class="ticker-item"><span class="dot"></span>Autonomie totale dès la première semaine</span>
+    <span class="ticker-item"><span class="dot"></span>Résultats mesurables dès J+7</span>
+    <span class="ticker-item"><span class="dot"></span>Claude & ChatGPT configurés pour vous</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROBLEM
+     ============================================================ -->
+<section class="problem" id="problem">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-label">Les défis</p>
+      <h2 class="section-title">Ce que vos collaborateurs font au lieu de négocier.</h2>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal reveal-delay-1">
+        <div class="problem-num">01</div>
+        <h3>Une annonce = deux heures de travail</h3>
+        <p>Photos triées, description rédigée, relue, retravaillée. Chaque bien publié coûte deux à trois heures à votre équipe. Multipliez par le volume mensuel.</p>
+      </div>
+      <div class="problem-card reveal reveal-delay-2">
+        <div class="problem-num">02</div>
+        <h3>Les prospects n'attendent pas.</h3>
+        <p>Un prospect sans réponse dans l'heure change d'agence. Vos collaborateurs savent que la qualité compte — mais ils n'ont plus le temps de bien écrire.</p>
+      </div>
+      <div class="problem-card reveal reveal-delay-3">
+        <div class="problem-num">03</div>
+        <h3>ChatGPT ne connaît pas votre agence.</h3>
+        <p>Vous avez essayé. Un prompt trop vague, un résultat inutilisable. L'IA générale ne sait pas comment vous travaillez — et personne n'a eu le temps de l'y former.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOLUTION
+     ============================================================ -->
+<section class="solution" id="solution">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-label">La solution</p>
+      <h2 class="section-title">L'IA taillée pour votre agence, <em>pas pour toutes les agences.</em></h2>
+      <p class="section-desc">Je ne vends pas un abonnement. Je passe du temps à comprendre comment votre équipe travaille, puis je construis des outils qui s'y adaptent — pas l'inverse.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="solution-card reveal reveal-delay-1">
+        <div class="solution-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Une annonce en 3 minutes</h3>
+        <p>Dictez les caractéristiques. L'IA produit le texte dans votre style, structuré pour convertir. Vous validez, vous publiez. Plus jamais deux heures pour un bien.</p>
+      </div>
+      <div class="solution-card reveal reveal-delay-2">
+        <div class="solution-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Réponses prospects instantanées</h3>
+        <p>Chaque email entrant déclenche une réponse personnalisée en quelques secondes. Vos prospects se sentent traités en priorité. Vous avancez sur autre chose.</p>
+      </div>
+      <div class="solution-card reveal reveal-delay-3">
+        <div class="solution-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Comptes-rendus en 2 minutes</h3>
+        <p>Vous revenez d'une visite. Vous dictez vos impressions. L'IA produit un compte-rendu professionnel, prêt à envoyer directement au vendeur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STEPS / APPROACH
+     ============================================================ -->
+<section class="steps" id="approche">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-label">Comment ça marche</p>
+      <h2 class="section-title">Comment ça fonctionne — sans détour.</h2>
+    </div>
+    <div class="steps-grid reveal">
+      <div class="step-card">
+        <div class="step-card-num">01</div>
+        <h3>J'observe avant de toucher quoi que ce soit</h3>
+        <p>Avant d'ouvrir un outil, je regarde comment votre équipe travaille vraiment. Pas une version théorique — la version réelle, avec ses raccourcis et ses pertes de temps.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-card-num">02</div>
+        <h3>Je construis les assistants pour votre agence</h3>
+        <p>Un pour les annonces. Un pour les réponses prospects. Un pour les comptes-rendus. Chacun calibré sur votre façon de travailler, votre ton, vos besoins.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-card-num">03</div>
+        <h3>On travaille sur vos vrais dossiers</h3>
+        <p>Pas de slides. Pas de cas fictifs. On prend vos annonces, vos emails, vos comptes-rendus — et on les traite en direct. Chacun repart avec un outil qu'il a construit lui-même.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-card-num">04</div>
+        <h3>Vous n'avez plus besoin de moi</h3>
+        <p>C'est l'objectif. Votre équipe maîtrise les outils sans dépendance. Je reste disponible pour les ajustements — mais l'autonomie est garantie dès le premier jour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section class="services" id="offres">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-label">Les offres</p>
+      <h2 class="section-title">Trois formats. Un seul objectif.</h2>
+      <p class="section-desc">Une demi-journée pour démarrer. Une journée pour être pleinement opérationnel. Une solution sur mesure pour aller plus loin.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-tier">Essentiel</div>
+        <h3>Votre équipe maîtrise l'IA en une demi-journée</h3>
+        <p class="service-desc">Votre équipe repart avec les bases maîtrisées et les premiers outils en main. Pas de théorie — des exercices sur vos vrais contenus, vos vrais cas.</p>
+        <ul class="service-features">
+          <li>Demi-journée de formation pratique (3h30)</li>
+          <li>Prise en main de Claude et ChatGPT</li>
+          <li>Exercices sur vos vrais cas : annonces, emails, rapports</li>
+          <li>Création d'assistants configurés pour votre agence</li>
+          <li>Guide de référence à garder après la formation</li>
+          <li>Support par email pendant 7 jours</li>
+        </ul>
+        <div class="service-price-block">
+          <div class="service-price">2 500€ <sub>HT</sub></div>
+          <div class="service-price-note">Demi-journée · Jusqu'à 8 personnes</div>
+        </div>
+        <a href="#contact" class="service-cta outline">Réserver une formation</a>
+      </div>
+
+      <div class="service-card featured reveal reveal-delay-2">
+        <div class="service-tier">Avancé</div>
+        <h3>Des outils IA installés et prêts à utiliser</h3>
+        <p class="service-desc">Je viens. J'identifie. Je construis. Je forme. En une journée, tout est en place et votre équipe sait s'en servir. Les deux semaines qui suivent, je reste disponible.</p>
+        <ul class="service-features">
+          <li>Journée complète en agence</li>
+          <li>Diagnostic de vos tâches les plus chronophages</li>
+          <li>Création d'assistants IA sur mesure pour votre équipe</li>
+          <li>Automatisation de tâches récurrentes</li>
+          <li>Formation individuelle de chaque collaborateur</li>
+          <li>Accompagnement et ajustements pendant 14 jours</li>
+        </ul>
+        <div class="service-price-block">
+          <div class="service-price">7 000€ <sub>HT</sub></div>
+          <div class="service-price-note">Journée complète + 2 semaines de suivi</div>
+        </div>
+        <a href="#contact" class="service-cta filled">Démarrer un projet</a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-tier">Premium</div>
+        <h3>Une solution construite de A à Z pour votre agence</h3>
+        <p class="service-desc">Vous avez un processus à automatiser, une intégration CRM à réaliser, un outil interne à créer. On le conçoit ensemble, je le développe, je l'installe.</p>
+        <ul class="service-features">
+          <li>Audit complet de vos processus</li>
+          <li>Conception et prototypage de la solution</li>
+          <li>Développement et intégration à vos outils existants</li>
+          <li>Phase de test avec votre équipe</li>
+          <li>Formation complète à l'utilisation</li>
+          <li>Maintenance et évolution dans le temps</li>
+        </ul>
+        <div class="service-price-block">
+          <div class="service-price">Sur devis</div>
+          <div class="service-price-note">Cadré ensemble selon votre projet</div>
+        </div>
+        <a href="#contact" class="service-cta outline">Discuter de votre projet</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESULTS
+     ============================================================ -->
+<section class="results" id="resultats">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-label">Ce que ça change</p>
+      <h2 class="section-title">Ce que ça change, concrètement.</h2>
+    </div>
+
+    <div class="results-stats reveal">
+      <div class="result-stat">
+        <div class="result-stat-num"><span class="accent" data-count="30">0</span><span class="accent">min</span></div>
+        <div class="result-stat-label">Gagnées par collaborateur<br>chaque jour</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num"><span class="accent">3</span></div>
+        <div class="result-stat-label">Assistants IA configurés<br>annonces · emails · rapports</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num"><span class="accent" data-count="14">0</span><span class="accent">j</span></div>
+        <div class="result-stat-label">De suivi inclus<br>dans l'offre Avancé</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num"><span class="accent">J</span><span class="accent">+7</span></div>
+        <div class="result-stat-label">Pour les premiers gains<br>mesurables</div>
+      </div>
+    </div>
+
+    <div class="results-list-items reveal">
+      <div class="result-item">
+        <div class="result-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h4>Une annonce en 3 minutes, pas en 2 heures.</h4>
+          <p>Le collaborateur donne les caractéristiques. L'IA génère le texte, dans le ton de l'agence. Un coup d'œil, un ajustement, publié.</p>
+        </div>
+      </div>
+      <div class="result-item">
+        <div class="result-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/><path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h4>Le prospect reçoit une réponse avant que votre collaborateur ait raccroché.</h4>
+          <p>Chaque demande entrante déclenche une réponse personnalisée en quelques secondes. La relation commence bien avant que votre équipe intervienne.</p>
+        </div>
+      </div>
+      <div class="result-item">
+        <div class="result-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <h4>Deux minutes de dictée. Un compte-rendu prêt à envoyer.</h4>
+          <p>Vos collaborateurs dictent leurs observations en sortant du bien. L'IA structure, reformule, formate. Le vendeur reçoit un document professionnel dans l'heure.</p>
+        </div>
+      </div>
+      <div class="result-item">
+        <div class="result-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="1"/><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M1 12h6m6 0h6M4.22 19.78l4.24-4.24m5.08 0l4.24 4.24" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h4>Fini le copier-coller. Chaque prospect reçoit un message qui lui ressemble.</h4>
+          <p>L'IA aide vos collaborateurs à adapter chaque prise de contact au profil exact du prospect. Plus de personnalisation, moins d'effort.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section class="about" id="apropos">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-label">À propos</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <div class="about-image-frame">
+          <img src="assets/wassim-rbila.png" alt="Portrait de Wassim Rbila">
+        </div>
+        <div class="about-image-caption">
+          <span class="about-image-caption-name">Wassim Rbila</span>
+          <span class="about-image-caption-role">// Spécialiste IA × Immobilier</span>
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-2">
+        <h3>Je n'ajoute pas de technologie. Je supprime du temps perdu.</h3>
+        <p>Je travaille exclusivement avec des agences immobilières indépendantes — des équipes de 2 à 15 personnes, dirigées par des gens pragmatiques qui n'ont pas le temps pour les promesses creuses. Ce qu'ils veulent, c'est que leur équipe soit plus efficace dès la semaine prochaine.</p>
+        <p>Ma règle : je passe du temps à comprendre comment votre agence fonctionne vraiment avant de toucher à quoi que ce soit. Si un outil IA ne fait pas gagner de temps à votre équipe en conditions réelles, je ne l'installe pas. Simple.</p>
+        <p>J'ai passé 10 ans à construire des produits IA dans des entreprises comme Betclic, Rakuten et Mention — systèmes data à grande échelle pour Tesla et Nike, direction d'équipes produit internationales, intégration de l'IA générative pour des millions d'utilisateurs. Ce que j'apporte aux agences, c'est cette même rigueur — appliquée à des problèmes concrets de votre quotidien.</p>
+        <div class="about-credentials">
+          <span class="credential-tag">IA × Immobilier</span>
+          <span class="credential-tag">Agences indépendantes</span>
+          <span class="credential-tag">Équipes 2–15 personnes</span>
+          <span class="credential-tag">Claude & ChatGPT</span>
+          <span class="credential-tag">Solutions concrètes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="section-head reveal">
+      <p class="section-label">Questions fréquentes</p>
+      <h2 class="section-title">Les vraies questions.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-question" aria-expanded="true">
+          <span class="faq-question-text">Mon équipe n'est pas du tout technique. C'est un problème ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            C'est exactement l'audience que je cible. Les outils que j'installe n'exigent aucune compétence technique — si quelqu'un sait envoyer un email, il sait utiliser ce que je mets en place. La preuve : mes clients les plus autonomes sont souvent les moins technophiles.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-question-text">Est-ce que l'IA va remplacer mes collaborateurs ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Non — et c'est une certitude, pas une promesse marketing. L'IA ne conduit pas une visite, ne lit pas un client, ne sent pas qu'un acheteur est prêt à signer. Elle traite l'administratif pour que vos collaborateurs passent plus de temps sur ce qui fait vraiment la différence : le terrain et la relation.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-question-text">2 500€ ou 7 000€, c'est cher pour une petite agence. Quel est le retour ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Calcul simple : un collaborateur qui gagne 30 minutes par jour récupère plus de 10 heures par mois. Sur une équipe de 5 personnes, c'est une semaine de travail. L'investissement est rentabilisé en quelques semaines — pas en mois.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-question-text">Qu'est-ce qui se passe après votre intervention ?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Vous repartez avec tout documenté et toute l'équipe formée. Mon objectif est votre indépendance totale — pas votre fidélité. Le suivi inclus dans chaque offre est là pour les ajustements fins, pas parce que les outils ne fonctionnent pas sans moi.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section class="cta-section" id="contact">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="reveal">
+    <p class="section-label">Prêt à démarrer ?</p>
+    <h2 class="section-title">30 minutes. Je vous dis exactement ce que l'IA peut faire pour votre agence.</h2>
+    <p class="section-desc">On parle de vos tâches, de votre équipe, de vos vrais blocages. À la fin de l'appel, vous savez précisément ce qui est possible — et ce qui ne l'est pas. Sans jargon. Sans engagement.</p>
+
+    <!-- CONTACT FORM -->
+    <form action="https://formspree.io/f/xojporrg" method="POST" class="contact-form">
+
+      <div class="form-group">
+        <label for="name">Nom *</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Votre nom"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="votre@email.com"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="06 XX XX XX XX"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Décrivez votre agence et vos défis avec l'IA"
+          rows="4"
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit" class="form-submit-btn">Envoyer</button>
+      <p class="form-note">Nous vous recontacterons dans 24h.</p>
+
+    </form>
+    <!-- END CONTACT FORM -->
+
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <span class="footer-logo">IA <span class="x">×</span> IMMO</span>
+  <span class="footer-copy">© 2026 — Tous droits réservés</span>
+  <ul class="footer-links">
+    <li><a href="#">Mentions légales</a></li>
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="mailto:contact@example.com">Contact</a></li>
+  </ul>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+// Nav scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Mobile menu
+const mobileToggle = document.getElementById('mobileToggle');
+const navLinks = document.getElementById('navLinks');
+mobileToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  const isOpen = navLinks.classList.contains('open');
+  mobileToggle.setAttribute('aria-expanded', isOpen);
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Scroll reveal (staggered children too)
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+    });
+    // Open clicked (toggle)
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// Counter animation for results section
+function animateCounter(el, target, duration = 1200) {
+  const start = performance.now();
+  const update = (time) => {
+    const progress = Math.min((time - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('[data-count]').forEach(el => {
+        animateCounter(el, parseInt(el.dataset.count), 1400);
+      });
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const statsBlock = document.querySelector('.results-stats');
+if (statsBlock) counterObserver.observe(statsBlock);
+</script>
+
+</body>
+</html>

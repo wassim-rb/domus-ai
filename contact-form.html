@@ -1,0 +1,151 @@
+<!-- SIMPLE CONTACT FORM — Add this to replace or enhance the #contact section in site.html -->
+
+<!-- Step 1: Find this in your site.html (around line 1600+):
+<section class="cta-section" id="contact">
+
+Step 2: Replace it with this code: -->
+
+<section class="cta-section" id="contact">
+  <div class="container-inner">
+    <p class="section-label">Prêt à démarrer ?</p>
+    <h2 class="section-title">30 minutes. Je vous dis exactement ce que l'IA peut faire pour votre agence.</h2>
+    <p class="section-desc">On parle de vos tâches, de votre équipe, de vos vrais blocages. À la fin de l'appel, vous savez précisément ce qui est possible — et ce qui ne l'est pas. Sans jargon. Sans engagement.</p>
+
+    <!-- CONTACT FORM -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+
+      <div class="form-group">
+        <label for="name">Nom *</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Votre nom"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="votre@email.com"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="06 XX XX XX XX"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Décrivez votre agence et vos défis avec l'IA"
+          rows="4"
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit" class="form-submit-btn">Envoyer</button>
+      <p class="form-note">Nous vous recontacterons dans 24h.</p>
+
+    </form>
+    <!-- END CONTACT FORM -->
+
+  </div>
+</section>
+
+<!-- ============================================================
+   ADD THIS CSS TO YOUR STYLE SECTION IN site.html
+   ============================================================ -->
+
+<style>
+.contact-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-mid);
+  background: var(--bg-surface);
+  color: var(--text);
+  border-radius: 2px;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold-border);
+  background: var(--bg-elevated);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-submit-btn {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 2rem;
+  background: var(--gold);
+  color: #0D0D0B;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+}
+
+.form-submit-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.form-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    max-width: 100%;
+  }
+}
+</style>
