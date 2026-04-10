@@ -1,0 +1,305 @@
+# Domus-AI Deployment & Configuration Guide
+
+## Overview
+
+This document captures all infrastructure, service configurations, and deployment details for the Domus-AI website. Use this as reference for maintenance, debugging, and future evolutions.
+
+**Live Site**: https://domus-ai.fr  
+**Repository**: https://github.com/wassim-rb/domus-ai  
+**Deployment Platform**: Vercel  
+**Status**: Launched April 10, 2026
+
+---
+
+## 1. Service Accounts & Credentials
+
+### Vercel
+- **Account Owner**: Wassim (personal account)
+- **GitHub Integration**: Connected to `wassim-rb/domus-ai` repo
+- **Auto-Deploy**: Enabled on main branch pushes
+- **Environment**: Production (domus-ai.fr)
+
+### GitHub
+- **Repository**: `https://github.com/wassim-rb/domus-ai`
+- **Branch**: `main` (production)
+- **Commits**:
+  - `5b33d99` - Clean launch blockers and align Domus-AI branding
+  - `4f0a7f4` - Initial commit
+
+### OVHcloud
+- **Domain**: domus-ai.fr
+- **Service Plan**: MX Plan (basic DNS + MX records, no email hosting)
+- **Email Redirection**: Enabled
+  - Source: `contact@domus-ai.fr`
+  - Destination: `rbilawaassim@gmail.com` (internal Gmail)
+  - Also verified: `adambadi333@gmail.com` (public contact email in Formspree)
+
+### Formspree
+- **Account**: wassim-rb@gmail.com (linked to contact@domus-ai.fr + adambadi333@gmail.com)
+- **Form Name**: `domus-ai-contact`
+- **Form Endpoint**: `https://formspree.io/f/xojporrg`
+- **Form Action**: POST to endpoint above
+- **Email Delivery**: Formspree forwards submissions to both verified email addresses
+
+---
+
+## 2. Contact Form Integration (Formspree)
+
+### How It Works
+1. User fills out form on `index.html` (name, email, phone, message)
+2. Form POSTs to Formspree endpoint: `https://formspree.io/f/xojporrg`
+3. Formspree validates submission (spam check, rate limiting)
+4. Submission forwarded to both:
+   - `rbilawaassim@gmail.com` (internal inbox)
+   - `adambadi333@gmail.com` (public contact email)
+5. User sees "success" response (can be customized in Formspree dashboard)
+
+### Form Fields
+```html
+<form action="https://formspree.io/f/xojporrg" method="POST" class="contact-form">
+  <input type="text" name="name" required />           <!-- Visitor name -->
+  <input type="email" name="email" required />         <!-- Visitor email -->
+  <input type="tel" name="phone" />                    <!-- Optional phone -->
+  <textarea name="message" required />                 <!-- Message/inquiry -->
+  <button type="submit">Envoyer</button>
+</form>
+```
+
+### Testing the Form
+1. Go to https://domus-ai.fr#contact
+2. Fill in test data (any name, email, message)
+3. Submit
+4. Check email (should arrive in 5-30 seconds)
+5. Response confirmation: User sees thank you message in browser
+
+### Troubleshooting Contact Form
+| Issue | Solution |
+|-------|----------|
+| Form not submitting | Check browser console for errors; verify Formspree endpoint in HTML is correct |
+| Emails not arriving | Check Formspree dashboard for spam/bounce status; verify recipient emails are verified |
+| Rate limiting | Formspree blocks >5 submissions/second from same IP; wait 5 minutes or use different network |
+| Spam filtering | Formspree has built-in spam detection; legitimate submissions should pass |
+
+### Future Enhancements
+- [ ] Add reCAPTCHA to reduce spam
+- [ ] Custom thank-you page with calendar link (Calendly/Cal.com)
+- [ ] Slack notification integration (new submissions → #leads channel)
+- [ ] Form field pre-population from URL params
+
+---
+
+## 3. Email Infrastructure (OVHcloud)
+
+### Domain Configuration
+- **Domain Registrar**: OVHcloud
+- **Domain**: domus-ai.fr
+- **Service Plan**: MX Plan (basic)
+- **MX Records**: Set up to handle inbound mail redirection
+
+### Email Redirection Setup
+**Primary Redirection** (set up April 10, 2026):
+- Rule: All mail to `contact@domus-ai.fr` → `rbilawaassim@gmail.com`
+- Status: Active
+- Created in: OVHcloud Control Panel → Emails → Redirections
+
+### Accessing OVHcloud Dashboard
+1. Go to https://www.ovhcloud.com/en/
+2. Sign in with account credentials
+3. Navigate to `My Services` → Domain → `domus-ai.fr`
+4. Click `Emails` → `Redirections`
+5. View/edit active redirections
+
+### Current MX Records (for reference)
+The domain currently uses OVHcloud's default MX records for mail redirection only. If you need full email hosting (SMTP, aliases, distribution lists), you must upgrade to "Email Pro" plan (~€4-5/month, 24-48h setup).
+
+### Future Enhancements
+- [ ] **Gmail "Send As"** — Enable sending from contact@domus-ai.fr via Gmail account
+  - Setup: Gmail Settings → Accounts → Add other email address → Verify via OVHcloud SMTP
+  - Enables professional outbound emails from contact@domus-ai.fr address
+- [ ] **Upgrade to Email Pro** — If volume exceeds redirection limits
+  - Benefit: Full mailbox, IMAP/SMTP, aliases, bigger capacity
+  - Cost: ~€4-5/month + VAT
+  - Setup time: 24-48 hours
+
+---
+
+## 4. Website Deployment (Vercel)
+
+### Current Deployment
+- **Platform**: Vercel (free tier)
+- **Production URL**: https://domus-ai.fr
+- **Source**: GitHub main branch (`wassim-rb/domus-ai`)
+- **Auto-Deploy**: Enabled (any push to main triggers deploy)
+- **Deploy History**: View at https://vercel.com → Project → Deployments
+
+### File Structure
+```
+domus-ai/
+├── index.html              # Main landing page (formerly site.html)
+├── blog/
+│   ├── index.html         # Blog listing page
+│   ├── article-1.html     # Lead qualification automation (6 min read)
+│   ├── article-2.html     # DVF property valuation (7 min read)
+│   └── article-3.html     # Voice notes to reports (5 min read)
+├── contact-form.html      # Reference template (not used directly)
+├── PROJECT-CHECKLIST.md   # Project tracking (internal)
+├── about-me.md            # Wassim's profile (internal)
+├── my-company.md          # Strategy & 2026 goals (internal)
+└── DEPLOYMENT.md          # This file
+```
+
+### Deployment Workflow
+
+**Option A: Automatic (Recommended)**
+```bash
+# 1. Make changes locally
+# 2. Push to GitHub
+git add .
+git commit -m "Description of changes"
+git push origin main
+
+# 3. Vercel auto-deploys (watch progress at vercel.com)
+# 4. Site updates at domus-ai.fr within 30 seconds
+```
+
+**Option B: Manual Deploy (if needed)**
+1. Go to https://vercel.com/dashboard
+2. Select `domus-ai` project
+3. Click "Deployments" tab
+4. Click "Redeploy" next to latest deployment (or specific version)
+
+### Viewing Deployment Status
+- **Current Status**: https://vercel.com/wassim-rb/domus-ai
+- **Build Logs**: Dashboard → Project → Deployments → Click any deployment
+- **Rollback**: Click previous deployment → "Promote to Production"
+
+### Custom Domain Setup at Vercel
+1. Dashboard → Project Settings → Domains
+2. Add `domus-ai.fr`
+3. Vercel gives you nameservers or CNAME record
+4. Update at OVHcloud (see section 5 below)
+
+---
+
+## 5. Domain Configuration (DNS)
+
+### Current Status
+- Domain: `domus-ai.fr` registered at OVHcloud
+- Nameservers: [To be configured with Vercel during deployment]
+- MX Records: OVHcloud default (for email redirection)
+
+### DNS Update Steps (One-time Setup)
+**At Vercel Dashboard:**
+1. Project → Settings → Domains
+2. Add custom domain: `domus-ai.fr`
+3. Vercel shows one of two options:
+
+   **Option A: Update Nameservers** (recommended)
+   - Vercel: "Use Vercel Nameservers"
+   - Record: ns1.vercel.com, ns2.vercel.com (varies)
+   - At OVHcloud: Domain → DNS → Change nameservers to Vercel's
+
+   **Option B: Add CNAME Record** (if keeping OVHcloud nameservers)
+   - Vercel gives: CNAME record like `www` → `cname.vercel.com`
+   - At OVHcloud: DNS → Add CNAME record
+
+**At OVHcloud Control Panel:**
+1. Go to https://www.ovhcloud.com/en/
+2. My Services → Domains → `domus-ai.fr`
+3. Click "DNS" tab
+4. Update nameservers or add CNAME (per Vercel's instructions)
+5. **⚠️ Keep MX records unchanged** — they handle email redirection
+
+### Verification
+```bash
+# Verify domain points to Vercel
+nslookup domus-ai.fr
+# Should show: Vercel's IP address
+
+# Verify MX records for email
+nslookup -type=MX domus-ai.fr
+# Should show: OVHcloud MX records
+```
+
+### Troubleshooting DNS
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Site shows "Not Found" | DNS not propagated | Wait 24-48 hours; check status at whatsmydns.net |
+| Email not arriving | MX records overwritten | Re-verify at OVHcloud that MX records exist |
+| HTTPS error | SSL certificate not issued | Vercel auto-issues after DNS is active; wait 24h |
+
+---
+
+## 6. Browser & Analytics
+
+### Current Setup
+- **Analytics**: Not yet configured
+- **SEO**: meta tags in place (title, description, keywords)
+- **SSL**: Auto-enabled by Vercel (HTTPS by default)
+
+### Future Enhancements
+- [ ] **Google Analytics** — Track visitor behavior, form submissions, blog views
+  - Setup: Add Google Analytics script to index.html `<head>`
+  - Dashboard: https://analytics.google.com
+- [ ] **Search Console** — Monitor indexing, keywords, click-through rates
+  - Setup: Verify domain at https://search.google.com/search-console
+  - Submitxml sitemap for faster indexing
+- [ ] **Hotjar** — Heatmaps, session recordings (understanding user behavior)
+
+---
+
+## 7. Project Management & Iteration
+
+### Current Phase
+**Phase 2 (Launch)** — Website live, contact form working, domain configured
+
+### Next Phases
+1. **Phase 2 Complete** → Verify live performance, test contact form end-to-end
+2. **Phase 3 (Growth)** → Content distribution, blog SEO, client acquisition
+   - Publish blog articles to LinkedIn, Twitter, email newsletter
+   - Optimize for Google search (keywords, backlinks, domain authority)
+   - Email prospecting via contact@domus-ai.fr (after Gmail "Send As" setup)
+
+### Important Files for Future Work
+- `PROJECT-CHECKLIST.md` — Main task tracking (update after each iteration)
+- `about-me.md` — Wassim's profile & voice (reference for content tone)
+- `my-company.md` — 2026 strategy & goals (decision-making context)
+- `DEPLOYMENT.md` — This file (infrastructure reference)
+
+---
+
+## 8. Support & Troubleshooting
+
+### Quick Diagnostics
+```bash
+# From project directory:
+git status                    # Check uncommitted changes
+git log --oneline -5          # Recent commits
+curl -I https://domus-ai.fr  # Check if site is live
+```
+
+### Getting Help
+| Problem | Resource |
+|---------|----------|
+| Vercel deployment fails | Check build logs at vercel.com → Deployments |
+| Form submissions not arriving | Verify Formspree endpoint in HTML; check Formspree dashboard |
+| Domain not resolving | Wait 24-48h for DNS propagation; use whatsmydns.net |
+| Email redirection not working | Check OVHcloud control panel; verify MX records |
+| Blog article not showing | Verify file path in blog/index.html links (use relative paths) |
+
+---
+
+## 9. Handover Checklist
+
+Before handing off project for future evolution:
+- [ ] Document any environment variables (none currently)
+- [ ] Share access: Vercel, OVHcloud, GitHub, Formspree, Gmail
+- [ ] Create backup of production files
+- [ ] Update `DEPLOYMENT.md` with any new service accounts
+- [ ] Update `PROJECT-CHECKLIST.md` with Phase 3 tasks
+
+---
+
+**Last Updated**: April 10, 2026  
+**Maintained By**: Claude  
+**Next Review**: After first customer acquisition or Phase 3 launch
