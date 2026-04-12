@@ -65,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // ============================================================
+  // SCROLL REVEAL (existing)
+  // ============================================================
   const revealElements = document.querySelectorAll(".reveal");
   if (revealElements.length > 0) {
     const revealObserver = new IntersectionObserver(
@@ -82,6 +85,9 @@ document.addEventListener("DOMContentLoaded", () => {
     revealElements.forEach((element) => revealObserver.observe(element));
   }
 
+  // ============================================================
+  // FAQ ACCORDION (existing)
+  // ============================================================
   document.querySelectorAll(".faq-question").forEach((button) => {
     button.addEventListener("click", () => {
       const item = button.closest(".faq-item");
@@ -99,11 +105,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const animateCounter = (element, target, duration = 1200) => {
+  // ============================================================
+  // ANIMATION 1: Text Reveal (hero subtitle word-by-word)
+  // ============================================================
+  const heroSub = document.querySelector(".hero-sub");
+  if (heroSub) {
+    const text = heroSub.textContent.trim();
+    const words = text.split(/\s+/);
+    heroSub.innerHTML = words.map((word, i) => {
+      const delay = 0.9 + i * 0.04; // staggered from 0.9s
+      return `<span class="text-reveal-word"><span style="transition-delay:${delay.toFixed(2)}s">${word}</span></span>`;
+    }).join(" ");
+
+    // Trigger after a short delay to allow CSS to parse
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        heroSub.classList.add("text-reveal-active");
+      });
+    });
+  }
+
+  // ============================================================
+  // ANIMATION 2: Animated Counter (smooth digit roll)
+  // ============================================================
+  const animateCounter = (element, target, duration = 1400) => {
     const start = performance.now();
 
     const update = (time) => {
       const progress = Math.min((time - start) / duration, 1);
+      // Ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       element.textContent = Math.round(eased * target);
 
@@ -115,14 +145,18 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(update);
   };
 
+  // Observe results stats section
   const statsBlock = document.querySelector(".results-stats");
   if (statsBlock) {
     const counterObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.querySelectorAll("[data-count]").forEach((element) => {
-              animateCounter(element, parseInt(element.dataset.count, 10), 1400);
+            entry.target.querySelectorAll("[data-count]").forEach((element, i) => {
+              // Stagger each counter slightly
+              setTimeout(() => {
+                animateCounter(element, parseInt(element.dataset.count, 10), 1400);
+              }, i * 150);
             });
             counterObserver.unobserve(entry.target);
           }
@@ -132,5 +166,65 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     counterObserver.observe(statsBlock);
+  }
+
+  // Also animate the hero stats if they have data-count attributes
+  const heroStats = document.querySelector(".hero-stats");
+  if (heroStats) {
+    const heroCounterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll("[data-count]").forEach((element, i) => {
+              setTimeout(() => {
+                animateCounter(element, parseInt(element.dataset.count, 10), 1200);
+              }, i * 120);
+            });
+            heroCounterObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    heroCounterObserver.observe(heroStats);
+  }
+
+  // ============================================================
+  // ANIMATION 5: Magic Text (scroll-triggered word highlight in CTA)
+  // ============================================================
+  const ctaTitle = document.querySelector(".cta-section .section-title");
+  if (ctaTitle) {
+    // Wrap specific keywords in magic-text spans
+    const magicWords = ["30 minutes", "concrètement", "votre agence"];
+    let html = ctaTitle.innerHTML;
+
+    magicWords.forEach((phrase) => {
+      const regex = new RegExp(`(${phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+      html = html.replace(regex, '<span class="magic-text-word">$1</span>');
+    });
+
+    ctaTitle.innerHTML = html;
+
+    // Observe and trigger
+    const magicObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Stagger each word highlight
+            const words = entry.target.querySelectorAll(".magic-text-word");
+            words.forEach((word, i) => {
+              setTimeout(() => {
+                entry.target.classList.add("magic-text-active");
+              }, 300 + i * 250);
+            });
+            magicObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    magicObserver.observe(ctaTitle);
   }
 });

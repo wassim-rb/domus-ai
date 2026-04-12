@@ -84,8 +84,7 @@
   font-weight: 300;
   line-height: 1.75;
   color: var(--text-muted);
-  opacity: 0;
-  animation: fadeUp 0.8s var(--ease-out) 0.9s forwards;
+  opacity: 1;
 }
 
 .hero-actions {
@@ -256,6 +255,7 @@
 }
 
 .solution-card {
+  position: relative;
   padding: 2rem;
   background: var(--bg-surface);
   border: 1px solid var(--border);
@@ -386,6 +386,7 @@
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  z-index: 1;
 }
 
 .service-tier {
@@ -976,6 +977,151 @@
   .hero-stats > div:nth-last-child(-n + 2) {
     border-bottom: none;
   }
+}
+
+/* ============================================================
+   ANIMATION: Text Reveal (hero subtitle word-by-word)
+   ============================================================ */
+.text-reveal-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: inherit;
+}
+
+.text-reveal-word > span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.65s var(--ease-out);
+  will-change: transform;
+}
+
+.text-reveal-active .text-reveal-word > span {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   ANIMATION: Animated Counter (scroll-triggered number roll)
+   ============================================================ */
+.counter-animate {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: baseline;
+}
+
+.counter-animate .counter-digit {
+  display: inline-block;
+  transition: transform 0.9s var(--ease-out);
+}
+
+/* ============================================================
+   ANIMATION: Shine Border (featured service card)
+   ============================================================ */
+.service-card.featured {
+  overflow: hidden;
+}
+
+.service-card.featured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--shine-angle, 0deg),
+    transparent 0%,
+    var(--gold) 10%,
+    var(--gold-light) 15%,
+    transparent 25%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: shineRotate 4s linear infinite;
+}
+
+@keyframes shineRotate {
+  from { --shine-angle: 0deg; }
+  to { --shine-angle: 360deg; }
+}
+
+@property --shine-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ============================================================
+   ANIMATION: Border Beam (solution cards on hover)
+   ============================================================ */
+.solution-card {
+  overflow: hidden;
+}
+
+.solution-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--beam-angle, 0deg),
+    transparent 0%,
+    var(--gold) 5%,
+    transparent 15%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  animation: beamRotate 3s linear infinite;
+}
+
+.solution-card:hover::after {
+  opacity: 1;
+}
+
+@keyframes beamRotate {
+  from { --beam-angle: 0deg; }
+  to { --beam-angle: 360deg; }
+}
+
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ============================================================
+   ANIMATION: Magic Text (scroll-triggered word highlight in CTA)
+   ============================================================ */
+.magic-text-word {
+  display: inline;
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(
+    120deg,
+    rgba(200, 146, 42, 0.18) 0%,
+    rgba(200, 146, 42, 0.28) 50%,
+    rgba(200, 146, 42, 0.18) 100%
+  );
+  transition: background-size 0.7s var(--ease-out), color 0.5s ease;
+  border-radius: 2px;
+  padding: 0 0.15em;
+  margin: 0 -0.15em;
+}
+
+.magic-text-active .magic-text-word {
+  background-size: 100% 100%;
+  color: var(--gold-light);
 }
 
 @media (max-width: 640px) {
