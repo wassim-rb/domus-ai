@@ -190,41 +190,4 @@ document.addEventListener("DOMContentLoaded", () => {
     heroCounterObserver.observe(heroStats);
   }
 
-  // ============================================================
-  // ANIMATION 5: Magic Text (scroll-triggered word highlight in CTA)
-  // ============================================================
-  const ctaTitle = document.querySelector(".cta-section .section-title");
-  if (ctaTitle) {
-    // Wrap specific keywords in magic-text spans
-    const magicWords = ["30 minutes", "concrètement", "votre agence"];
-    let html = ctaTitle.innerHTML;
-
-    magicWords.forEach((phrase) => {
-      const regex = new RegExp(`(${phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
-      html = html.replace(regex, '<span class="magic-text-word">$1</span>');
-    });
-
-    ctaTitle.innerHTML = html;
-
-    // Observe and trigger
-    const magicObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Stagger each word highlight
-            const words = entry.target.querySelectorAll(".magic-text-word");
-            words.forEach((word, i) => {
-              setTimeout(() => {
-                entry.target.classList.add("magic-text-active");
-              }, 300 + i * 250);
-            });
-            magicObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-
-    magicObserver.observe(ctaTitle);
-  }
 });
