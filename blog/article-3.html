@@ -3,517 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Transformer une note vocale brute en compte rendu professionnel et suivi client automatisé. De la visite à l'email du vendeur en 5 minutes.">
-<meta name="keywords" content="compte rendu de visite immobilier, IA rédaction, automatisation suivi client">
-<meta property="og:title" content="Compte rendu de visite immobilier avec l'IA en 5 minutes">
-<meta property="og:description" content="De la note vocale à l'email prêt à envoyer au vendeur">
-<title>Compte rendu de visite avec l'IA — 5 minutes de la visite à l'email</title>
+<title>Compte rendu de visite immobilier avec l'IA | Guide pratique | Domus-AI</title>
+<meta name="description" content="Comment transformer une note vocale de visite en compte rendu immobilier structuré et en email vendeur prêt à envoyer grâce à l'IA.">
+<meta property="og:title" content="Compte rendu de visite immobilier avec l'IA | Domus-AI">
+<meta property="og:description" content="Une méthode simple pour passer d'une note vocale brute à un compte rendu et un email vendeur en quelques minutes.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://domus-ai.fr/blog/article-3.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg:          #0D0D0B;
-  --bg-alt:      #111110;
-  --bg-surface:  #181816;
-  --bg-elevated: #1F1F1C;
-  --text:        #F0EAD8;
-  --text-muted:  #8C857A;
-  --text-dim:    #4A4742;
-  --gold:        #C8922A;
-  --gold-light:  #DFB05A;
-  --gold-pale:   rgba(200,146,42,0.12);
-  --gold-border: rgba(200,146,42,0.35);
-  --border:      rgba(240,234,216,0.07);
-  --border-mid:  rgba(240,234,216,0.12);
-  --serif:       'DM Serif Display', Georgia, serif;
-  --mono:        'IBM Plex Mono', 'Courier New', monospace;
-  --sans:        'DM Sans', system-ui, sans-serif;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-::selection { background: var(--gold); color: #0D0D0B; }
-a { text-decoration: none; color: var(--gold); transition: color 0.25s ease; }
-a:hover { color: var(--gold-light); }
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-}
-
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  height: 68px;
-  padding: 0 clamp(1.5rem, 5vw, 5rem);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(13,13,11,0);
-  border-bottom: 1px solid transparent;
-  transition: background 0.5s ease, border-color 0.5s ease;
-}
-
-nav.scrolled {
-  background: rgba(13,13,11,0.9);
-  backdrop-filter: blur(24px);
-  border-bottom-color: var(--border);
-}
-
-.nav-logo {
-  font-family: var(--mono);
-  font-weight: 400;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  color: var(--text);
-  cursor: pointer;
-}
-
-.nav-logo .x { color: var(--gold); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  list-style: none;
-}
-
-.nav-links a {
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--text-muted);
-  letter-spacing: 0.03em;
-  transition: color 0.25s ease;
-}
-
-.nav-links a:hover { color: var(--text); }
-
-main {
-  position: relative;
-  z-index: 1;
-  margin-top: 68px;
-}
-
-.article-container {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 3rem);
-}
-
-.article-header {
-  margin-bottom: 3rem;
-  animation: fadeUp 0.8s ease 0.2s both;
-}
-
-.article-meta-top {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  font-family: var(--mono);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.article-meta-item::before {
-  content: '';
-  display: inline-block;
-  width: 3px;
-  height: 3px;
-  background: var(--gold);
-  border-radius: 50%;
-  margin-right: 0.6rem;
-}
-
-h1 {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 1.2rem;
-  color: var(--text);
-}
-
-.article-lede {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-  margin-bottom: 2rem;
-  max-width: 680px;
-}
-
-.article-body {
-  animation: fadeUp 0.8s ease 0.3s both;
-}
-
-.article-body p {
-  margin-bottom: 1.8rem;
-  text-align: justify;
-}
-
-.article-body h2 {
-  font-family: var(--serif);
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin-top: 2.5rem;
-  margin-bottom: 1.2rem;
-  color: var(--text);
-  line-height: 1.3;
-}
-
-.article-body h3 {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 400;
-  margin-top: 1.8rem;
-  margin-bottom: 0.8rem;
-  color: var(--text);
-}
-
-.article-body ul, .article-body ol {
-  margin-bottom: 1.8rem;
-  margin-left: 1.5rem;
-  color: var(--text);
-}
-
-.article-body li {
-  margin-bottom: 0.8rem;
-  line-height: 1.7;
-}
-
-.article-body em {
-  color: var(--gold-light);
-  font-style: italic;
-}
-
-.example-box {
-  background: var(--bg-surface);
-  border-left: 3px solid var(--gold);
-  padding: 1.5rem;
-  margin: 2rem 0;
-  border-radius: 2px;
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  overflow-x: auto;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.example-label {
-  font-size: 0.75rem;
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.8rem;
-  display: block;
-}
-
-.cta-box {
-  background: var(--bg-elevated);
-  border: 1px solid var(--gold-border);
-  padding: 2rem;
-  margin: 3rem 0;
-  border-radius: 2px;
-  text-align: center;
-}
-
-.cta-box h3 {
-  margin-top: 0;
-}
-
-.cta-box p {
-  margin-bottom: 1.5rem;
-  color: var(--text-muted);
-}
-
-.cta-button {
-  display: inline-block;
-  background: var(--gold);
-  color: #0D0D0B;
-  padding: 0.75rem 2rem;
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-decoration: none;
-  border: none;
-}
-
-.cta-button:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
-}
-
-.related-section {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
-}
-
-.related-section h4 {
-  font-family: var(--serif);
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  color: var(--text);
-}
-
-.related-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.related-link {
-  padding: 1rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  transition: all 0.25s ease;
-}
-
-.related-link:hover {
-  border-color: var(--gold-border);
-  background: var(--bg-elevated);
-}
-
-.related-link a {
-  color: var(--text);
-  font-weight: 500;
-}
-
-footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-dim);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--border);
-  margin-top: 4rem;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-  .nav-links { gap: 1.2rem; }
-  h1 { font-size: 1.8rem; }
-  .article-body h2 { font-size: 1.4rem; }
-}
-</style>
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/article.css">
 </head>
-<body>
+<body class="article-page">
 
-<nav>
-  <div class="nav-logo">Domus-AI</div>
-  <ul class="nav-links">
+<div class="page-progress" aria-hidden="true"></div>
+
+<nav class="site-nav" id="navbar">
+  <a href="../index.html" class="nav-logo">Domus<span class="nav-logo-accent">-AI</span></a>
+  <ul class="nav-links" id="navLinks">
     <li><a href="../index.html">Accueil</a></li>
     <li><a href="../index.html#solution">Solutions</a></li>
     <li><a href="../index.html#approche">Approche</a></li>
     <li><a href="../index.html#offres">Offres</a></li>
     <li><a href="../index.html#apropos">À propos</a></li>
-    <li><a href="index.html" style="color: var(--gold);">Blog</a></li>
+    <li><a href="index.html" aria-current="page">Blog</a></li>
     <li><a href="../index.html#faq">FAQ</a></li>
+    <li><a href="../index.html#contact" class="nav-cta-btn">Prendre rendez-vous</a></li>
   </ul>
+  <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <main>
-<article class="article-container">
-
-<div class="article-header">
-  <div class="article-meta-top">
-    <span class="article-meta-item">5 minutes de lecture</span>
-    <span class="article-meta-item">Automatisation</span>
-  </div>
-  <h1>Compte rendu de visite immobilier avec l'IA : le faire en 5 minutes à partir de notes vocales</h1>
-  <p class="article-lede">Vous terminez une visite. Au lieu de rentrer au bureau et passer 30 minutes à rédiger un compte rendu, vous laissez une note vocale de 3 minutes. L'IA le transforme en rapport professionnel et génère l'email au vendeur. Voici comment.</p>
-</div>
-
-<div class="article-body">
-
-<h2>Le vrai problème : le compte rendu tue votre temps</h2>
-
-<p>Vous visitez 3 biens par jour. Pour chacun, vous devez :</p>
-
-<ul>
-  <li>Rédiger un compte rendu structuré</li>
-  <li>L'envoyer au vendeur</li>
-  <li>Encoder les remarques dans votre CRM</li>
-  <li>Ajouter un suivi</li>
-</ul>
-
-<p>Ça prend 30–45 minutes par jour. Amplifié sur une semaine, c'est 4–5 heures d'administration pure.</p>
-
-<p>Avec l'IA, ce même flux prend 10 minutes <em>au total</em>.</p>
-
-<h2>Le workflow : de la note brute à l'email prêt</h2>
-
-<h3>Étape 1 : Laisser une note vocale après la visite (2–3 minutes)</h3>
-
-<p>Vous sortez du bien. Vous sortez votre téléphone et vous parlez :</p>
-
-<div class="example-box">
-  <span class="example-label">Exemple de note brute</span>
-  Visite appartement 75 m², 3e étage, rue de la Paix. Acheteur : jeune couple, budget 350–380K, avec enfant prévu. État : bon, cuisine neuve (2023), salle de bain refaite, parquet massif partout. Manques : pas de dressing, loggia petite. Acheteur est entré, a aimé la lumière, moins emballé par la proximité route bruyante. Objections : prix un peu élevé (350K pour le quartier). Intérêt : moyen-fort, veut y réfléchir.
-</div>
-
-<p>Brut, sans structure. Juste vos impressions.</p>
-
-<h3>Étape 2 : Transformer en rapport avec Claude/ChatGPT (2 minutes)</h3>
-
-<p>Vous copyez votre note dans Claude ou ChatGPT avec ce prompt :</p>
-
-<div class="example-box">
-  <span class="example-label">Prompt pour ChatGPT</span>
-  Voici mes notes brutes d'une visite immobilière. Transformez-les en un compte rendu professionnel à envoyer au vendeur. Structure :<br><br>
-  — Résumé : qui a visité, impression générale en 2 lignes<br>
-  — Points positifs : ce qu'ils ont aimé<br>
-  — Remarques : ce qu'ils ont noté (défauts mineurs)<br>
-  — Intérêt : score de 1 à 10 + probabilité d'offre<br>
-  — Prochains pas<br><br>
-  Notes brutes :<br>
-  [collez votre note vocale écrite]
-</div>
-
-<p>Claude vous retourne un rapport structuré, prêt à présenter au vendeur.</p>
-
-<h3>Étape 3 : Générer l'email au vendeur (1 minute)</h3>
-
-<p>Vous utilisez le même rapport pour générer un email :</p>
-
-<div class="example-box">
-  <span class="example-label">Prompt pour l'email</span>
-  À partir de ce compte rendu, écrivez un email court au vendeur (3–4 lignes) qui :<br>
-  — Le rassure (visite s'est bien passée)<br>
-  — Soulève une petite question (pour relancer)<br>
-  — Crée du suspense (« intéressé, réfléchit »)<br><br>
-  Pas d'email générique. Tonalité : professionnel mais humain.
-</div>
-
-<p>Vous obtenez :</p>
-
-<div class="example-box">
-  <span class="example-label">Email généré</span>
-  Bonjour,<br><br>
-  Merci pour la visite cet après-midi. Les acheteurs ont beaucoup apprécié la luminosité et l'état général du bien — très bon point pour vous. Ils ont une petite question : la loggia peut-elle accueillir un petit bureau ? (Projet de télétravail partiel)<br><br>
-  Je vous recontacte demain avec leur décision. Vous avez des nouvelles du syndic concernant les charges ?<br><br>
-  À bientôt,<br>
-  [Votre nom]
-</div>
-
-<h2>Trois cas concrets : adapter le workflow</h2>
-
-<h3>Cas 1 : Acheteur très intéressé</h3>
-
-<p>Note : « Couple excité, budget 380K exact, veulent revenir avec la famille demain. »</p>
-
-<p>Email : Pas un email neutre. Vous créez de l'urgence : « Ils veulent revenir demain — aurai-je la clé à 15h ? Penser à vérifier les risques dégâts des eaux (question fréquente à la 2e visite). »</p>
-
-<h3>Cas 2 : Acheteur hésitant</h3>
-
-<p>Note : « Aiment bien mais trouvent cher pour le secteur. Salle de bain à refaire vue (100K). »</p>
-
-<p>Email : Vous positionnez votre valeur : « Vos acheteurs sont réalistes sur la salle de bain. En fait, c'est une opportunité — une salle refaite ajoute 50–80K au prix. Vous envisagez des travaux avant vente ? »</p>
-
-<h3>Cas 3 : Aucun intérêt</h3>
-
-<p>Note : « Bien trop cher pour le quartier. Ils ont d'autres options. »</p>
-
-<p>Email : Court et honnête. « Visite d'information. Acheteurs sérieux, mais budget limite. Si vous acceptiez 335K, on reparlerait. »</p>
-
-<h2>Pourquoi ça change le jeu</h2>
-
-<p><strong>Rapidité :</strong> 5 minutes au lieu de 45. Vous récupérez 4h par semaine.</p>
-
-<p><strong>Qualité :</strong> Vos notes fraîches passent par Claude, qui les structure. Vous gardez l'authenticité, l'IA ajoute la rigueur.</p>
-
-<p><strong>Relation :</strong> Vendeurs reçoivent un compte rendu le jour même. Pas demain. Pas la semaine d'après. Aujourd'hui.</p>
-
-<p><strong>Suivi :</strong> Le rapport va aussi dans votre CRM auto. Pas de ressaisie manuelle.</p>
-
-<h2>Le piège : ne pas perdre votre voix</h2>
-
-<p>L'IA structure et rédige. Mais elle peut rendre ça trop générique. Solution : après génération, relisez et ajoutez une phrase personnelle.</p>
-
-<p>Au lieu de : « Ils ont apprécié la luminosité. »</p>
-
-<p>Écrivez : « Ils ont apprécié la luminosité — le couple a dit textuellement 'on ne s'attendait pas à ça'. »</p>
-
-<p>L'humain revient. L'IA reste.</p>
-
-<div class="cta-box">
-  <h3>Prêt à automatiser votre suivi de visite ?</h3>
-  <p>Ça déverrouille du temps pour la prospection réelle. Parlons de comment intégrer ça à votre flux.</p>
-  <a href="../index.html#contact" class="cta-button">Planifier un appel</a>
-</div>
-
-<h2>En résumé</h2>
-
-<ul>
-  <li><strong>Note vocale brute :</strong> 3 minutes après visite</li>
-  <li><strong>Compte rendu structuré :</strong> Claude en 2 minutes</li>
-  <li><strong>Email au vendeur :</strong> Généré + personnalisé en 1 minute</li>
-  <li><strong>Total :</strong> 6 minutes vs 45 minutes avant</li>
-  <li><strong>Gain :</strong> 4h par semaine de temps de bureau</li>
-  <li><strong>Bonus :</strong> Vendeurs impressionnés par la réactivité</li>
-</ul>
-
-<!-- Related articles -->
-<div class="related-section">
-  <h4>Articles associés</h4>
-  <div class="related-links">
-    <div class="related-link">
-      <a href="article-1.html">Qualification et relance automatique des leads</a>
+  <article class="article-shell">
+    <div class="article-topbar">
+      <a href="index.html" class="article-back-link">Retour au blog</a>
+      <span class="article-breadcrumb">Blog / Compte rendu de visite</span>
     </div>
-    <div class="related-link">
-      <a href="article-2.html">Utiliser DVF avec ChatGPT pour l'estimation</a>
+
+    <div class="article-container">
+      <header class="article-header">
+        <p class="article-kicker">Guide pratique</p>
+        <div class="article-meta-top">
+          <span class="article-meta-item">5 minutes de lecture</span>
+          <span class="article-meta-item">Automatisation</span>
+        </div>
+        <h1>Faire un compte rendu de visite immobilier avec l'IA en quelques minutes</h1>
+        <p class="article-lede">Vous sortez d'une visite, vous laissez une note vocale de trois minutes, puis l'IA vous aide à la transformer en compte rendu structuré et en email vendeur prêt à partir. L'objectif n'est pas d'écrire plus vite pour écrire plus, mais de rendre le suivi plus propre sans rallonger la journée.</p>
+      </header>
+
+      <div class="article-body">
+        <h2>Le vrai problème : le compte rendu mange la fin de journée</h2>
+
+        <p>Après une visite, il faut souvent rédiger un résumé clair, prévenir le vendeur, noter les objections dans le CRM et penser au suivi. Pris séparément, ce sont de petites tâches. Additionnées sur une semaine, elles finissent par représenter plusieurs heures de travail administratif.</p>
+
+        <p>L'idée ici n'est pas d'automatiser la relation. L'idée est de mieux capturer vos impressions pendant qu'elles sont encore fraîches et de remettre en forme plus vite.</p>
+
+        <h2>Le workflow : de la note brute au message prêt</h2>
+
+        <h3>Étape 1 : laisser une note vocale en sortant du bien</h3>
+
+        <p>Vous prenez votre téléphone et vous dictez ce que vous venez de voir et d'entendre. Pas besoin d'être structuré.</p>
+
+        <div class="example-box">
+          <span class="example-label">Exemple de note brute</span>
+          Visite appartement 75 m², 3e étage, rue de la Paix. Acheteur : jeune couple, budget 350 à 380K, avec enfant prévu. Bon état, cuisine neuve, salle de bain refaite, parquet massif. Points faibles : pas de dressing, loggia petite. Ils ont aimé la lumière, moins la proximité de la route. Intérêt moyen à fort.
+        </div>
+
+        <p>Ce matériau brut est souvent largement suffisant pour produire un compte rendu utile.</p>
+
+        <h3>Étape 2 : transformer la note avec ChatGPT ou Claude</h3>
+
+        <p>Vous copiez votre note dans l'outil avec une consigne claire sur la structure attendue.</p>
+
+        <div class="example-box">
+          <span class="example-label">Prompt exemple</span>
+          Transforme mes notes brutes de visite en compte rendu professionnel pour le vendeur.<br><br>
+          Structure attendue :<br>
+          Résumé de la visite<br>
+          Points positifs<br>
+          Réserves exprimées<br>
+          Niveau d'intérêt<br>
+          Prochaines étapes<br><br>
+          Notes : [collez votre note]
+        </div>
+
+        <p>L'IA ne remplace pas vos impressions. Elle les réorganise, les reformule et vous fait gagner le temps de mise au propre.</p>
+
+        <h3>Étape 3 : générer l'email au vendeur</h3>
+
+        <p>À partir du compte rendu structuré, vous demandez un email court, simple et rassurant.</p>
+
+        <div class="example-box">
+          <span class="example-label">Prompt pour l'email</span>
+          À partir du compte rendu, écris un email court au vendeur : ton professionnel, humain, rassurant. Mentionne ce qui a plu, le principal point de vigilance et la prochaine étape attendue.
+        </div>
+
+        <div class="example-box">
+          <span class="example-label">Email type</span>
+          Bonjour,<br><br>
+          Merci encore pour la visite de cet après-midi. Les acheteurs ont beaucoup apprécié la luminosité et l'état général du bien. Leur principale réserve concerne la proximité de la route, mais l'intérêt reste réel. Je reviens vers vous demain après leur second échange.<br><br>
+          Bien à vous,<br>
+          [Votre nom]
+        </div>
+
+        <h2>Trois situations où ce workflow est particulièrement utile</h2>
+
+        <h3>1. Acheteur très intéressé</h3>
+
+        <p>Le compte rendu permet de reformuler vite ce qui a déclenché l'envie et de préparer la suite sans perdre l'élan de la visite.</p>
+
+        <h3>2. Acheteur hésitant</h3>
+
+        <p>Le message vendeur reste plus précis et plus utile qu'un simple “visite correcte”. Vous pouvez remonter la réserve exacte et cadrer la prochaine relance.</p>
+
+        <h3>3. Visite peu concluante</h3>
+
+        <p>Vous gardez malgré tout une trace propre dans le CRM et vous pouvez informer le vendeur sans tourner autour du pot pendant vingt minutes.</p>
+
+        <h2>Pourquoi ça change vraiment le quotidien</h2>
+
+        <p><strong>Rapidité :</strong> vous capitalisez sur l'instant où vos impressions sont les plus fraîches.</p>
+
+        <p><strong>Qualité :</strong> les messages envoyés sont mieux structurés et plus homogènes.</p>
+
+        <p><strong>Suivi :</strong> le vendeur reçoit un retour le jour même, ce qui augmente la perception de sérieux.</p>
+
+        <p><strong>Mémoire :</strong> vos notes sont plus faciles à retrouver et à relire quelques jours plus tard.</p>
+
+        <h2>Le point de vigilance : ne pas perdre votre voix</h2>
+
+        <p>L'IA peut rendre le compte rendu trop lisse. Il faut donc relire et réinjecter une phrase ou une nuance qui vient vraiment de vous.</p>
+
+        <p>Par exemple, au lieu de garder une phrase vague comme “les acheteurs ont apprécié la luminosité”, préférez une version plus humaine si elle est vraie : “Ils ont dit tout de suite que la pièce de vie était plus lumineuse qu'ils l'imaginaient.”</p>
+
+        <p>L'outil organise. La relation, elle, reste portée par votre voix.</p>
+
+        <div class="cta-box">
+          <h3>Envie d'automatiser ce suivi sans rendre vos messages froids ?</h3>
+          <p>On peut cadrer ensemble un flux simple pour vos visites, vos notes et vos retours vendeurs, sans imposer un nouveau système lourd à l'équipe.</p>
+          <a href="../index.html#contact" class="cta-button">Planifier un appel</a>
+        </div>
+
+        <h2>En résumé</h2>
+
+        <ul>
+          <li><strong>La matière première :</strong> une note vocale prise juste après la visite.</li>
+          <li><strong>Le rôle de l'IA :</strong> structurer, clarifier et accélérer la mise au propre.</li>
+          <li><strong>Le vrai gain :</strong> un suivi plus régulier sans rallonger la journée.</li>
+          <li><strong>Le garde-fou :</strong> toujours relire et remettre votre ton avant envoi.</li>
+        </ul>
+
+        <div class="related-section">
+          <h4>Continuer la lecture</h4>
+          <div class="related-links">
+            <div class="related-link">
+              <a href="article-1.html">Qualifier et relancer automatiquement ses leads immobiliers avec l'IA</a>
+            </div>
+            <div class="related-link">
+              <a href="article-2.html">Utiliser DVF avec l'IA pour préparer une estimation plus solide</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-</div>
-
-</article>
+  </article>
 </main>
 
-<footer>
-  <p>&copy; 2026 Domus-AI. Tous droits réservés. <a href="../index.html">Retour à l'accueil</a></p>
+<footer class="site-footer">
+  <a href="../index.html" class="footer-logo">Domus<span class="nav-logo-accent">-AI</span></a>
+  <span class="footer-copy">© 2026 — Tous droits réservés</span>
+  <ul class="footer-links">
+    <li><a href="../mentions-legales.html">Mentions légales</a></li>
+    <li><a href="mailto:contact@domus-ai.fr">Contact</a></li>
+  </ul>
 </footer>
 
-<script>
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 20) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-});
-
-document.querySelector('.nav-logo').addEventListener('click', () => {
-  window.location.href = '../index.html';
-});
-</script>
-
+<script defer src="../assets/site.js"></script>
 </body>
 </html>

@@ -56,6 +56,7 @@
 - ⏳ Point domus-ai.fr domain to Vercel (DNS configuration)
 - ⏳ Test website live + contact form functionality
 - ✅ Set up email alias (contact@domus-ai.fr → rbilawaassim@gmail.com)
+- 🚫 Confirm legal publication details for Mentions légales (éditeur, adresse, directeur de publication, identifiants si applicable)
 
 ### HIGH 🟠 (This week)
 
@@ -64,6 +65,7 @@
 - 🔄 Verify all article CTAs work — CTA targets updated while working with Codex; live testing still pending
 - ⏳ Add Google Analytics to website
 - ⏳ Create simple robots.txt & sitemap.xml for SEO
+- 🚫 Add the final LinkedIn profile URL to the website footer (blocked: URL not yet available)
 
 ### MEDIUM 🟡 (Before next week)
 

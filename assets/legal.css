@@ -1,0 +1,14 @@
+.legal-card a {
+  color: var(--gold);
+}
+
+.legal-card a:hover,
+.legal-card a:focus-visible {
+  color: var(--gold-light);
+}
+
+.legal-divider {
+  margin: 2.5rem 0;
+  height: 1px;
+  background: var(--border);
+}
