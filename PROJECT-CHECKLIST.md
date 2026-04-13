@@ -61,7 +61,7 @@
 - ✅ Create contact@domus-ai.fr email address
 - ✅ Test all navigation links (index → blog → back) — verified live
 - ✅ Verify all article CTAs work — verified live
-- 🔄 Add Google Analytics to website — code added on all current public pages, pending production deploy + verification in Google Analytics
+- ✅ Add Google Analytics to website — installed on all current public pages and verified in production on April 13, 2026
 - ✅ Create simple robots.txt & sitemap.xml for SEO
 - ✅ Add the final LinkedIn profile URL to the website footer
 
@@ -69,7 +69,7 @@
 
 - ⏳ Set up email auto-reply (auto-confirmation on contact form submission)
 - ⏳ Create /assets folder for images (if needed for optimization)
-- ⏳ Add favicon to website
+- 🔄 Add favicon to website — favicon file created and linked on all current public pages, pending production deploy
 - ⏳ Test on mobile (all pages, all links)
 
 ---
@@ -137,4 +137,4 @@ Validation rule:
 
 ---
 
-**Next checkpoint:** 15 Apr 2026 — Finish Mentions légales, verify Google Analytics in production, add favicon, complete mobile testing, and continue text validation
+**Next checkpoint:** 15 Apr 2026 — Finish Mentions légales, verify favicon in production, complete mobile testing, and continue text validation
