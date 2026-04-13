@@ -2,10 +2,10 @@
 
 **Last Updated:** 13 Apr 2026  
 **Scope:** Website only — domus-ai.fr  
-**Current Phase:** PHASE 2 — LAUNCH (FINAL SPRINT)  
-**Progress:** 88%
+**Current Phase:** PHASE 3 — WEBSITE IMPROVEMENTS (POST-LAUNCH)  
+**Progress:** Phase 1 ✅ | Phase 2 ✅ (launched April 13, 2026) | Phase 3 in progress
 
-> 🔗 For all growth & marketing tasks → see [GROWTH-CHECKLIST.md](../00-PROJECT-BRIEF/GROWTH-CHECKLIST.md)  
+> 🔗 For growth & marketing roadmap → see [MASTER-BRIEF.md](../00-PROJECT-BRIEF/MASTER-BRIEF.md) (Phases 3-5)  
 > 🔗 For overall strategy → see [MASTER-BRIEF.md](../00-PROJECT-BRIEF/MASTER-BRIEF.md)
 
 ---
@@ -45,7 +45,7 @@
 
 ---
 
-## 🟠 PHASE 2: LAUNCH (CURRENT)
+## 🟠 PHASE 2: LAUNCH (COMPLETED)
 
 ### CRITICAL 🔴 (Must do now)
 
@@ -99,7 +99,8 @@ Validation rule:
 
 - ⏳ Add booking system (Calendly or similar) embedded on website
 - ⏳ Add social proof / case study section to homepage
-- ⏳ Publish blog articles 4-7 (once written — see 03-content/)
+- ✅ Publish blog articles 4-6 (articles 4, 5, 6 now live on site)
+- ⏳ Publish blog article 7 (once written — see 03-content/)
 - ⏳ Optimize images & page load speed
 - 📌 Consider multilingual version (FR → EN) — Month 2+
 

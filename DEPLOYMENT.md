@@ -253,14 +253,8 @@ nslookup -type=MX domus-ai.fr
 - **Favicon**: SVG favicon added in code on April 13, 2026; production verification still pending after deploy
 
 ### Google Analytics Implementation Rule
-- This site is built with separate static HTML pages, not a shared template system.
-- Because of that, the GA4 snippet must be present in the `<head>` of every public page you want to track.
-- This includes:
-  - `index.html`
-  - `mentions-legales.html`
-  - `blog/index.html`
-  - every individual file in `blog/article-*.html`
-- **Rule for future blog posts:** every new article page must include the GA4 snippet with measurement ID `G-1G1293D2BP`, or that article will not be tracked in Analytics.
+> Canonical rule: see `AGENTS.md` rule #6. GA4 measurement ID: `G-1G1293D2BP`.  
+> Applies to all public pages: index.html, mentions-legales.html, blog/index.html, and every blog/article-*.html.
 
 ### Future Enhancements
 - [x] **Google Analytics verification** — Production tracking confirmed on April 13, 2026 via real-time view and Google tag detection
