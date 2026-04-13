@@ -1,8 +1,8 @@
 # DOMUS-AI PROJECT CHECKLIST
 
-**Last Updated:** 13 Apr 2026, 11:15  
+**Last Updated:** 13 Apr 2026, 11:45  
 **Current Phase:** PHASE 2 — LAUNCH (FINAL SPRINT)  
-**Overall Progress:** 70% → 85%
+**Overall Progress:** 70% → 88%
 
 ---
 
@@ -65,7 +65,7 @@
 - ✅ Verify all article CTAs work — verified live
 - 🔄 Add Google Analytics to website
 - ✅ Create simple robots.txt & sitemap.xml for SEO
-- 🔄 Add the final LinkedIn profile URL to the website footer (https://www.linkedin.com/in/wassimrbila/)
+- ✅ Add the final LinkedIn profile URL to the website footer (https://www.linkedin.com/in/wassimrbila/)
 
 ### MEDIUM 🟡 (Before next week)
 
@@ -132,12 +132,12 @@
 **Decision:** Formspree for contact form (not custom backend)  
 **Date:** 10 Apr 2026  
 **Reason:** Easiest, free, no setup required, direct email to inbox  
-**Status:** ⏳ Awaiting implementation
+**Status:** ✅ Implemented and working
 
 **Decision:** Vercel for hosting (not traditional hosting)  
 **Date:** 10 Apr 2026  
 **Reason:** Free tier, fast, easy deploy, perfect for static site  
-**Status:** ⏳ Awaiting account setup
+**Status:** ✅ Implemented and live
 
 ---
 
@@ -156,5 +156,5 @@
 
 ---
 
-**Next checkpoint:** PHASE 2 COMPLETION → Website live on domus-ai.fr with working contact form  
-**Target date:** Today (10 Apr 2026) by 21:00
+**Next checkpoint:** PHASE 2 COMPLETION → finish legal details, analytics, favicon, and mobile testing  
+**Target date:** 15 Apr 2026
