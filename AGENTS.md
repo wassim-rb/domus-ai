@@ -37,3 +37,5 @@ This file contains a growing ruleset that improves over time. **At session start
 4. [PROCESS] Always update `sitemap.xml` when a new blog article is added or published — because otherwise search engines may discover the new article more slowly.
 
 5. [PROCESS] Always update the blog listing page when a new blog article is added or published — because the new article must appear in `blog/index.html` as well as in the sitemap.
+
+6. [PROCESS] Always add the Google Analytics GA4 snippet with measurement ID `G-1G1293D2BP` to every new public HTML page inside `<head>` — including each new blog article — because this website uses separate static pages and analytics will miss any page that does not include the tag.

@@ -245,17 +245,27 @@ nslookup -type=MX domus-ai.fr
 ## 6. Browser & Analytics
 
 ### Current Setup
-- **Analytics**: In progress (not yet confirmed active in production)
+- **Analytics**: GA4 measurement ID `G-1G1293D2BP` added in code on all current public HTML pages; production verification still needed after deploy
 - **SEO**: meta tags in place (title, description, keywords)
 - **SSL**: Auto-enabled by Vercel (HTTPS by default)
 - **robots.txt**: Present
 - **sitemap.xml**: Present
 - **Favicon**: Not yet added
 
+### Google Analytics Implementation Rule
+- This site is built with separate static HTML pages, not a shared template system.
+- Because of that, the GA4 snippet must be present in the `<head>` of every public page you want to track.
+- This includes:
+  - `index.html`
+  - `mentions-legales.html`
+  - `blog/index.html`
+  - every individual file in `blog/article-*.html`
+- **Rule for future blog posts:** every new article page must include the GA4 snippet with measurement ID `G-1G1293D2BP`, or that article will not be tracked in Analytics.
+
 ### Future Enhancements
-- [ ] **Google Analytics** — Track visitor behavior, form submissions, blog views
-  - Setup: Add Google Analytics script to index.html `<head>`
-  - Dashboard: https://analytics.google.com
+- [ ] **Google Analytics verification** — Confirm data is received in production after deploy
+  - Check in dashboard: https://analytics.google.com
+  - Open domus-ai.fr and confirm visits appear in real-time or installation test
 - [ ] **Search Console** — Monitor indexing, keywords, click-through rates
   - Setup: Verify domain at https://search.google.com/search-console
   - Submitxml sitemap for faster indexing
