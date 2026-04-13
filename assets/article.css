@@ -219,18 +219,18 @@
   color: var(--gold-light);
 }
 
-.article-body a,
-.legal-body a {
+.article-body a:not(.cta-button),
+.legal-body a:not(.cta-button) {
   color: var(--gold);
   text-decoration-color: rgba(200, 146, 42, 0.45);
   text-underline-offset: 0.18em;
   transition: color 0.25s ease, text-decoration-color 0.25s ease;
 }
 
-.article-body a:hover,
-.article-body a:focus-visible,
-.legal-body a:hover,
-.legal-body a:focus-visible {
+.article-body a:not(.cta-button):hover,
+.article-body a:not(.cta-button):focus-visible,
+.legal-body a:not(.cta-button):hover,
+.legal-body a:not(.cta-button):focus-visible {
   color: var(--gold-light);
   text-decoration-color: rgba(223, 176, 90, 0.72);
 }
@@ -311,6 +311,16 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.article-body .cta-button,
+.legal-body .cta-button,
+.article-body .cta-button:hover,
+.article-body .cta-button:focus-visible,
+.legal-body .cta-button:hover,
+.legal-body .cta-button:focus-visible {
+  color: #0d0d0b;
+  text-decoration: none;
 }
 
 .cta-button:hover,
