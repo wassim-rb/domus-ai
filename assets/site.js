@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.getElementById("navLinks");
   const mobileToggle = document.getElementById("mobileToggle");
   const pageProgress = document.querySelector(".page-progress");
+  const heroScene = document.querySelector("[data-hero-scroll]");
 
   const closeMenu = () => {
     if (!navLinks || !mobileToggle) {
@@ -106,23 +107,85 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ============================================================
-  // ANIMATION 1: Text Reveal (hero subtitle word-by-word)
+  // HERO SCROLL SCENE (homepage only)
   // ============================================================
-  const heroSub = document.querySelector(".hero-sub");
-  if (heroSub) {
-    const text = heroSub.textContent.trim();
-    const words = text.split(/\s+/);
-    heroSub.innerHTML = words.map((word, i) => {
-      const delay = 0.9 + i * 0.04; // staggered from 0.9s
-      return `<span class="text-reveal-word"><span style="transition-delay:${delay.toFixed(2)}s">${word}</span></span>`;
-    }).join(" ");
+  if (heroScene) {
+    const desktopHeroMedia = window.matchMedia("(min-width: 769px)");
+    const reducedMotionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let heroFrame = null;
 
-    // Trigger after a short delay to allow CSS to parse
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        heroSub.classList.add("text-reveal-active");
+    const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
+    const mapRange = (value, start, end) => clamp((value - start) / (end - start));
+    const easeOutCubic = (value) => 1 - Math.pow(1 - clamp(value), 3);
+    const mapRangeEased = (value, start, end) => easeOutCubic(mapRange(value, start, end));
+
+    const setHeroVar = (name, value) => {
+      heroScene.style.setProperty(name, value.toFixed(4));
+    };
+
+    const setStaticHero = () => {
+      heroScene.classList.add("hero-static");
+      heroScene.classList.remove("is-proof", "is-settled");
+      setHeroVar("--hero-progress", 0);
+      setHeroVar("--intro-progress", 0);
+      setHeroVar("--proof-1", 1);
+      setHeroVar("--proof-2", 1);
+      setHeroVar("--proof-3", 1);
+      setHeroVar("--proof-panel-opacity", 1);
+      setHeroVar("--metrics-progress", 1);
+    };
+
+    const updateHeroScene = () => {
+      if (!desktopHeroMedia.matches || reducedMotionMedia.matches) {
+        setStaticHero();
+        return;
+      }
+
+      heroScene.classList.remove("hero-static");
+
+      const totalScrollable = heroScene.offsetHeight - window.innerHeight;
+      const rect = heroScene.getBoundingClientRect();
+      const progress = totalScrollable > 0 ? clamp((-rect.top) / totalScrollable) : 0;
+
+      setHeroVar("--hero-progress", progress);
+
+      // Phase 1: Intro exit (0.0 → 0.30) - moves up and fades out
+      setHeroVar("--intro-progress", mapRangeEased(progress, 0.0, 0.30));
+
+      // Phase 2: Proof cards (0.28 → 0.62 with stagger)
+      // Card 1: 0.28-0.48
+      setHeroVar("--proof-1", mapRangeEased(progress, 0.28, 0.48));
+      // Card 2: 0.35-0.55
+      setHeroVar("--proof-2", mapRangeEased(progress, 0.35, 0.55));
+      // Card 3: 0.42-0.62
+      setHeroVar("--proof-3", mapRangeEased(progress, 0.42, 0.62));
+
+      // Proof panel opacity (crossfade with intro, visible from ~0.25)
+      setHeroVar("--proof-panel-opacity", mapRangeEased(progress, 0.22, 0.35));
+
+      // Phase 3: Metrics (0.62 → 0.82) - appear after proof cards settle
+      setHeroVar("--metrics-progress", mapRangeEased(progress, 0.62, 0.82));
+
+      heroScene.classList.toggle("is-proof", progress >= 0.22);
+      heroScene.classList.toggle("is-settled", progress >= 0.82);
+    };
+
+    const queueHeroUpdate = () => {
+      if (heroFrame !== null) {
+        cancelAnimationFrame(heroFrame);
+      }
+
+      heroFrame = requestAnimationFrame(() => {
+        updateHeroScene();
+        heroFrame = null;
       });
-    });
+    };
+
+    queueHeroUpdate();
+    window.addEventListener("scroll", queueHeroUpdate, { passive: true });
+    window.addEventListener("resize", queueHeroUpdate);
+    desktopHeroMedia.addEventListener("change", queueHeroUpdate);
+    reducedMotionMedia.addEventListener("change", queueHeroUpdate);
   }
 
   // ============================================================
@@ -166,28 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     counterObserver.observe(statsBlock);
-  }
-
-  // Also animate the hero stats if they have data-count attributes
-  const heroStats = document.querySelector(".hero-stats");
-  if (heroStats) {
-    const heroCounterObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll("[data-count]").forEach((element, i) => {
-              setTimeout(() => {
-                animateCounter(element, parseInt(element.dataset.count, 10), 1200);
-              }, i * 120);
-            });
-            heroCounterObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    heroCounterObserver.observe(heroStats);
   }
 
 });

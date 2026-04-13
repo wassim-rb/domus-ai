@@ -33,3 +33,7 @@ This file contains a growing ruleset that improves over time. **At session start
 2. [TOOL] Always invoke the `anthropic-skills:content-pipeline` skill before writing or rewriting any copy (headlines, descriptions, CTAs, section text, labels) — because it applies a rigorous editorial process (thesis, deconstruction, reconstruction, storytelling) that produces sharper, more persuasive content.
 
 3. [STYLE] Always use "collaborateur/collaborateurs" instead of "négociateur/négociateurs" throughout all copy — because the client prefers this term.
+
+4. [PROCESS] Always update `sitemap.xml` when a new blog article is added or published — because otherwise search engines may discover the new article more slowly.
+
+5. [PROCESS] Always update the blog listing page when a new blog article is added or published — because the new article must appear in `blog/index.html` as well as in the sitemap.
