@@ -7,7 +7,8 @@ This document captures all infrastructure, service configurations, and deploymen
 **Live Site**: https://domus-ai.fr  
 **Repository**: https://github.com/wassim-rb/domus-ai  
 **Deployment Platform**: Vercel  
-**Status**: Launched April 10, 2026
+**Status**: Live and maintained  
+**Last Reviewed**: April 13, 2026
 
 ---
 
@@ -22,9 +23,10 @@ This document captures all infrastructure, service configurations, and deploymen
 ### GitHub
 - **Repository**: `https://github.com/wassim-rb/domus-ai`
 - **Branch**: `main` (production)
-- **Commits**:
-  - `5b33d99` - Clean launch blockers and align Domus-AI branding
-  - `4f0a7f4` - Initial commit
+- **Recent Commits**:
+  - `863bc44` - Update project checklist
+  - `9b6e04a` - Add LinkedIn footer links
+  - `4e5f64f` - Add blog articles and SEO updates
 
 ### OVHcloud
 - **Domain**: domus-ai.fr
@@ -32,7 +34,7 @@ This document captures all infrastructure, service configurations, and deploymen
 - **Email Redirection**: Enabled
   - Source: `contact@domus-ai.fr`
   - Destination: `rbilawaassim@gmail.com` (internal Gmail)
-  - Also verified: `adambadi333@gmail.com` (public contact email in Formspree)
+  - Form/contact flows also reference: `adambadi333@gmail.com`
 
 ### Formspree
 - **Account**: wassim-rb@gmail.com (linked to contact@domus-ai.fr + adambadi333@gmail.com)
@@ -46,7 +48,7 @@ This document captures all infrastructure, service configurations, and deploymen
 ## 2. Contact Form Integration (Formspree)
 
 ### How It Works
-1. User fills out form on `index.html` (name, email, phone, message)
+1. User fills out form on `index.html` (name, email, site web ou LinkedIn, phone, message)
 2. Form POSTs to Formspree endpoint: `https://formspree.io/f/xojporrg`
 3. Formspree validates submission (spam check, rate limiting)
 4. Submission forwarded to both:
@@ -59,7 +61,8 @@ This document captures all infrastructure, service configurations, and deploymen
 <form action="https://formspree.io/f/xojporrg" method="POST" class="contact-form">
   <input type="text" name="name" required />           <!-- Visitor name -->
   <input type="email" name="email" required />         <!-- Visitor email -->
-  <input type="tel" name="phone" />                    <!-- Optional phone -->
+  <input type="text" name="company" required />        <!-- Website or LinkedIn -->
+  <input type="tel" name="phone" required />           <!-- Visitor phone -->
   <textarea name="message" required />                 <!-- Message/inquiry -->
   <button type="submit">Envoyer</button>
 </form>
@@ -67,7 +70,7 @@ This document captures all infrastructure, service configurations, and deploymen
 
 ### Testing the Form
 1. Go to https://domus-ai.fr#contact
-2. Fill in test data (any name, email, message)
+2. Fill in test data (name, email, site web ou LinkedIn, phone, message)
 3. Submit
 4. Check email (should arrive in 5-30 seconds)
 5. Response confirmation: User sees thank you message in browser
@@ -131,20 +134,27 @@ The domain currently uses OVHcloud's default MX records for mail redirection onl
 - **Source**: GitHub main branch (`wassim-rb/domus-ai`)
 - **Auto-Deploy**: Enabled (any push to main triggers deploy)
 - **Deploy History**: View at https://vercel.com → Project → Deployments
+- **Domain Status**: Custom domain connected and live
 
 ### File Structure
 ```
 domus-ai/
-├── index.html              # Main landing page (formerly site.html)
+├── index.html              # Main landing page
 ├── blog/
 │   ├── index.html         # Blog listing page
-│   ├── article-1.html     # Lead qualification automation (6 min read)
-│   ├── article-2.html     # DVF property valuation (7 min read)
-│   └── article-3.html     # Voice notes to reports (5 min read)
-├── contact-form.html      # Reference template (not used directly)
+│   ├── article-1.html
+│   ├── article-2.html
+│   ├── article-3.html
+│   ├── article-4.html
+│   ├── article-5.html
+│   └── article-6.html
+├── assets/                # Images and static assets
+├── contact-form.html      # Reference template / backup form block
 ├── PROJECT-CHECKLIST.md   # Project tracking (internal)
-├── about-me.md            # Wassim's profile (internal)
-├── my-company.md          # Strategy & 2026 goals (internal)
+├── GITHUB-SETUP.md        # GitHub push/auth notes
+├── mentions-legales.html  # Legal notice page
+├── robots.txt             # SEO crawling rules
+├── sitemap.xml            # SEO sitemap
 └── DEPLOYMENT.md          # This file
 ```
 
@@ -185,10 +195,12 @@ git push origin main
 
 ### Current Status
 - Domain: `domus-ai.fr` registered at OVHcloud
-- Nameservers: [To be configured with Vercel during deployment]
+- Website DNS: configured and pointing to Vercel
 - MX Records: OVHcloud default (for email redirection)
 
 ### DNS Update Steps (One-time Setup)
+These steps are already completed for the live site. Keep them here only as reference if the domain setup ever needs to be rebuilt.
+
 **At Vercel Dashboard:**
 1. Project → Settings → Domains
 2. Add custom domain: `domus-ai.fr`
@@ -214,7 +226,7 @@ git push origin main
 ```bash
 # Verify domain points to Vercel
 nslookup domus-ai.fr
-# Should show: Vercel's IP address
+# Should show: Vercel-related resolution / active website IP
 
 # Verify MX records for email
 nslookup -type=MX domus-ai.fr
@@ -233,9 +245,12 @@ nslookup -type=MX domus-ai.fr
 ## 6. Browser & Analytics
 
 ### Current Setup
-- **Analytics**: Not yet configured
+- **Analytics**: In progress (not yet confirmed active in production)
 - **SEO**: meta tags in place (title, description, keywords)
 - **SSL**: Auto-enabled by Vercel (HTTPS by default)
+- **robots.txt**: Present
+- **sitemap.xml**: Present
+- **Favicon**: Not yet added
 
 ### Future Enhancements
 - [ ] **Google Analytics** — Track visitor behavior, form submissions, blog views
@@ -254,7 +269,7 @@ nslookup -type=MX domus-ai.fr
 **Phase 2 (Launch)** — Website live, contact form working, domain configured
 
 ### Next Phases
-1. **Phase 2 Complete** → Verify live performance, test contact form end-to-end
+1. **Phase 2 Complete** → Finish legal details, analytics, favicon, and mobile testing
 2. **Phase 3 (Growth)** → Content distribution, blog SEO, client acquisition
    - Publish blog articles to LinkedIn, Twitter, email newsletter
    - Optimize for Google search (keywords, backlinks, domain authority)

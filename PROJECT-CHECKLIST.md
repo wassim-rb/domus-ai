@@ -1,8 +1,12 @@
-# DOMUS-AI PROJECT CHECKLIST
+# DOMUS-AI WEBSITE CHECKLIST
 
-**Last Updated:** 13 Apr 2026, 11:45  
+**Last Updated:** 13 Apr 2026  
+**Scope:** Website only — domus-ai.fr  
 **Current Phase:** PHASE 2 — LAUNCH (FINAL SPRINT)  
-**Overall Progress:** 70% → 88%
+**Progress:** 88%
+
+> 🔗 For all growth & marketing tasks → see [GROWTH-CHECKLIST.md](../00-PROJECT-BRIEF/GROWTH-CHECKLIST.md)  
+> 🔗 For overall strategy → see [MASTER-BRIEF.md](../00-PROJECT-BRIEF/MASTER-BRIEF.md)
 
 ---
 
@@ -24,15 +28,9 @@
 ### Update Rules
 1. **Update this file every session** — After each work block, mark items complete or update status
 2. **Move items up if dependencies change** — If an item is no longer blocking, prioritize it
-3. **Archive done items** — Move completed phase to the bottom "Archive" section (keep last 5)
-4. **One item per line** — Keep format consistent for easy scanning
-5. **Reason for blocked items** — Always explain why something is blocked (e.g., "Blocked: waiting for domain DNS")
-
-### Cleaning Rules
-- Archive completed phases when moving to next phase
-- Remove "On Hold" items if not revisited in 2 weeks
-- Consolidate similar items if they emerge (e.g., if two "email setup" tasks, merge them)
-- Delete outdated items (e.g., "Choose domain name" once purchased)
+3. **One item per line** — Keep format consistent for easy scanning
+4. **Reason for blocked items** — Always explain why something is blocked
+5. **This file covers the website only** — All growth/marketing tasks live in GROWTH-CHECKLIST.md
 
 ---
 
@@ -49,7 +47,7 @@
 
 ## 🟠 PHASE 2: LAUNCH (CURRENT)
 
-### CRITICAL 🔴 (Must do today)
+### CRITICAL 🔴 (Must do now)
 
 - ✅ Add contact form to index.html with Formspree integration
 - ✅ Create Vercel account & deploy website
@@ -65,60 +63,58 @@
 - ✅ Verify all article CTAs work — verified live
 - 🔄 Add Google Analytics to website
 - ✅ Create simple robots.txt & sitemap.xml for SEO
-- ✅ Add the final LinkedIn profile URL to the website footer (https://www.linkedin.com/in/wassimrbila/)
+- ✅ Add the final LinkedIn profile URL to the website footer
 
 ### MEDIUM 🟡 (Before next week)
 
-- ⏳ Set up email auto-reply (out-of-office message or auto-confirmation)
+- ⏳ Set up email auto-reply (auto-confirmation on contact form submission)
 - ⏳ Create /assets folder for images (if needed for optimization)
 - ⏳ Add favicon to website
 - ⏳ Test on mobile (all pages, all links)
 
 ---
 
-## 🟢 PHASE 3: PROMOTION & GROWTH (UPCOMING)
+## 📝 TEXT VALIDATION TRACKER
 
-### HIGH 🟠 (Week 2-3)
+Purpose: validate the final text of each website section one by one before launch.
 
-- 📌 Create LinkedIn content calendar (share 3 articles)
-- 📌 Write LinkedIn outreach sequence (reach agents)
-- 📌 Set up email newsletter template
-- 📌 Create lead magnet (free guide or template) — optional for now
+- ✅ À propos — text validated
+- ⏳ Hero / main headline — not yet validated
+- ⏳ Solutions — not yet validated
+- ⏳ Approche — not yet validated
+- ⏳ Offres — not yet validated
+- ⏳ FAQ — not yet validated
+- ⏳ Contact / CTA sections — not yet validated
+- ⏳ Footer — not yet validated
+- ⏳ Blog homepage intro — not yet validated
 
-### MEDIUM 🟡 (Week 3-4)
-
-- 📌 Plan articles 4-7 (next batch of blog content)
-- 📌 Create Twitter/X presence (optional, secondary channel)
-- 📌 Reach out to 10-15 agents for feedback/first clients
-- 📌 Set up booking system (Calendly or similar) on website
-
-### LOW 🟢 (Month 2+)
-
-- 📌 Create PDF case study template
-- 📌 Develop email nurture sequence
-- 📌 Consider paid ads (LinkedIn or Google Ads) if organic stalls
-- 📌 Plan webinar or demo video
+Validation rule:
+- Mark a section ✅ only when the wording is approved by you
+- Keep ⏳ for any section still to review
+- If a section is being edited during a session, switch it to 🔄
 
 ---
 
-## 📊 METRICS & MILESTONES
+## 🟢 PHASE 3: WEBSITE IMPROVEMENTS (POST-LAUNCH)
+
+- ⏳ Add booking system (Calendly or similar) embedded on website
+- ⏳ Add social proof / case study section to homepage
+- ⏳ Publish blog articles 4-7 (once written — see 03-content/)
+- ⏳ Optimize images & page load speed
+- 📌 Consider multilingual version (FR → EN) — Month 2+
+
+---
+
+## 📊 WEBSITE METRICS
 
 ### By End of Month 1 (May 10)
-- Website live & discoverable
+- Website live & discoverable ✅
 - First 3 blog articles indexed by Google
 - First 5 contact form submissions
-- 100+ LinkedIn profile views
 
 ### By End of Month 2 (June 10)
 - 1,000+ monthly blog visitors
-- 2-3 training client conversations booked
-- Articles 4-7 published
-- Contact form → 15+ qualified leads
-
-### By End of Q2 (June 30)
-- 3-5 paying training clients closed
-- 5,000+ monthly blog traffic
-- Personal brand established in French real estate AI space
+- Articles 4-7 published on site
 
 ---
 
@@ -141,20 +137,4 @@
 
 ---
 
-## 📝 NOTES
-
-- Keep sessions short & focused on one phase at a time
-- Review this checklist at START of every session to reset priorities
-- If blocked, escalate immediately (don't wait)
-- Celebrate completed phases — momentum matters
-
----
-
-## 📦 ARCHIVE (Completed Phases)
-
-*(Completed phases moved here for reference)*
-
----
-
-**Next checkpoint:** PHASE 2 COMPLETION → finish legal details, analytics, favicon, and mobile testing  
-**Target date:** 15 Apr 2026
+**Next checkpoint:** 15 Apr 2026 — Finish Mentions légales, Google Analytics, favicon, mobile testing, and text validation

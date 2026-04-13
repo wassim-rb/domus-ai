@@ -254,7 +254,7 @@
           <li>Support par email pendant 7 jours</li>
         </ul>
         <div class="service-price-block">
-          <div class="service-price">2 500€ <sub>HT</sub></div>
+          <div class="service-price">3 000€ <sub>HT</sub></div>
           <div class="service-price-note">Demi-journée · Jusqu'à 8 personnes</div>
         </div>
         <a href="#contact" class="service-cta outline">Réserver une formation</a>
@@ -391,10 +391,9 @@
         </div>
       </div>
       <div class="about-text reveal reveal-delay-2">
-        <h3>Je ne vends pas de la technologie. Je récupère du temps pour votre équipe.</h3>
-        <p>Je travaille uniquement avec des agences indépendantes — des équipes de 2 à 15 personnes, dirigées par des gens qui n'ont pas de temps à perdre. Pas avec des promesses, pas avec des démos qui ne ressemblent pas à leur quotidien. Ce qu'ils veulent, c'est que ça marche la semaine d'après.</p>
-        <p>Avant d'installer quoi que ce soit, je passe du temps à comprendre comment votre agence fonctionne vraiment. Si un outil IA ne fait pas gagner de temps en conditions réelles — pas dans une démonstration, sur vos vrais dossiers — je ne le mets pas en place.</p>
-        <p>J'ai construit des produits IA pendant 10 ans, dans des entreprises comme Betclic, Rakuten et Mention. Des systèmes data pour Tesla et Nike, des équipes produit à l'international. Ce que j'apporte aux agences immobilières, c'est cette même exigence appliquée à des tâches très simples en apparence : écrire une annonce correcte, répondre à un prospect au bon moment, envoyer un compte-rendu qui donne confiance.</p>
+        <h3>L’IA n’a d’intérêt que si elle simplifie vraiment le quotidien de votre agence.</h3>
+        <p>Je travaille avec des agences indépendantes qui veulent des solutions concrètes, pas une couche d’outils en plus. Je vous accompagne et vous forme dans votre intégration de l’IA de façon simple et utile. Pas pour suivre une tendance, mais pour alléger le quotidien d’équipes qui ont mieux à faire que perdre du temps sur des tâches répétitives.</p>
+        <p>Pendant 10 ans, j’ai conçu des produits IA et data dans des environnements exigeants, chez Betclic, Rakuten et Mention, ainsi que sur des projets pour Tesla et Nike. Cette expérience, je la mets aujourd’hui au service des agences immobilières pour améliorer des tâches simples en apparence, mais décisives au quotidien. Avec une idée simple : utiliser les bons outils pour gagner du temps sur ce qui compte vraiment.</p>
         <div class="about-credentials">
           <span class="credential-tag">IA × Immobilier</span>
           <span class="credential-tag">Agences indépendantes</span>
@@ -441,7 +440,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-question" aria-expanded="false">
-          <span class="faq-question-text">2 500€ ou 7 000€, c'est cher pour une petite agence. Quel est le retour ?</span>
+          <span class="faq-question-text">3 000€ ou 7 000€, c'est cher pour une petite agence. Quel est le retour ?</span>
           <span class="faq-icon" aria-hidden="true"></span>
         </button>
         <div class="faq-answer">
@@ -501,16 +500,28 @@
       </div>
 
       <div class="form-group">
-        <label for="phone">Téléphone</label>
+        <label for="company">Site web ou LinkedIn *</label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          placeholder="Nom de votre agence ou lien vers votre site web"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Téléphone *</label>
         <input
           type="tel"
           id="phone"
           name="phone"
           placeholder="06 XX XX XX XX"
+          required
         >
       </div>
 
-      <div class="form-group">
+      <div class="form-group form-group-full">
         <label for="message">Message *</label>
         <textarea
           id="message"
@@ -521,8 +532,8 @@
         ></textarea>
       </div>
 
-      <button type="submit" class="form-submit-btn">Envoyer</button>
-      <p class="form-note">Je vous réponds personnellement dans les 24h.</p>
+      <button type="submit" class="form-submit-btn form-submit-btn-full">Envoyer</button>
+      <p class="form-note form-note-full">Réponse ou prise de contact en moins de 24h.</p>
 
     </form>
     <!-- END CONTACT FORM -->
