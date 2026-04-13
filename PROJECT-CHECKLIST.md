@@ -1,8 +1,8 @@
 # DOMUS-AI PROJECT CHECKLIST
 
-**Last Updated:** 10 Apr 2026, 19:31  
-**Current Phase:** PHASE 2 — LAUNCH  
-**Overall Progress:** 35% → 70%
+**Last Updated:** 13 Apr 2026, 11:15  
+**Current Phase:** PHASE 2 — LAUNCH (FINAL SPRINT)  
+**Overall Progress:** 70% → 85%
 
 ---
 
@@ -52,20 +52,20 @@
 ### CRITICAL 🔴 (Must do today)
 
 - ✅ Add contact form to index.html with Formspree integration
-- 🔄 Create Vercel account & deploy website
-- ⏳ Point domus-ai.fr domain to Vercel (DNS configuration)
-- ⏳ Test website live + contact form functionality
+- ✅ Create Vercel account & deploy website
+- ✅ Point domus-ai.fr domain to Vercel (DNS configuration)
+- ✅ Test website live + contact form functionality
 - ✅ Set up email alias (contact@domus-ai.fr → rbilawaassim@gmail.com)
 - 🚫 Confirm legal publication details for Mentions légales (éditeur, adresse, directeur de publication, identifiants si applicable)
 
 ### HIGH 🟠 (This week)
 
-- ⏳ Create contact@domus-ai.fr email address
-- 🔄 Test all navigation links (index → blog → back) — internal links updated while working with Codex; live testing still pending
-- 🔄 Verify all article CTAs work — CTA targets updated while working with Codex; live testing still pending
-- ⏳ Add Google Analytics to website
-- ⏳ Create simple robots.txt & sitemap.xml for SEO
-- 🚫 Add the final LinkedIn profile URL to the website footer (blocked: URL not yet available)
+- ✅ Create contact@domus-ai.fr email address
+- ✅ Test all navigation links (index → blog → back) — verified live
+- ✅ Verify all article CTAs work — verified live
+- 🔄 Add Google Analytics to website
+- ✅ Create simple robots.txt & sitemap.xml for SEO
+- 🔄 Add the final LinkedIn profile URL to the website footer (https://www.linkedin.com/in/wassimrbila/)
 
 ### MEDIUM 🟡 (Before next week)
 
