@@ -32,6 +32,8 @@
 4. **Reason for blocked items** — Always explain why something is blocked
 5. **This file covers the website only** — All growth/marketing tasks live in GROWTH-CHECKLIST.md
 
+⚠️ **GAINS CONSISTENCY REMINDER:** Avant toute modification de copy sur le site ou dans du contenu commercial, vérifier l'alignement avec [GAINS-REFERENCE.md](../07-sales/GAINS-REFERENCE.md) — baseline: **1+ heure/jour par personne**.
+
 ---
 
 ## 🔴 PHASE 1: FOUNDATION (COMPLETED)
