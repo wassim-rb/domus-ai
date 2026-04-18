@@ -140,34 +140,38 @@ document.addEventListener("DOMContentLoaded", () => {
         setStaticHero();
         return;
       }
-
       heroScene.classList.remove("hero-static");
 
       const totalScrollable = heroScene.offsetHeight - window.innerHeight;
       const rect = heroScene.getBoundingClientRect();
-      const progress = totalScrollable > 0 ? clamp((-rect.top) / totalScrollable) : 0;
+      const p = totalScrollable > 0 ? clamp((-rect.top) / totalScrollable) : 0;
+      setHeroVar("--hero-progress", p);
 
-      setHeroVar("--hero-progress", progress);
+      // Smoother easing — quintic out feels softer than cubic for long scrolls.
+      const easeOutQuint = (v) => 1 - Math.pow(1 - clamp(v), 5);
+      const mapEased = (v, a, b) => easeOutQuint(mapRange(v, a, b));
 
-      // Phase 1: Intro exit (0.0 → 0.30) - moves up and fades out
-      setHeroVar("--intro-progress", mapRangeEased(progress, 0.0, 0.30));
+      // Phase 1 — Intro settles back (0.00 → 0.34). Longer tail so it doesn't snap out.
+      setHeroVar("--intro-progress", mapEased(p, 0.00, 0.34));
 
-      // Phase 2: Proof cards (0.28 → 0.62 with stagger)
-      // Card 1: 0.28-0.48
-      setHeroVar("--proof-1", mapRangeEased(progress, 0.28, 0.48));
-      // Card 2: 0.35-0.55
-      setHeroVar("--proof-2", mapRangeEased(progress, 0.35, 0.55));
-      // Card 3: 0.42-0.62
-      setHeroVar("--proof-3", mapRangeEased(progress, 0.42, 0.62));
+      // Phase 2 — Proof cards emerge in place, heavily overlapped with intro.
+      // Start at 0.18 (while intro is still 50% visible) to kill the crossfade gap.
+      setHeroVar("--proof-1", mapEased(p, 0.18, 0.44));
+      setHeroVar("--proof-2", mapEased(p, 0.26, 0.52));
+      setHeroVar("--proof-3", mapEased(p, 0.34, 0.60));
+      setHeroVar("--proof-panel-opacity", mapEased(p, 0.14, 0.30));
 
-      // Proof panel opacity (crossfade with intro, visible from ~0.25)
-      setHeroVar("--proof-panel-opacity", mapRangeEased(progress, 0.22, 0.35));
+      // Phase 3 — Metrics surface earlier and overlap proof settle.
+      setHeroVar("--metrics-progress", mapEased(p, 0.48, 0.78));
 
-      // Phase 3: Metrics (0.62 → 0.82) - appear after proof cards settle
-      setHeroVar("--metrics-progress", mapRangeEased(progress, 0.62, 0.82));
+      // Independent parallax channel for watermark (lags scroll, slight vertical droop)
+      setHeroVar("--watermark-progress", easeOutQuint(p * 0.85));
 
-      heroScene.classList.toggle("is-proof", progress >= 0.22);
-      heroScene.classList.toggle("is-settled", progress >= 0.82);
+      // Glow progress runs slower than scroll for weight.
+      setHeroVar("--glow-progress", easeOutQuint(p * 1.15));
+
+      heroScene.classList.toggle("is-proof", p >= 0.14);
+      heroScene.classList.toggle("is-settled", p >= 0.78);
     };
 
     const queueHeroUpdate = () => {
