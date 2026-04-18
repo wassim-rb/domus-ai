@@ -49,8 +49,12 @@
   right: -4%;
   top: 48%;
   transform:
-    translate3d(calc(var(--hero-progress) * -8vw), calc(-50% + (var(--hero-progress) * -8rem)), 0)
-    scale(calc(1 - (var(--hero-progress) * 0.16)));
+    translate3d(
+      calc(var(--watermark-progress) * -9vw),
+      calc(-50% + (var(--watermark-progress) * -6rem)),
+      0
+    )
+    scale(calc(1 - (var(--watermark-progress) * 0.14)));
   font-family: var(--serif);
   font-size: clamp(11rem, 24vw, 24rem);
   line-height: 1;
@@ -60,7 +64,7 @@
   user-select: none;
   white-space: nowrap;
   letter-spacing: -0.045em;
-  opacity: calc(0.9 - (var(--hero-progress) * 0.68));
+  opacity: calc(1 - (var(--watermark-progress) * 0.35));
   will-change: transform, opacity;
 }
 
@@ -75,10 +79,12 @@
   filter: blur(68px);
   pointer-events: none;
   animation: glowPulse 6s ease-in-out infinite;
-  transform:
-    translate3d(calc(var(--hero-progress) * -14vw), calc(var(--hero-progress) * 9vh), 0)
-    scale(calc(1 - (var(--hero-progress) * 0.18)));
-  opacity: calc(0.88 - (var(--hero-progress) * 0.42));
+  transform: translate3d(
+    calc(var(--glow-progress) * 4vw),
+    calc(var(--glow-progress) * -3rem),
+    0
+  ) scale(calc(1 + (var(--glow-progress) * 0.12)));
+  opacity: calc(0.6 + (var(--glow-progress) * 0.2));
   will-change: transform, opacity;
 }
 
@@ -98,11 +104,14 @@
   width: min(1380px, 96vw);
   padding-top: clamp(0.25rem, 1vh, 1rem);
   text-align: center;
-  transform:
-    translate3d(0, calc(var(--intro-progress) * -12vh), 0)
-    scale(calc(1 - (var(--intro-progress) * 0.05)));
-  transform-origin: center top;
   opacity: calc(1 - var(--intro-progress));
+  transform: translate3d(
+    0,
+    calc(var(--intro-progress) * -2.5rem),
+    0
+  ) scale(calc(1 - (var(--intro-progress) * 0.03)));
+  transform-origin: center top;
+  filter: blur(calc(var(--intro-progress) * 3px));
   will-change: transform, opacity;
 }
 
@@ -229,28 +238,26 @@
   pointer-events: none;
 }
 
+.hero-proof-card {
+  will-change: transform, opacity, filter;
+}
+
 .hero-proof-card-1 {
-  --card-progress: var(--proof-1);
-  --proof-shift-x: -20px;
+  opacity: var(--proof-1);
+  filter: blur(calc((1 - var(--proof-1)) * 8px));
+  transform: translate3d(0, calc((1 - var(--proof-1)) * 18px), 0);
 }
 
 .hero-proof-card-2 {
-  --card-progress: var(--proof-2);
-  --proof-shift-x: 0px;
+  opacity: var(--proof-2);
+  filter: blur(calc((1 - var(--proof-2)) * 8px));
+  transform: translate3d(0, calc((1 - var(--proof-2)) * 18px), 0);
 }
 
 .hero-proof-card-3 {
-  --card-progress: var(--proof-3);
-  --proof-shift-x: 20px;
-}
-
-.hero-proof-card {
-  opacity: var(--card-progress);
-  transform:
-    translate3d(calc((1 - var(--card-progress)) * var(--proof-shift-x)), calc((1 - var(--card-progress)) * 48px), 0)
-    scale(calc(0.92 + (var(--card-progress) * 0.08)));
-  filter: saturate(calc(0.6 + (var(--card-progress) * 0.4)));
-  will-change: transform, opacity;
+  opacity: var(--proof-3);
+  filter: blur(calc((1 - var(--proof-3)) * 8px));
+  transform: translate3d(0, calc((1 - var(--proof-3)) * 18px), 0);
 }
 
 .hero-proof-kicker {
@@ -294,9 +301,7 @@
   margin-top: auto;
   padding-top: 1rem;
   opacity: var(--metrics-progress);
-  transform:
-    translate3d(0, calc((1 - var(--metrics-progress)) * 40px), 0)
-    scale(calc(0.94 + (var(--metrics-progress) * 0.06)));
+  transform: translate3d(0, calc((1 - var(--metrics-progress)) * 24px), 0);
   will-change: transform, opacity;
 }
 
