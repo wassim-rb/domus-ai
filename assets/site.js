@@ -189,6 +189,122 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============================================================
+  // STEPS CINEMATIC SCENE (homepage only)
+  // ============================================================
+  const stepsScene = document.querySelector("[data-steps-scene]");
+  if (stepsScene) {
+    const reducedMotionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let sceneFrame = null;
+    let sceneInView = false;
+    let sceneScrollBound = false;
+
+    const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
+    const mapRange = (value, start, end) => clamp((value - start) / (end - start));
+    const easeOutCubic = (value) => 1 - Math.pow(1 - clamp(value), 3);
+    const mapRangeEased = (value, start, end) => easeOutCubic(mapRange(value, start, end));
+
+    const setSceneVar = (name, value) => {
+      stepsScene.style.setProperty(name, value.toFixed(4));
+    };
+
+    const setStaticScene = () => {
+      setSceneVar("--steps-progress", 1);
+      setSceneVar("--steps-zoom", 1);
+      setSceneVar("--steps-pan", 0);
+      setSceneVar("--steps-glow", 0.38);
+      setSceneVar("--steps-sweep", 0.5);
+      setSceneVar("--steps-caption-1", 1);
+      setSceneVar("--steps-caption-2", 1);
+    };
+
+    const updateStepsScene = () => {
+      if (reducedMotionMedia.matches) {
+        setStaticScene();
+        return;
+      }
+
+      const rect = stepsScene.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+      const start = viewportHeight * 0.88;
+      const end = -rect.height * 0.32;
+      const progress = clamp((start - rect.top) / (start - end));
+
+      const zoom = 1.01 + (progress * 0.09);
+      const pan = mapRangeEased(progress, 0.05, 1);
+      const glow = mapRangeEased(progress, 0.08, 0.92);
+      const caption1 = mapRangeEased(progress, 0.1, 0.45);
+      const caption2 = mapRangeEased(progress, 0.2, 0.62);
+
+      setSceneVar("--steps-progress", progress);
+      setSceneVar("--steps-zoom", zoom);
+      setSceneVar("--steps-pan", pan);
+      setSceneVar("--steps-glow", glow);
+      setSceneVar("--steps-sweep", progress);
+      setSceneVar("--steps-caption-1", caption1);
+      setSceneVar("--steps-caption-2", caption2);
+    };
+
+    const queueSceneUpdate = () => {
+      if (sceneFrame !== null) {
+        return;
+      }
+
+      sceneFrame = requestAnimationFrame(() => {
+        updateStepsScene();
+        sceneFrame = null;
+      });
+    };
+
+    const startSceneScroll = () => {
+      if (sceneScrollBound) {
+        return;
+      }
+
+      window.addEventListener("scroll", queueSceneUpdate, { passive: true });
+      window.addEventListener("resize", queueSceneUpdate);
+      sceneScrollBound = true;
+    };
+
+    const stopSceneScroll = () => {
+      if (!sceneScrollBound) {
+        return;
+      }
+
+      window.removeEventListener("scroll", queueSceneUpdate);
+      window.removeEventListener("resize", queueSceneUpdate);
+      sceneScrollBound = false;
+    };
+
+    const sceneObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target !== stepsScene) {
+            return;
+          }
+
+          sceneInView = entry.isIntersecting;
+          if (sceneInView) {
+            startSceneScroll();
+            queueSceneUpdate();
+          } else {
+            stopSceneScroll();
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "120px 0px 120px 0px" }
+    );
+
+    sceneObserver.observe(stepsScene);
+
+    reducedMotionMedia.addEventListener("change", () => {
+      if (!sceneInView && !reducedMotionMedia.matches) {
+        return;
+      }
+      queueSceneUpdate();
+    });
+  }
+
+  // ============================================================
   // ANIMATION 2: Animated Counter (smooth digit roll)
   // ============================================================
   const animateCounter = (element, target, duration = 1400) => {

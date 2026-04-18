@@ -477,10 +477,26 @@
 
 .problem-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(240px, 0.9fr);
+  grid-template-areas:
+    "card-1 card-2 photo"
+    "card-3 card-3 photo";
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
+  align-items: stretch;
+}
+
+.problem-card-1 {
+  grid-area: card-1;
+}
+
+.problem-card-2 {
+  grid-area: card-2;
+}
+
+.problem-card-3 {
+  grid-area: card-3;
 }
 
 .problem-card {
@@ -536,6 +552,82 @@
   font-weight: 300;
   line-height: 1.7;
   color: var(--text-muted);
+}
+
+.problem-photo-card {
+  grid-area: photo;
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.problem-photo-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--gold), rgba(200, 146, 42, 0.2));
+  z-index: 2;
+}
+
+.problem-photo-frame {
+  position: relative;
+  height: 100%;
+}
+
+.problem-photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(13, 13, 11, 0.08) 15%, rgba(13, 13, 11, 0.78) 100%);
+  pointer-events: none;
+}
+
+.problem-photo-frame img {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.88) contrast(1.03);
+  transform: scale(1);
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+.problem-photo-card:hover .problem-photo-frame img {
+  transform: scale(1.03);
+  filter: saturate(1) contrast(1.06);
+}
+
+.problem-photo-caption {
+  position: absolute;
+  right: 1.15rem;
+  bottom: 1.15rem;
+  left: 1.15rem;
+  z-index: 3;
+}
+
+.problem-photo-kicker {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.problem-photo-text {
+  display: block;
+  max-width: 24ch;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text);
 }
 
 .solution {
@@ -594,6 +686,178 @@
 
 .steps {
   background: var(--bg-alt);
+}
+
+.steps-cinematic {
+  --steps-progress: 0;
+  --steps-zoom: 1.01;
+  --steps-pan: 0;
+  --steps-glow: 0;
+  --steps-sweep: 0;
+  --steps-caption-1: 0;
+  --steps-caption-2: 0;
+  position: relative;
+  margin: 0 0 1.6rem;
+  border-radius: 3px;
+}
+
+.steps-cinematic-frame {
+  position: relative;
+  overflow: hidden;
+  height: clamp(300px, 36vh, 430px);
+  border: 1px solid rgba(240, 234, 216, 0.16);
+  border-radius: 3px;
+  background: #120808;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.46),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.steps-cinematic-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(240, 234, 216, 0.06), rgba(255, 181, 181, 0.66), rgba(240, 234, 216, 0.06));
+  z-index: 4;
+}
+
+.steps-cinematic-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(12, 9, 9, 0.08) 18%, rgba(12, 8, 8, 0.82) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.steps-cinematic-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  filter:
+    saturate(calc(0.88 + (var(--steps-progress) * 0.26)))
+    contrast(calc(0.98 + (var(--steps-progress) * 0.2)));
+  transform:
+    translate3d(0, calc((var(--steps-pan) * -14px) - 8px), 0)
+    scale(var(--steps-zoom));
+  transform-origin: center 54%;
+  transition: transform 0.32s var(--ease-out), filter 0.32s var(--ease-out);
+  will-change: transform, filter;
+}
+
+.steps-cinematic:hover .steps-cinematic-photo {
+  transform:
+    translate3d(0, calc((var(--steps-pan) * -16px) - 10px), 0)
+    scale(calc(var(--steps-zoom) + 0.03));
+}
+
+.steps-cinematic-atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 66% 22%, rgba(214, 32, 32, 0.54), transparent 43%),
+    linear-gradient(120deg, rgba(119, 16, 16, 0.22), transparent 58%);
+  opacity: calc(0.45 + (var(--steps-glow) * 0.4));
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.35s var(--ease-out);
+}
+
+.steps-cinematic-sweep {
+  position: absolute;
+  top: -20%;
+  width: 48%;
+  height: 140%;
+  left: calc((var(--steps-sweep) * 84%) - 26%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 246, 226, 0.22) 52%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  filter: blur(1px);
+  opacity: calc(0.14 + (var(--steps-glow) * 0.3));
+  transform: skewX(-15deg);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.steps-cinematic-caption {
+  position: absolute;
+  left: 1.05rem;
+  right: 1.05rem;
+  bottom: 1rem;
+  z-index: 5;
+}
+
+.steps-cinematic-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.6rem;
+  padding: 0.32rem 0.7rem;
+  border: 1px solid rgba(240, 234, 216, 0.22);
+  border-radius: 999px;
+  background: rgba(9, 9, 8, 0.6);
+  backdrop-filter: blur(2px);
+  font-family: var(--mono);
+  font-size: 0.61rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: calc(0.3 + (var(--steps-caption-1) * 0.7));
+  transform: translate3d(0, calc((1 - var(--steps-caption-1)) * 13px), 0);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+
+.steps-cinematic-kicker::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 138, 138, 0.95);
+  box-shadow: 0 0 8px rgba(255, 89, 89, 0.5);
+}
+
+.steps-cinematic-text {
+  display: block;
+  max-width: 36ch;
+  color: var(--text);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.52);
+  opacity: calc(0.24 + (var(--steps-caption-2) * 0.76));
+  transform: translate3d(0, calc((1 - var(--steps-caption-2)) * 16px), 0);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steps-cinematic {
+    --steps-progress: 1;
+    --steps-zoom: 1;
+    --steps-pan: 0;
+    --steps-glow: 0.35;
+    --steps-sweep: 0.5;
+    --steps-caption-1: 1;
+    --steps-caption-2: 1;
+  }
+
+  .steps-cinematic-photo,
+  .steps-cinematic-kicker,
+  .steps-cinematic-text {
+    transition: none;
+    transform: none;
+  }
+
+  .steps-cinematic-sweep {
+    opacity: 0.08;
+  }
 }
 
 .steps-grid {
@@ -1187,6 +1451,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .steps-cinematic-frame {
+    height: 300px;
+  }
+
   .step-card {
     border-bottom: 1px solid var(--border);
   }
@@ -1265,9 +1533,24 @@
     border-bottom: none;
   }
 
-  .problem-grid,
   .solution-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps-cinematic-frame {
+    height: 300px;
+  }
+
+  .problem-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "photo photo"
+      "card-1 card-2"
+      "card-3 card-3";
+  }
+
+  .problem-photo-card {
+    min-height: 360px;
   }
 
   .services-grid {
@@ -1389,10 +1672,57 @@
     opacity: 0.72;
   }
 
-  .problem-grid,
   .solution-grid,
   .steps-grid {
     grid-template-columns: 1fr;
+  }
+
+  .steps-cinematic {
+    margin-bottom: 1.2rem;
+  }
+
+  .steps-cinematic-frame {
+    height: 244px;
+  }
+
+  .steps-cinematic-photo {
+    object-position: center 68%;
+    transform:
+      translate3d(0, calc((var(--steps-pan) * -10px) - 6px), 0)
+      scale(var(--steps-zoom));
+  }
+
+  .steps-cinematic-caption {
+    left: 0.95rem;
+    right: 0.95rem;
+    bottom: 0.95rem;
+  }
+
+  .steps-cinematic-kicker {
+    margin-bottom: 0.55rem;
+    font-size: 0.58rem;
+  }
+
+  .steps-cinematic-text {
+    font-size: 0.78rem;
+    max-width: 100%;
+  }
+
+  .problem-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "card-1"
+      "card-2"
+      "card-3";
+  }
+
+  .problem-photo-card {
+    min-height: 300px;
+  }
+
+  .problem-photo-text {
+    max-width: 100%;
   }
 
   .step-card {

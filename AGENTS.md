@@ -30,7 +30,7 @@ This file contains a growing ruleset that improves over time. **At session start
 
 1. [TOOL] Always invoke the `anthropic-skills:frontend-design` skill before making any frontend decision (layout, typography, color, component design, animations, spacing) — because it enforces a distinctive, production-grade aesthetic standard and prevents generic AI-slop output.
 
-2. [TOOL] Always invoke the `anthropic-skills:content-pipeline` skill before writing or rewriting any copy (headlines, descriptions, CTAs, section text, labels) — because it applies a rigorous editorial process (thesis, deconstruction, reconstruction, storytelling) that produces sharper, more persuasive content.
+2. [TOOL] Always invoke the `anthropic-skills:copy-editing` skill before writing or rewriting any copy (headlines, descriptions, CTAs, section text, labels) — because it applies a rigorous editorial process (thesis, deconstruction, reconstruction, storytelling) that produces sharper, more persuasive content.
 
 3. [STYLE] Always use "collaborateur/collaborateurs" instead of "négociateur/négociateurs" throughout all copy — because the client prefers this term.
 
