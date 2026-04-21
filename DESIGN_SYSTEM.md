@@ -51,6 +51,10 @@ Single source of truth. Any new code in this repo must use these values.
 - Never emoji.
 - "collaborateurs" — never "négociateurs."
 - Concrete over abstract: lead with a scene, then the capability.
+- Use a single gains baseline in public copy: `+10 h/mois par collaborateur` or `1h/jour`. Do not mix granular gains by assistant if they can add up incoherently.
+- Never use fixed assistant counts in public copy (`3 assistants`, `5+ assistants`, `8 assistants`, `10 outils`). Use evolving language instead: `bibliothèque`, `ensemble d'assistants`, `selon vos priorités`.
+- Assistants are illustrations of the `Solutions` pillar, not the main product.
+- Keep one proof per pillar in messaging: `Formation` = sessions + autonomy, `Solutions` = time saved, `Expertise` = ongoing advice and adjustment.
 
 ## Iconography
 

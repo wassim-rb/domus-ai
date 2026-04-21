@@ -132,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setHeroVar("--proof-2", 1);
       setHeroVar("--proof-3", 1);
       setHeroVar("--proof-panel-opacity", 1);
-      setHeroVar("--metrics-progress", 1);
     };
 
     const updateHeroScene = () => {
@@ -155,14 +154,12 @@ document.addEventListener("DOMContentLoaded", () => {
       setHeroVar("--intro-progress", mapEased(p, 0.00, 0.34));
 
       // Phase 2 — Proof cards emerge in place, heavily overlapped with intro.
-      // Start at 0.18 (while intro is still 50% visible) to kill the crossfade gap.
-      setHeroVar("--proof-1", mapEased(p, 0.18, 0.44));
-      setHeroVar("--proof-2", mapEased(p, 0.26, 0.52));
-      setHeroVar("--proof-3", mapEased(p, 0.34, 0.60));
-      setHeroVar("--proof-panel-opacity", mapEased(p, 0.14, 0.30));
-
-      // Phase 3 — Metrics surface earlier and overlap proof settle.
-      setHeroVar("--metrics-progress", mapEased(p, 0.48, 0.78));
+      // Extended range now that the metrics rail is gone, so the cards take the
+      // full weight of the scroll and settle more slowly for a more airy feel.
+      setHeroVar("--proof-1", mapEased(p, 0.20, 0.52));
+      setHeroVar("--proof-2", mapEased(p, 0.32, 0.66));
+      setHeroVar("--proof-3", mapEased(p, 0.44, 0.80));
+      setHeroVar("--proof-panel-opacity", mapEased(p, 0.14, 0.32));
 
       // Independent parallax channel for watermark (lags scroll, slight vertical droop)
       setHeroVar("--watermark-progress", easeOutQuint(p * 0.85));
@@ -171,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setHeroVar("--glow-progress", easeOutQuint(p * 1.15));
 
       heroScene.classList.toggle("is-proof", p >= 0.14);
-      heroScene.classList.toggle("is-settled", p >= 0.78);
+      heroScene.classList.toggle("is-settled", p >= 0.80);
     };
 
     const queueHeroUpdate = () => {
