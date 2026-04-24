@@ -308,8 +308,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============================================================
   // ANIMATION 2: Animated Counter (smooth digit roll)
   // ============================================================
-  const animateCounter = (element, target, duration = 1400) => {
+  const counterDuration = 1400;
+
+  const animateCounter = (element, target, duration = counterDuration) => {
     const start = performance.now();
+    element.textContent = "0";
 
     const update = (time) => {
       const progress = Math.min((time - start) / duration, 1);
@@ -332,11 +335,12 @@ document.addEventListener("DOMContentLoaded", () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.querySelectorAll("[data-count]").forEach((element, i) => {
-              // Stagger each counter slightly
-              setTimeout(() => {
-                animateCounter(element, parseInt(element.dataset.count, 10), 1400);
-              }, i * 150);
+            entry.target.querySelectorAll("[data-count]").forEach((element) => {
+              const target = parseInt(element.dataset.count, 10);
+
+              if (!Number.isNaN(target)) {
+                animateCounter(element, target, counterDuration);
+              }
             });
             counterObserver.unobserve(entry.target);
           }
