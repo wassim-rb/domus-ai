@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Domus-AI">
-  <rect width="64" height="64" rx="14" fill="#0d0d0b"></rect>
-  <text x="32" y="48" text-anchor="middle" font-family="DM Sans, system-ui, sans-serif" font-size="46" font-weight="900" fill="#dfb05a">S</text>
+  <rect width="64" height="64" rx="14" fill="#0d0d0b"/>
+  <text x="13" y="48" font-family="DM Sans, system-ui, -apple-system, sans-serif" font-size="46" font-weight="900" letter-spacing="-2" fill="#dfb05a">D</text>
+  <circle cx="50" cy="44" r="5" fill="#c8922a"/>
 </svg>
