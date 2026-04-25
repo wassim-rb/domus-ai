@@ -24,7 +24,7 @@ Single source of truth. Any new code in this repo must use these values.
 |---|---|
 | `--gold` | `#c8922a` |
 | `--gold-light` | `#dfb05a` |
-| `--gold-pale` | `rgba(200, 146, 42, 0.12)` |
+| `--gold-pale` | `hsla(39, 65.30%, 47.50%, 0.12)` |
 | `--gold-border` | `rgba(200, 146, 42, 0.35)` |
 
 ### Borders
