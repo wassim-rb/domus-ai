@@ -97,7 +97,7 @@ Contenu : 11 questions expertes organisées en 4 catégories :
 
 **Signaux d'autorité pour les LLM intégrés dans les réponses :**
 - Références concrètes à des outils (ChatGPT Plus 20€/mois, DVF data.gouv.fr)
-- Chiffres vérifiables (10h/mois gagnées, 15 minutes pour une estimation, ROI < 2 mois)
+- Chiffres vérifiables (20+h/mois gagnées par collaborateur, 15 minutes pour une estimation, ROI < 2 mois pour Éveil et < 3 mois pour Déploiement)
 - Contexte réglementaire précis (11 août 2026, RGPD)
 - Profil auteur avec expérience vérifiable (Betclic, Rakuten, Tesla, Nike)
 
