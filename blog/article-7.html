@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rédiger une annonce immobilière avec ChatGPT : méthode et prompts | Domus-AI</title>
+<meta name="description" content="Méthode pas à pas pour rédiger une annonce immobilière avec ChatGPT ou Claude : prompt complet, exemples sur LeBonCoin, SeLoger, BienIci et garde-fous juridiques.">
+<meta property="og:title" content="Rédiger une annonce immobilière avec ChatGPT : méthode complète | Domus-AI">
+<meta property="og:description" content="Le workflow concret pour générer une annonce immobilière avec l'IA, l'adapter à chaque portail et la valider en quelques minutes.">
+<meta property="og:image" content="https://domus-ai.fr/assets/domus-ai-linkedin-banner-hd.png">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://domus-ai.fr/blog/article-7.html">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="../assets/favicon/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon-180.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1G1293D2BP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1G1293D2BP');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Comment rédiger une annonce immobilière avec ChatGPT : méthode, prompts et adaptation multi-portails",
+      "description": "Méthode pas à pas pour rédiger une annonce immobilière avec ChatGPT ou Claude : prompt complet, exemples sur LeBonCoin, SeLoger, BienIci et garde-fous juridiques.",
+      "url": "https://domus-ai.fr/blog/article-7.html",
+      "datePublished": "2026-04-25",
+      "dateModified": "2026-04-25",
+      "author": {
+        "@type": "Person",
+        "name": "Wassim Rbila",
+        "url": "https://domus-ai.fr/#apropos"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Domus AI",
+        "url": "https://domus-ai.fr",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://domus-ai.fr/assets/favicon/favicon-1024.png"
+        }
+      },
+      "image": "https://domus-ai.fr/assets/domus-ai-linkedin-banner-hd.png",
+      "mainEntityOfPage": "https://domus-ai.fr/blog/article-7.html",
+      "inLanguage": "fr-FR",
+      "keywords": ["rédiger annonce immobilière ChatGPT", "annonce immobilière IA", "prompt ChatGPT immobilier", "description de bien IA", "annonce LeBonCoin SeLoger BienIci", "fiche bien ChatGPT"],
+      "articleSection": "Guide pratique",
+      "timeRequired": "PT9M"
+    },
+    {
+      "@type": "HowTo",
+      "name": "Comment rédiger une annonce immobilière avec ChatGPT en 5 étapes",
+      "description": "Méthode complète pour transformer une fiche bien en annonce publiable, adaptée à chaque portail (LeBonCoin, SeLoger, BienIci, Instagram), avec un prompt cadre et une checklist de relecture.",
+      "totalTime": "PT9M",
+      "supply": [
+        { "@type": "HowToSupply", "name": "Fiche technique du bien (surface, pièces, DPE, étage, charges)" },
+        { "@type": "HowToSupply", "name": "Notes de visite ou points marquants observés sur place" },
+        { "@type": "HowToSupply", "name": "Référence du ton de votre agence (3 anciennes annonces validées)" },
+        { "@type": "HowToSupply", "name": "Modèle de langage : ChatGPT (OpenAI) ou Claude (Anthropic)" }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Rassembler les bons inputs avant d'ouvrir ChatGPT",
+          "text": "Réunir la fiche technique complète (surface, pièces, étage, DPE, charges, prix), 3 à 5 points marquants notés en visite (luminosité, calme, vue, travaux récents), et 2 à 3 anciennes annonces de l'agence pour donner le ton."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Construire un prompt cadre qui fixe le ton et les contraintes",
+          "text": "Écrire un prompt qui précise : le rôle (rédacteur d'annonces immobilières en France), le ton (concret, factuel, sans superlatif vide), les contraintes légales (mentions DPE, prix, honoraires), et le format attendu (titre, accroche, descriptif, points clés, CTA)."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Générer une version longue défendable",
+          "text": "Demander d'abord une version complète de 250 à 350 mots, structurée, qui servira de version mère. C'est cette version qu'on adaptera ensuite, jamais l'inverse — partir court mène à des résumés plats."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Adapter le texte aux contraintes de chaque portail",
+          "text": "Demander à l'IA de produire des variantes calées sur les limites de SeLoger (titre court, descriptif structuré), LeBonCoin (lecture mobile, pas de jargon), BienIci (mots-clés explicites) et Instagram (accroche émotionnelle, hashtags maîtrisés)."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Relire avec une checklist de cohérence",
+          "text": "Vérifier en moins d'une minute : DPE et surfaces exacts, prix et honoraires conformes, aucune affirmation invérifiable (« quartier le plus recherché », « rare sur le marché ») non sourcée, ton aligné sur l'agence."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel prompt utiliser pour rédiger une annonce immobilière avec ChatGPT ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le prompt efficace combine quatre éléments : un rôle clair (« tu es rédacteur d'annonces immobilières en France »), des contraintes de ton (concret, sans superlatif vide), des contraintes légales (mentions DPE, prix, honoraires) et un format attendu (titre, accroche de 2 lignes, descriptif structuré en paragraphes, points clés, CTA). Donner ensuite la fiche technique complète et 2 à 3 anciennes annonces validées comme référence de ton. Sans cette base, l'IA produit du texte générique."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ChatGPT peut-il adapter automatiquement une annonce à LeBonCoin, SeLoger et BienIci en même temps ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, à condition de générer d'abord une version longue de référence, puis de demander explicitement les variantes par portail. Chaque plateforme a ses contraintes : SeLoger structure forte avec titre court ; LeBonCoin lecture mobile et phrases simples ; BienIci densité de mots-clés ; Instagram accroche émotionnelle et hashtags. Donner ces contraintes dans le prompt évite que l'IA produise un texte uniforme inadapté."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien de temps gagne-t-on à utiliser ChatGPT pour rédiger les annonces immobilières ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sur la rédaction d'annonces, le gain mesurable se situe autour de 2 heures par mois et par négociateur, en intégrant la production de la version longue, les variantes multi-portails et la relecture finale. Sur l'ensemble des tâches d'une journée d'agence, l'IA bien paramétrée fait gagner 1 heure ou plus par jour à chaque collaborateur, soit 20 heures et plus par mois — l'annonce n'est qu'un des leviers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on publier une annonce immobilière générée par IA sans relecture humaine ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. L'IA peut inventer des caractéristiques (surface, étage, DPE) ou produire des affirmations non sourcées (« quartier le plus recherché »). Une relecture rapide reste obligatoire pour vérifier les données factuelles, la conformité légale (mentions DPE, prix, honoraires) et l'absence de claims invérifiables. La relecture prend 30 à 60 secondes par annonce — ce n'est pas un goulot d'étranglement."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://domus-ai.fr/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://domus-ai.fr/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Rédiger une annonce immobilière avec ChatGPT", "item": "https://domus-ai.fr/blog/article-7.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="article-page">
+
+<div class="page-progress" aria-hidden="true"></div>
+
+<nav class="site-nav" id="navbar">
+  <a href="../index.html" class="nav-logo cascade-logo cascade-logo--l" aria-label="Domus-AI — accueil"><span class="cascade-d">D</span><span class="cascade-o">O</span><span class="cascade-m">M</span><span class="cascade-u">U</span><span class="cascade-s">S</span><span class="cascade-ai">·AI</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#solution">Solutions</a></li>
+    <li><a href="../index.html#approche">Approche</a></li>
+    <li><a href="../index.html#offres">Offres</a></li>
+    <li><a href="../index.html#apropos">À propos</a></li>
+    <li><a href="index.html" aria-current="page">Blog</a></li>
+    <li><a href="../faq-ia-immobilier.html">FAQ</a></li>
+    <li><a href="../index.html#contact" class="nav-cta-btn">Prendre rendez-vous</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+  <article class="article-shell">
+    <div class="article-topbar">
+      <a href="index.html" class="article-back-link">Retour au blog</a>
+      <span class="article-breadcrumb">Blog / Rédaction d'annonces avec l'IA</span>
+    </div>
+
+    <div class="article-container">
+      <header class="article-header">
+        <p class="article-kicker">Guide pratique</p>
+        <div class="article-meta-top">
+          <span class="article-meta-item"><time datetime="2026-04-25">Publié le 25 avril 2026</time></span>
+          <span class="article-meta-item">9 minutes de lecture</span>
+          <span class="article-meta-item">Annonces &amp; IA</span>
+        </div>
+        <h1>Comment rédiger une annonce immobilière avec ChatGPT : méthode, prompts et adaptation multi-portails</h1>
+        <p class="article-lede">Une bonne annonce immobilière prend du temps. Pas parce que l'écriture est compliquée, mais parce qu'il faut produire la version longue, l'adapter à SeLoger, LeBonCoin, BienIci, Instagram, et garder un ton cohérent à chaque fois. ChatGPT et Claude peuvent absorber cette partie mécanique en quelques minutes — à condition d'utiliser une méthode propre. Voici la marche à suivre, le prompt complet à copier, et les pièges à connaître avant de publier.</p>
+      </header>
+
+      <div class="article-body">
+        <h2>Pourquoi la rédaction d'annonces reste l'une des tâches les plus chronophages d'une agence</h2>
+
+        <p>Une annonce, ce n'est pas un texte. C'est six à huit textes qui partent du même bien : la fiche site, la version SeLoger, la version LeBonCoin, la version BienIci, l'accroche Instagram, parfois l'email aux acquéreurs en portefeuille. Chaque portail a ses contraintes. Chaque plateforme demande un découpage différent. Et pendant ce temps, le négociateur a une visite à 14h, une estimation à 16h et trois relances en retard.</p>
+
+        <p>Résultat : on copie-colle, on raccourcit à la va-vite, on perd la touche éditoriale qui fait qu'une annonce sort du lot. C'est précisément l'endroit où une IA bien paramétrée fait la différence — sur le travail répétitif d'adaptation, pas sur le choix éditorial initial.</p>
+
+        <p>Sur le breakdown des gains observés en agence, la rédaction d'annonces représente environ 2 heures par mois et par négociateur, dans un total de 20 heures et plus par personne sur l'ensemble des tâches — soit plus de 100 heures par mois récupérées pour une équipe de cinq.</p>
+
+        <h2>La méthode en 5 étapes</h2>
+
+        <p>L'erreur classique, c'est d'ouvrir ChatGPT et de taper « rédige-moi une annonce pour un T3 à Lyon ». Vous obtenez un texte plat, générique, qui aurait pu décrire n'importe quel T3 dans n'importe quelle ville. La méthode ci-dessous prend deux minutes de plus au démarrage et change le résultat radicalement.</p>
+
+        <h3>1. Rassembler les bons inputs avant d'ouvrir ChatGPT</h3>
+
+        <p>Trois éléments, pas plus :</p>
+
+        <ul>
+          <li><strong>La fiche technique complète</strong> : surface Carrez, nombre de pièces, étage, exposition, DPE, charges, prix, honoraires.</li>
+          <li><strong>3 à 5 points marquants relevés en visite</strong> : luminosité, calme, vue, travaux récents, atypisme du plan, équipement de la cuisine. Ce sont ces éléments qui distinguent l'annonce d'un communiqué de presse.</li>
+          <li><strong>2 à 3 anciennes annonces validées par votre agence</strong>, à coller dans le prompt comme référence de ton. C'est ce qui fait que l'IA écrit comme vous, pas comme ChatGPT par défaut.</li>
+        </ul>
+
+        <p>Sans ces trois inputs, vous obtenez une annonce qui sent l'IA. Avec ces trois inputs, vous obtenez une annonce qui ressemble aux vôtres, en plus rapide.</p>
+
+        <h3>2. Définir le ton et les contraintes dans un prompt cadre</h3>
+
+        <p>Le prompt cadre, c'est le contrat que vous passez avec l'IA. Il fixe le rôle, le ton, les contraintes légales et le format attendu. Vous le rédigez une fois, vous le réutilisez sur chaque bien.</p>
+
+        <h3>3. Générer une version longue défendable</h3>
+
+        <p>Demandez d'abord une version de 250 à 350 mots, structurée. Cette version sert de version mère. C'est elle qu'on adaptera aux portails ensuite, jamais l'inverse. Partir d'une version courte pour la rallonger produit du remplissage. Partir d'une version longue pour la condenser produit des arbitrages éditoriaux propres.</p>
+
+        <h3>4. Adapter aux contraintes de chaque portail</h3>
+
+        <p>Une fois la version longue validée, on demande à l'IA des variantes calibrées. SeLoger n'aime pas les mêmes phrases que LeBonCoin. Instagram n'a rien à voir avec BienIci. On y revient en détail plus bas.</p>
+
+        <h3>5. Relire avec une checklist de cohérence</h3>
+
+        <p>30 à 60 secondes par annonce. Pas plus. Mais cette relecture est non-négociable : l'IA peut inventer des caractéristiques ou produire des claims non sourcés (« quartier le plus prisé », « rare sur le marché »). On y revient à la fin de cet article.</p>
+
+        <h2>Le prompt complet à copier</h2>
+
+        <p>Voici la version courte et fonctionnelle. Vous la copiez, vous remplacez ce qui est entre crochets, vous l'envoyez.</p>
+
+        <div class="example-box">
+          <span class="example-label">Prompt cadre — version annonce immobilière</span>
+          Tu es rédacteur d'annonces immobilières en France pour [Nom de l'agence], une agence située à [ville/quartier].<br><br>
+          Ton de l'agence : concret, factuel, sans superlatif vide ni jargon publicitaire. Pas de « véritable », « unique en son genre », « rare opportunité ». Pas de mention émotionnelle non sourcée.<br><br>
+          Contraintes légales obligatoires : afficher le DPE, le prix de vente, le montant et la nature des honoraires (charge vendeur ou acquéreur), la surface Carrez pour les copropriétés.<br><br>
+          Format attendu :<br>
+          — Titre : 60 caractères max, factuel.<br>
+          — Accroche : 2 lignes, point fort principal du bien.<br>
+          — Descriptif : 200 à 250 mots, structuré (entrée, pièces de vie, chambres, cuisine/SDB, extérieur si pertinent, copropriété, environnement).<br>
+          — Points clés : 4 à 6 bullets factuels.<br>
+          — Mention finale : DPE, honoraires, contact.<br><br>
+          Voici la fiche technique du bien : [coller les caractéristiques].<br>
+          Voici les 3 à 5 points marquants relevés en visite : [coller les points].<br>
+          Voici 2 anciennes annonces de l'agence pour le ton : [coller les annonces].<br><br>
+          Produis la version longue défendable. On adaptera les portails ensuite.
+        </div>
+
+        <p>Ce prompt fait quatre choses utiles : il donne un rôle clair, il pose une contrainte de ton négatif (ce qu'on ne veut pas), il rappelle les obligations légales, il impose un format. C'est ce qui permet à l'IA de travailler en cadre, pas en surface.</p>
+
+        <h2>Exemples concrets</h2>
+
+        <h3>Appartement parisien — 3 pièces, 65 m², 4ᵉ étage</h3>
+
+        <div class="example-box">
+          <span class="example-label">Sortie attendue (extrait)</span>
+          <strong>Titre.</strong> 3 pièces lumineux 65 m² — Paris 11ᵉ, métro Voltaire<br><br>
+          <strong>Accroche.</strong> Au 4ᵉ étage avec ascenseur, ce 3 pièces traversant offre une vraie pièce de vie sud-ouest et deux chambres calmes côté cour.<br><br>
+          <strong>Descriptif.</strong> L'entrée distribue un grand séjour de 25 m² ouvert sur une cuisine équipée récente. Deux chambres de 11 et 12 m² donnent côté cour, totalement au calme. Salle d'eau refaite en 2024, WC séparés. Belle hauteur sous plafond, parquet d'origine, double vitrage. La copropriété de 24 lots est bien tenue, ravalement effectué en 2023.<br><br>
+          <strong>Points clés.</strong> Métro Voltaire à 3 min — 4ᵉ étage avec ascenseur — Cave incluse — Chauffage individuel gaz<br><br>
+          <strong>Mentions.</strong> DPE D — Prix : 690 000 € — Honoraires charge vendeur — Surface Carrez : 65,2 m².
+        </div>
+
+        <h3>Maison de province — 5 pièces, 130 m², jardin</h3>
+
+        <div class="example-box">
+          <span class="example-label">Sortie attendue (extrait)</span>
+          <strong>Titre.</strong> Maison 5 pièces 130 m² avec jardin — Tours, secteur Sainte-Radegonde<br><br>
+          <strong>Accroche.</strong> À 10 min du centre-ville, cette maison familiale propose 4 chambres, un jardin clos de 350 m² et un garage attenant.<br><br>
+          <strong>Descriptif.</strong> Au rez-de-chaussée, une entrée dessert un séjour-salon de 35 m² ouvert sur la cuisine équipée. Une chambre, une salle d'eau et des WC complètent ce niveau, accessibles de plain-pied. À l'étage, trois chambres de 11 à 14 m², une salle de bains avec baignoire, et un palier qui peut servir de coin bureau. Le jardin de 350 m² est entièrement clos, bien orienté, avec une terrasse en pierre. Toiture refaite en 2021, chaudière à condensation 2023.<br><br>
+          <strong>Points clés.</strong> 4 chambres dont 1 plain-pied — Garage attenant — Jardin clos 350 m² — Travaux récents toiture &amp; chaudière<br><br>
+          <strong>Mentions.</strong> DPE C — Prix : 295 000 € — Honoraires charge acquéreur (4,2 % TTC) — Surface habitable : 130 m².
+        </div>
+
+        <p>Ces deux exemples ont la même structure. Ce qui change, c'est la nature des points clés et la manière dont l'accroche met en avant l'élément différenciant principal. C'est exactement le genre d'arbitrage qu'une IA cadrée peut produire en première version, à valider par le négociateur en quelques secondes.</p>
+
+        <h2>Adaptation multi-portails : ce qui change vraiment entre LeBonCoin, SeLoger, BienIci et Instagram</h2>
+
+        <p>Une fois la version longue validée, vous demandez à l'IA quatre variantes. Voici ce qu'il faut préciser dans le prompt d'adaptation pour que chaque variante soit utilisable telle quelle.</p>
+
+        <h3>SeLoger</h3>
+
+        <p>Lecture desktop et mobile, audience qualifiée. Titre court (60 caractères) factuel. Descriptif structuré, paragraphes nets. Pas d'émojis. Mots-clés explicites pour le moteur interne (« proche transports », « rénové », « calme »).</p>
+
+        <h3>LeBonCoin</h3>
+
+        <p>Lecture mobile à 90 %. Phrases simples, paragraphes courts (3 lignes max). On ouvre par le bénéfice principal, pas par la fiche technique. Le prix et la mention « Honoraires » doivent être clairement séparés du descriptif, jamais noyés dans la prose.</p>
+
+        <h3>BienIci</h3>
+
+        <p>Densité de mots-clés plus stratégique pour le référencement interne. Préciser systématiquement les commodités (transports, écoles, commerces) et les caractéristiques techniques (DPE, étage, exposition). C'est le portail où une description plate « passe » le moins.</p>
+
+        <h3>Instagram</h3>
+
+        <p>Format complètement différent : accroche émotionnelle en 2 lignes, points clés en bullets visuels, hashtags maîtrisés (5 à 7 max, pertinents — pas #immobilierdeluxe sur un T2). Pas de prix dans la légende sauf si la stratégie de l'agence le demande explicitement.</p>
+
+        <div class="example-box">
+          <span class="example-label">Prompt d'adaptation multi-portails</span>
+          À partir de la version longue ci-dessus, produis 4 variantes :<br>
+          1. SeLoger — titre 60 caractères, descriptif structuré 200 mots, mots-clés moteur interne.<br>
+          2. LeBonCoin — phrases courtes, lecture mobile, prix séparé.<br>
+          3. BienIci — densité de mots-clés sur commodités et caractéristiques techniques.<br>
+          4. Instagram — accroche 2 lignes, 4 bullets, 5 à 7 hashtags pertinents, pas de prix.<br><br>
+          Garde le ton de l'agence sur les 4 variantes. Ne réinvente pas les caractéristiques du bien.
+        </div>
+
+        <h2>Les pièges classiques à éviter</h2>
+
+        <p>Trois erreurs reviennent systématiquement quand une agence commence à utiliser ChatGPT pour ses annonces.</p>
+
+        <p><strong>Premier piège : le prompt trop court.</strong> « Rédige une annonce pour ce bien » + photo de la fiche. Vous obtenez du générique. La règle est simple : si votre prompt fait moins de 200 mots, l'IA travaille à l'aveugle.</p>
+
+        <p><strong>Deuxième piège : valider la première sortie sans relecture.</strong> L'IA peut écrire « quartier le plus prisé du 11ᵉ » alors que rien dans vos inputs ne le confirme. Elle peut aussi inverser la surface ou le DPE. La relecture de 30 à 60 secondes n'est pas une option.</p>
+
+        <p><strong>Troisième piège : changer de prompt cadre à chaque bien.</strong> Le bon usage, c'est l'inverse — un seul prompt cadre, stable, qu'on alimente avec des inputs différents. C'est ce qui fait que vos annonces gardent une cohérence éditoriale d'un bien à l'autre.</p>
+
+        <h2>Ce que l'IA ne doit pas faire seule</h2>
+
+        <p>Trois choses restent humaines, toujours.</p>
+
+        <p><strong>Le choix de l'angle éditorial.</strong> Mettre en avant la luminosité plutôt que la cuisine équipée, c'est un arbitrage commercial qui dépend du positionnement du bien et de la cible acquéreur. L'IA peut proposer, le négociateur tranche.</p>
+
+        <p><strong>La validation des données factuelles.</strong> DPE, surface Carrez, prix, honoraires, mentions de copropriété. Ces données engagent l'agence légalement. Aucune annonce ne part sans une vérification humaine de ces éléments.</p>
+
+        <p><strong>Les claims sur le marché ou le quartier.</strong> « Secteur recherché », « hausse des prix », « rare sur le marché » : ce sont des affirmations qui peuvent se retrouver dans un litige. L'IA en produit volontiers — il faut les retirer ou les sourcer.</p>
+
+        <div class="cta-box">
+          <h3>Vous voulez ce workflow installé chez vous, avec votre ton et vos contraintes ?</h3>
+          <p>Cet article donne la méthode générique. La version cadrée pour votre agence — prompt sur mesure, calibrage du ton, intégration multi-portails — se met en place en une à deux journées. Un appel de 30 minutes suffit pour cadrer ce qui est réaliste chez vous.</p>
+          <a href="../index.html#contact" class="cta-button">Planifier un appel</a>
+        </div>
+
+        <h2>En résumé</h2>
+
+        <ul>
+          <li><strong>Le problème :</strong> une annonce, c'est six à huit textes adaptés à des portails différents — d'où le copier-coller et la perte de qualité.</li>
+          <li><strong>La méthode :</strong> 5 étapes — inputs propres, prompt cadre stable, version longue d'abord, variantes par portail, relecture courte mais non-négociable.</li>
+          <li><strong>Le prompt utile</strong> donne un rôle, un ton, des contraintes légales et un format attendu. Il fait au moins 200 mots et sert sur tous les biens.</li>
+          <li><strong>Le gain mesurable :</strong> environ 2 heures par mois et par négociateur sur les annonces, dans un total de 20 heures et plus par personne sur l'ensemble des tâches.</li>
+          <li><strong>Le garde-fou :</strong> les données factuelles, l'angle éditorial et les claims marché restent humains.</li>
+        </ul>
+
+        <div class="related-section">
+          <h4>Continuer la lecture</h4>
+          <div class="related-links">
+            <div class="related-link">
+              <a href="article-2.html">Utiliser ChatGPT avec les données DVF pour une estimation plus solide</a>
+            </div>
+            <div class="related-link">
+              <a href="article-6.html">Quels courriers immobiliers peut-on vraiment rédiger avec l'IA en 2026 ?</a>
+            </div>
+            <div class="related-link">
+              <a href="article-1.html">Qualifier et relancer automatiquement ses leads immobiliers avec l'IA</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <a href="../index.html" class="footer-logo cascade-logo cascade-logo--xs" aria-label="Domus-AI"><span class="cascade-d">D</span><span class="cascade-o">O</span><span class="cascade-m">M</span><span class="cascade-u">U</span><span class="cascade-s">S</span><span class="cascade-ai">·AI</span></a>
+  <span class="footer-copy">© 2026 — Tous droits réservés</span>
+  <ul class="footer-links">
+    <li><a href="../mentions-legales.html">Mentions légales</a></li>
+    <li><a href="mailto:contact@domus-ai.fr">Contact</a></li>
+  </ul>
+</footer>
+
+<script defer src="../assets/site.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # DOMUS-AI WEBSITE CHECKLIST
 
-**Last Updated:** 13 Apr 2026  
+**Last Updated:** 25 Apr 2026  
 **Scope:** Website only — domus-ai.fr  
 **Current Phase:** PHASE 3 — WEBSITE IMPROVEMENTS (POST-LAUNCH)  
 **Progress:** Phase 1 ✅ | Phase 2 ✅ (launched April 13, 2026) | Phase 3 in progress
@@ -102,7 +102,7 @@ Validation rule:
 - ⏳ Add booking system (Calendly or similar) embedded on website
 - ⏳ Add social proof / case study section to homepage
 - ✅ Publish blog articles 4-6 (articles 4, 5, 6 now live on site)
-- ⏳ Publish blog article 7 (once written — see 03-content/)
+- ✅ Publish blog article 7 — "Comment rédiger une annonce immobilière avec ChatGPT : méthode, prompts et adaptation multi-portails" (live 25 avril 2026, JSON-LD Article + HowTo + FAQPage + BreadcrumbList, ajouté au sitemap avec priorité 0.8)
 - ⏳ Optimize images & page load speed
 - 📌 Consider multilingual version (FR → EN) — Month 2+
 

@@ -148,7 +148,7 @@ Les moteurs génératifs citent des sources qui : (1) répondent directement à 
 - [ ] Ajouter un lien vers la FAQ dans le footer du site
 
 ### Contenu
-- [ ] Article 7 (identifié dans le checklist projet) — priorité aux sujets avec forte demande LLM : "Comment écrire une annonce immobilière avec ChatGPT" est la requête la plus cherchée dans ce domaine
+- [x] **Article 7 publié le 25 avril 2026** — *Comment rédiger une annonce immobilière avec ChatGPT : méthode, prompts et adaptation multi-portails*. Cible la requête la plus cherchée du domaine. JSON-LD Article + HowTo (5 étapes) + FAQPage (4 Q&A pour GEO) + BreadcrumbList. Long-tails couverts : "rédiger annonce immobilière ChatGPT", "prompt ChatGPT immobilier", "annonce LeBonCoin SeLoger BienIci", "fiche bien IA". Ajouté au sitemap avec priorité 0.8 (au-dessus des articles 1-6 à 0.7 pour signal de fraîcheur). Lien FAQ dans la nav corrigé pour pointer vers `/faq-ia-immobilier.html` (au lieu de l'ancien anchor `#faq`).
 
 ---
 
