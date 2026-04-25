@@ -176,22 +176,6 @@ textarea:focus-visible {
   animation: fadeIn 0.8s ease 0.15s forwards;
 }
 
-.nav-logo-accent {
-  color: var(--gold);
-}
-
-.brand-wordmark {
-  display: inline-flex;
-  align-items: baseline;
-}
-
-.brand-mark {
-  width: 1.05rem;
-  height: 1.05rem;
-  flex: 0 0 auto;
-  filter: drop-shadow(0 0 10px rgba(200, 146, 42, 0.14));
-}
-
 .nav-links {
   list-style: none;
   display: flex;
@@ -525,12 +509,6 @@ section {
   color: var(--text-muted);
 }
 
-.footer-logo .brand-mark {
-  width: 0.95rem;
-  height: 0.95rem;
-  opacity: 0.92;
-}
-
 .footer-copy {
   font-family: var(--mono);
   font-size: 0.65rem;
@@ -636,4 +614,56 @@ section {
   .section-title {
     font-size: clamp(1.9rem, 9vw, 2.8rem);
   }
+}
+
+/* ─── Cascade logo ──────────────────────────────────────────── */
+
+.cascade-logo {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  font-family: var(--sans);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+  user-select: none;
+  gap: 0;
+}
+
+.cascade-logo--l  { font-size: 1.15rem; }
+.cascade-logo--s  { font-size: 0.95rem; }
+.cascade-logo--xs { font-size: 0.82rem; }
+
+.cascade-d { font-weight: 100; opacity: 0.50; }
+.cascade-o { font-weight: 200; opacity: 0.62; }
+.cascade-m { font-weight: 400; opacity: 0.76; }
+.cascade-u { font-weight: 700; opacity: 0.90; }
+.cascade-s { font-weight: 900; opacity: 1.00; }
+
+.cascade-ai {
+  font-family: var(--mono);
+  font-size: 0.58em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  align-self: flex-end;
+  margin-bottom: 0.12em;
+  margin-left: 0.3em;
+  opacity: 1;
+}
+
+.cascade-logo:hover .cascade-d { opacity: 0.65; }
+.cascade-logo:hover .cascade-o { opacity: 0.75; }
+.cascade-logo:hover .cascade-m { opacity: 0.85; }
+.cascade-logo:hover .cascade-u { opacity: 0.95; }
+.cascade-logo:hover .cascade-s { opacity: 1.00; }
+.cascade-logo:hover .cascade-ai { color: var(--gold-light); }
+
+.cascade-logo span {
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .nav-logo.cascade-logo--l { font-size: 0.95rem; }
+  .nav-logo.cascade-logo--l .cascade-ai { font-size: 0.58em; }
 }
