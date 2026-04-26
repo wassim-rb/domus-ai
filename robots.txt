@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /contact-form.html
 
-Sitemap: https://domus-ai.fr/sitemap.xml
+Sitemap: https://www.domus-ai.fr/sitemap.xml

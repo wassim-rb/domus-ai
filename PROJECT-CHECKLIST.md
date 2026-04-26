@@ -103,6 +103,7 @@ Validation rule:
 - ⏳ Add social proof / case study section to homepage
 - ✅ Publish blog articles 4-6 (articles 4, 5, 6 now live on site)
 - ✅ Publish blog article 7 — "Comment rédiger une annonce immobilière avec ChatGPT : méthode, prompts et adaptation multi-portails" (live 25 avril 2026, JSON-LD Article + HowTo + FAQPage + BreadcrumbList, ajouté au sitemap avec priorité 0.8)
+- ⏳ Re-check Google Search Console between 27 Apr and 2 May 2026 — sitemap accepted on 25 Apr 2026 and homepage indexed; confirm `/blog/` and `/faq-ia-immobilier.html` are indexed before requesting indexing again
 - ⏳ Optimize images & page load speed
 - 📌 Consider multilingual version (FR → EN) — Month 2+
 

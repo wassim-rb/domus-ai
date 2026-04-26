@@ -4,11 +4,11 @@
 
 This document captures all infrastructure, service configurations, and deployment details for the Domus-AI website. Use this as reference for maintenance, debugging, and future evolutions.
 
-**Live Site**: https://domus-ai.fr  
+**Live Site**: https://www.domus-ai.fr  
 **Repository**: https://github.com/wassim-rb/domus-ai  
 **Deployment Platform**: Vercel  
 **Status**: Live and maintained  
-**Last Reviewed**: April 13, 2026
+**Last Reviewed**: April 25, 2026
 
 ---
 
@@ -69,7 +69,7 @@ This document captures all infrastructure, service configurations, and deploymen
 ```
 
 ### Testing the Form
-1. Go to https://domus-ai.fr#contact
+1. Go to https://www.domus-ai.fr#contact
 2. Fill in test data (name, email, site web ou LinkedIn, phone, message)
 3. Submit
 4. Check email (should arrive in 5-30 seconds)
@@ -130,7 +130,7 @@ The domain currently uses OVHcloud's default MX records for mail redirection onl
 
 ### Current Deployment
 - **Platform**: Vercel (free tier)
-- **Production URL**: https://domus-ai.fr
+- **Production URL**: https://www.domus-ai.fr
 - **Source**: GitHub main branch (`wassim-rb/domus-ai`)
 - **Auto-Deploy**: Enabled (any push to main triggers deploy)
 - **Deploy History**: View at https://vercel.com → Project → Deployments
@@ -246,6 +246,7 @@ nslookup -type=MX domus-ai.fr
 
 ### Current Setup
 - **Analytics**: GA4 measurement ID `G-1G1293D2BP` added on all current public HTML pages and verified in production on April 13, 2026
+- **Search Console**: Domain property `domus-ai.fr` verified on April 25, 2026
 - **SEO**: meta tags in place (title, description, keywords)
 - **SSL**: Auto-enabled by Vercel (HTTPS by default)
 - **robots.txt**: Present
@@ -256,11 +257,28 @@ nslookup -type=MX domus-ai.fr
 > Canonical rule: see `AGENTS.md` rule #6. GA4 measurement ID: `G-1G1293D2BP`.  
 > Applies to all public pages: index.html, mentions-legales.html, blog/index.html, and every blog/article-*.html.
 
+### Google Search Console Status (April 25, 2026)
+- **Property Type**: Domain property for `domus-ai.fr`
+- **Preferred URL Version**: Use `https://www.domus-ai.fr/...` when inspecting pages and when submitting the sitemap
+- **Sitemap Submitted**: `https://www.domus-ai.fr/sitemap.xml`
+- **Sitemap Result**: Processed successfully on April 25, 2026
+- **Pages Discovered via Sitemap**: 11
+- **Homepage Status**: `https://www.domus-ai.fr/` confirmed indexed on April 25, 2026
+- **Pending Pages at Last Check**:
+  - `https://www.domus-ai.fr/blog/`
+  - `https://www.domus-ai.fr/faq-ia-immobilier.html`
+- **Action Already Taken**: Indexing requested for both pending pages on April 25, 2026
+- **Re-check Window**: Between April 27 and May 2, 2026, before requesting indexing again
+- **Useful Live URLs**:
+  - `https://www.domus-ai.fr/robots.txt`
+  - `https://www.domus-ai.fr/sitemap.xml`
+
 ### Future Enhancements
 - [x] **Google Analytics verification** — Production tracking confirmed on April 13, 2026 via real-time view and Google tag detection
-- [ ] **Search Console** — Monitor indexing, keywords, click-through rates
-  - Setup: Verify domain at https://search.google.com/search-console
-  - Submitxml sitemap for faster indexing
+- [x] **Search Console setup** — Domain property verified on April 25, 2026
+- [x] **Search Console sitemap submission** — `https://www.domus-ai.fr/sitemap.xml` accepted on April 25, 2026 with 11 pages discovered
+- [ ] **Search Console follow-up** — Re-check indexing for `/blog/` and `/faq-ia-immobilier.html` between April 27 and May 2, 2026
+- [ ] **Search Console monitoring** — Continue checking indexing, keywords, and click-through rates
 - [ ] **Hotjar** — Heatmaps, session recordings (understanding user behavior)
 
 ---
@@ -292,7 +310,7 @@ nslookup -type=MX domus-ai.fr
 # From project directory:
 git status                    # Check uncommitted changes
 git log --oneline -5          # Recent commits
-curl -I https://domus-ai.fr  # Check if site is live
+curl -I https://www.domus-ai.fr  # Check if site is live
 ```
 
 ### Getting Help
@@ -317,6 +335,6 @@ Before handing off project for future evolution:
 
 ---
 
-**Last Updated**: April 10, 2026  
+**Last Updated**: April 25, 2026  
 **Maintained By**: Claude  
 **Next Review**: After first customer acquisition or Phase 3 launch

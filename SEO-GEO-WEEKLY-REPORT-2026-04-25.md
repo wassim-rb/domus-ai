@@ -12,6 +12,9 @@
 - Homepage complète avec JSON-LD `ProfessionalService` + Google Analytics
 - Blog avec 6 articles publiés, tous bien ciblés sur des mots-clés terrain
 - Sitemap.xml et robots.txt en place
+- Propriété Google Search Console `domus-ai.fr` vérifiée le 25 avril 2026
+- Sitemap `https://www.domus-ai.fr/sitemap.xml` soumis et traité avec succès le 25 avril 2026 (11 pages découvertes)
+- Homepage `https://www.domus-ai.fr/` confirmée comme indexée dans Google le 25 avril 2026
 - Social : LinkedIn + Instagram actifs
 - Meta tags et OG tags corrects sur toutes les pages
 
@@ -67,7 +70,7 @@ Un site récent avec peu de backlinks ne peut pas se battre sur l'autorité de d
 - Hausse du CTR estimée : +15 à 40% sur les articles éligibles aux rich results
 
 ### Prochaine étape
-Vérifier les 6 articles dans [Google Rich Results Test](https://search.google.com/test/rich-results) après le prochain déploiement Vercel. Soumettre sitemap dans Google Search Console pour forcer le re-crawl.
+Vérifier les 6 articles dans [Google Rich Results Test](https://search.google.com/test/rich-results) après le prochain déploiement Vercel. Puis recontrôler l'indexation de `/blog/` et `/faq-ia-immobilier.html` dans Search Console entre le 27 avril et le 2 mai 2026.
 
 ---
 
@@ -138,7 +141,9 @@ Les moteurs génératifs citent des sources qui : (1) répondent directement à 
 ## 5. Prochaines actions recommandées (semaine suivante)
 
 ### SEO
-- [ ] Déployer sur Vercel et soumettre sitemap dans Google Search Console
+- [x] Déployer sur Vercel et soumettre le sitemap dans Google Search Console
+- [x] Vérifier la homepage dans Search Console — `https://www.domus-ai.fr/` est déjà indexée
+- [ ] Recontrôler dans Search Console l'indexation de `/blog/` et `/faq-ia-immobilier.html` entre le 27 avril et le 2 mai 2026 avant de redemander une indexation
 - [ ] Vérifier les rich results avec Google Rich Results Test sur les 6 articles
 - [ ] Ajouter `datePublished` visible dans le HTML des articles (balise `<time>`) pour renforcer l'autorité temporelle auprès de Google
 
