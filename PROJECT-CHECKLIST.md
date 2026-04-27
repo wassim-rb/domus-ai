@@ -1,6 +1,6 @@
 # DOMUS-AI WEBSITE CHECKLIST
 
-**Last Updated:** 25 Apr 2026  
+**Last Updated:** 27 Apr 2026  
 **Scope:** Website only — domus-ai.fr  
 **Current Phase:** PHASE 3 — WEBSITE IMPROVEMENTS (POST-LAUNCH)  
 **Progress:** Phase 1 ✅ | Phase 2 ✅ (launched April 13, 2026) | Phase 3 in progress
@@ -104,6 +104,7 @@ Validation rule:
 - ✅ Publish blog articles 4-6 (articles 4, 5, 6 now live on site)
 - ✅ Publish blog article 7 — "Comment rédiger une annonce immobilière avec ChatGPT : méthode, prompts et adaptation multi-portails" (live 25 avril 2026, JSON-LD Article + HowTo + FAQPage + BreadcrumbList, ajouté au sitemap avec priorité 0.8)
 - ⏳ Re-check Google Search Console between 27 Apr and 2 May 2026 — sitemap accepted on 25 Apr 2026 and homepage indexed; confirm `/blog/` and `/faq-ia-immobilier.html` are indexed before requesting indexing again
+- ⏳ Check the `wassim-rbila.html` page and add the correct Wassim Rbila LinkedIn profile link everywhere it appears (visible button + structured data)
 - ⏳ Optimize images & page load speed
 - 📌 Consider multilingual version (FR → EN) — Month 2+
 

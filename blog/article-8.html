@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA et RGPD dans une agence immobilière : ce qui est autorisé en 2026 | Domus-AI</title>
+<meta name="description" content="Ce que votre agence peut faire avec l'IA sans violer le RGPD, ce qui est risqué, et comment sécuriser vos usages avant la loi du 11 août 2026. Guide concret avec exemples.">
+<meta property="og:title" content="IA et RGPD dans une agence immobilière : autorisé, toléré, interdit | Domus-AI">
+<meta property="og:description" content="Guide pratique RGPD × IA pour les agences immobilières en France : données personnelles, consentement, outils cloud et conformité avant août 2026.">
+<meta property="og:image" content="https://www.domus-ai.fr/assets/domus-ai-linkedin-banner-hd.png">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://www.domus-ai.fr/blog/article-8.html">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="../assets/favicon/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/favicon-180.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1G1293D2BP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1G1293D2BP');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/article.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "IA et RGPD dans une agence immobilière : ce qui est autorisé, ce qui est risqué en 2026",
+      "description": "Ce que votre agence peut faire avec l'IA sans violer le RGPD, ce qui est risqué, et comment sécuriser vos usages avant la loi du 11 août 2026.",
+      "url": "https://www.domus-ai.fr/blog/article-8.html",
+      "datePublished": "2026-04-27",
+      "dateModified": "2026-04-27",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.domus-ai.fr/wassim-rbila.html#wassim-rbila",
+        "name": "Wassim Rbila",
+        "url": "https://www.domus-ai.fr/wassim-rbila.html",
+        "sameAs": "https://www.linkedin.com/in/wassim-rbila"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Domus AI",
+        "url": "https://www.domus-ai.fr",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.domus-ai.fr/assets/favicon/favicon-1024.png"
+        }
+      },
+      "image": "https://www.domus-ai.fr/assets/domus-ai-linkedin-banner-hd.png",
+      "mainEntityOfPage": "https://www.domus-ai.fr/blog/article-8.html",
+      "inLanguage": "fr-FR",
+      "keywords": ["RGPD IA immobilier", "intelligence artificielle RGPD agence", "données personnelles IA immobilier", "conformité IA immobilier 2026", "ChatGPT RGPD agence immobilière", "loi IA 2026 immobilier"],
+      "articleSection": "Guide pratique",
+      "timeRequired": "PT10M",
+      "about": [
+        { "@type": "Thing", "name": "RGPD" },
+        { "@type": "Thing", "name": "Intelligence artificielle" },
+        { "@type": "Thing", "name": "Agences immobilières" },
+        { "@type": "Thing", "name": "Conformité des données" }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "Comment sécuriser les usages IA de votre agence immobilière vis-à-vis du RGPD",
+      "description": "Processus en 4 étapes pour utiliser l'IA dans une agence immobilière sans risque RGPD : cartographie des données, choix des outils, documentation et politique d'utilisation.",
+      "totalTime": "PT10M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Cartographier les données que vous faites traiter par l'IA",
+          "text": "Lister toutes les tâches où vous utilisez ou prévoyez d'utiliser l'IA (qualification leads, comptes rendus, annonces, emails). Pour chaque tâche, identifier si des données personnelles sont impliquées : nom, téléphone, email, adresse de bien, situation financière du client. Cette cartographie prend 30 à 60 minutes et conditionne toutes les décisions suivantes."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Distinguer les outils qui entraînent les modèles de ceux qui ne le font pas",
+          "text": "Vérifier pour chaque outil IA utilisé si les données soumises servent à entraîner le modèle. ChatGPT (version gratuite) entraîne par défaut — désactiver l'historique dans les paramètres ou utiliser ChatGPT Team / Enterprise. Claude Pro et l'API Anthropic n'utilisent pas les conversations pour l'entraînement par défaut. Copilot Microsoft 365 est couvert par le DPA Microsoft. Tout outil grand public non contractualisé est une zone grise à risque."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Ne jamais soumettre de données identifiantes brutes à un outil cloud non contractualisé",
+          "text": "Règle opérationnelle : avant de coller un texte dans ChatGPT ou Claude, vérifier qu'il ne contient pas de nom, téléphone, email ou adresse associés à une personne physique identifiable. Pour un compte rendu de visite, remplacer 'M. Dupont, 06 12 34 56 78' par 'le client' avant de passer l'IA. Cette anonymisation prend 10 secondes et élimine 90% du risque RGPD."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Documenter vos usages IA dans votre registre de traitement",
+          "text": "Le RGPD exige que tout traitement de données personnelles soit documenté dans un registre des activités de traitement (article 30 du RGPD). Ajouter une ligne pour chaque usage IA impliquant des données personnelles : finalité, base légale, catégorie de données, sous-traitant (OpenAI, Anthropic, Microsoft), durée de conservation. En cas de contrôle CNIL, ce registre est la première pièce demandée."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Peut-on utiliser ChatGPT avec les données clients d'une agence immobilière ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, sous conditions. La version gratuite de ChatGPT peut utiliser vos conversations pour entraîner les modèles OpenAI — ce qui constitue un transfert de données à un sous-traitant non encadré par un DPA (Data Processing Agreement). Pour une utilisation professionnelle conforme au RGPD, utiliser ChatGPT Team (9€/mois/utilisateur) ou ChatGPT Enterprise, qui incluent un DPA et désactivent l'entraînement sur vos données. L'alternative : anonymiser systématiquement les données avant de les soumettre à l'IA, quelle que soit la version utilisée."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelles données personnelles ne doit-on jamais soumettre à une IA cloud ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dans le contexte immobilier, les données à ne jamais soumettre à une IA cloud non contractualisée sont : les noms et prénoms des clients ou prospects, les numéros de téléphone et adresses email, les situations financières (revenus, capacité d'emprunt, dossier de financement), les pièces d'identité ou données de la fiche de renseignements, et les coordonnées complètes associées à un bien. En pratique : avant de coller un texte dans une IA, retirer tout ce qui identifie une personne physique spécifique. Garder les données agrégées, les types de bien, les cas génériques."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qu'est-ce qui change avec la loi du 11 août 2026 pour les agences immobilières ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La loi du 11 août 2026 interdit le démarchage téléphonique B2C non consenti (cold calling vers des particuliers sans demande préalable). Elle ne modifie pas directement les règles RGPD sur l'IA, mais elle renforce indirectement l'obligation de disposer d'une base légale claire pour contacter un prospect. Si votre CRM contient des prospects issus d'achats de fichiers ou de listes non opt-in, les contacter via un workflow IA automatisé après le 11 août 2026 expose l'agence à un double risque : violation de la loi démarchage et traitement RGPD sans base légale valide."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Une agence immobilière doit-elle nommer un DPO pour utiliser l'IA ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, une agence immobilière standard n'est pas obligée de nommer un Délégué à la Protection des Données (DPO). Le DPO obligatoire ne concerne que les organismes publics, les entités traitant des données sensibles à grande échelle, ou celles dont l'activité principale implique un suivi régulier et systématique des personnes à grande échelle. Une agence de 2 à 15 personnes n'entre généralement pas dans ces catégories. En revanche, maintenir un registre des traitements et documenter les usages IA reste obligatoire pour toute structure, quelle que soit sa taille."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment utiliser l'IA pour qualifier des leads immobiliers sans violer le RGPD ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trois règles opérationnelles suffisent pour qualifier des leads avec l'IA en restant conforme. Première règle : travailler sur des données anonymisées ou pseudonymisées dans l'IA — l'identifiant client reste dans votre CRM, l'IA ne voit que le profil dépersonnalisé (type de projet, budget, délai, critères). Deuxième règle : ne pas automatiser les décisions de refus ou de classement définitif uniquement sur la base d'un score IA sans supervision humaine — le RGPD interdit les décisions automatisées à impact significatif (article 22). Troisième règle : utiliser un outil contractualisé avec un DPA si vous traitez des volumes importants ou des données financières."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.domus-ai.fr/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.domus-ai.fr/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "IA et RGPD dans une agence immobilière", "item": "https://www.domus-ai.fr/blog/article-8.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="article-page">
+
+<div class="page-progress" aria-hidden="true"></div>
+
+<nav class="site-nav" id="navbar">
+  <a href="../index.html" class="nav-logo cascade-logo cascade-logo--l" aria-label="Domus-AI — accueil"><span class="cascade-d">D</span><span class="cascade-o">O</span><span class="cascade-m">M</span><span class="cascade-u">U</span><span class="cascade-s">S</span><span class="cascade-ai">·AI</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">Accueil</a></li>
+    <li><a href="../index.html#solution">Solutions</a></li>
+    <li><a href="../index.html#approche">Approche</a></li>
+    <li><a href="../index.html#offres">Offres</a></li>
+    <li><a href="../index.html#apropos">À propos</a></li>
+    <li><a href="index.html" aria-current="page">Blog</a></li>
+    <li><a href="../faq-ia-immobilier.html">FAQ</a></li>
+    <li><a href="../index.html#contact" class="nav-cta-btn">Prendre rendez-vous</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main>
+  <article class="article-shell">
+    <div class="article-topbar">
+      <a href="index.html" class="article-back-link">Retour au blog</a>
+      <span class="article-breadcrumb">Blog / RGPD &amp; IA en agence</span>
+    </div>
+
+    <div class="article-container">
+      <header class="article-header">
+        <p class="article-kicker">Guide pratique</p>
+        <div class="article-meta-top">
+          <span class="article-meta-item"><time datetime="2026-04-27">Publié le 27 avril 2026</time></span>
+          <span class="article-meta-item">10 minutes de lecture</span>
+          <span class="article-meta-item">RGPD &amp; Conformité</span>
+        </div>
+        <h1>IA et RGPD dans une agence immobilière : ce qui est autorisé, ce qui est risqué en 2026</h1>
+        <p class="article-lede">Réponse courte : vous pouvez utiliser ChatGPT, Claude et les autres outils IA dans votre agence sans violer le RGPD — à condition de ne jamais y soumettre de données personnelles identifiantes sans contrat de sous-traitance en place, et d'anonymiser systématiquement vos textes avant de les passer à l'IA. La suite de cet article donne le détail concret : ce qui est autorisé, ce qui est risqué, ce qui est interdit, et comment sécuriser vos usages actuels en moins d'une journée.</p>
+      </header>
+
+      <div class="article-body">
+
+        <h2>Pourquoi le RGPD s'applique à vos usages IA — même si vous ne stockez rien</h2>
+
+        <p>Le malentendu le plus courant : « je n'enregistre rien, donc il n'y a pas de traitement ». C'est faux au sens du RGPD. Soumettre un texte contenant le nom d'un client, son numéro de téléphone ou sa situation financière à une IA cloud, même temporairement, constitue un traitement de données personnelles. Ce traitement implique un transfert à un sous-traitant — OpenAI, Anthropic, Microsoft — et ce sous-traitant doit être encadré par un contrat spécifique appelé DPA (Data Processing Agreement).</p>
+
+        <p>Sans DPA en place, vous transférez des données personnelles à un tiers sans base légale RGPD valide. Ce n'est pas théorique : la CNIL a déjà sanctionné des entreprises pour des transferts de données vers des outils SaaS sans DPA, et l'utilisation d'IA générative grand public est dans son radar depuis 2023.</p>
+
+        <p>La bonne nouvelle : le risque est très facile à réduire avec deux réflexes simples, sans investissement technique particulier.</p>
+
+        <h2>La règle des 10 secondes : anonymiser avant de soumettre</h2>
+
+        <p>Avant de coller n'importe quel texte dans une IA, appliquer ce filtre : est-ce que ce texte contient quelque chose qui permet d'identifier une personne physique spécifique ?</p>
+
+        <p>Les données identifiantes courantes en agence immobilière :</p>
+        <ul>
+          <li>Nom et prénom d'un client, acquéreur ou vendeur</li>
+          <li>Numéro de téléphone ou adresse email personnelle</li>
+          <li>Adresse exacte d'un bien associée au propriétaire</li>
+          <li>Situation financière : revenus, capacité d'emprunt, dossier de financement</li>
+          <li>Données issues d'une pièce d'identité ou d'une fiche de renseignements</li>
+        </ul>
+
+        <p>Si le texte contient l'un de ces éléments, deux options : soit retirer l'élément identifiant avant de soumettre à l'IA (« M. Dupont, 06 12 34 56 78 » devient « le client »), soit utiliser un outil contractualisé avec un DPA en bonne et due forme.</p>
+
+        <p>Cette règle des 10 secondes ne demande aucun outil supplémentaire. Elle s'apprend en une session de formation d'une heure et élimine 90 % du risque RGPD lié à l'utilisation quotidienne de l'IA en agence.</p>
+
+        <h2>Ce qui est autorisé sans restriction particulière</h2>
+
+        <p>Ces usages ne présentent pas de risque RGPD significatif parce qu'ils n'impliquent pas de données personnelles identifiables :</p>
+
+        <ul>
+          <li><strong>Rédiger une annonce immobilière</strong> à partir de la fiche technique d'un bien (surface, DPE, étage, prix) — sans mentionner le propriétaire ni ses coordonnées</li>
+          <li><strong>Générer un email de relance</strong> en remplaçant le prénom du destinataire par un champ variable rempli côté CRM, pas dans l'IA</li>
+          <li><strong>Synthétiser un compte rendu de visite</strong> à partir de notes anonymisées : « le client cherche un T3, budget 350k, délai 3 mois » — sans nom ni contact</li>
+          <li><strong>Préparer des scripts de qualification</strong> génériques, des modèles d'email, des réponses FAQ — aucune donnée personnelle en jeu</li>
+          <li><strong>Analyser des données DVF</strong> (données.gouv.fr) pour construire une estimation — ces données sont publiques et déjà anonymisées par l'État</li>
+          <li><strong>Rédiger des courriers contractuels standards</strong> (lettres de mandat, attestations) en remplaçant les champs nominatifs par des variables avant de passer l'IA</li>
+        </ul>
+
+        <h2>Ce qui est risqué — à encadrer, pas à interdire</h2>
+
+        <p>Ces usages ne sont pas interdits mais exposent à un risque réel si l'outil n'est pas contractualisé :</p>
+
+        <p><strong>Soumettre un dossier client complet à ChatGPT (version gratuite ou Plus) pour en faire un résumé.</strong> Le dossier contient presque toujours des données identifiantes. Solution : utiliser ChatGPT Team (à partir de 9 € HT/mois/utilisateur) qui inclut un DPA OpenAI, ou anonymiser le dossier avant de le soumettre.</p>
+
+        <p><strong>Utiliser un outil IA non contractualisé pour noter automatiquement des leads.</strong> Si la notation entraîne une décision significative (ne pas rappeler ce prospect, le classer « non prioritaire » définitivement), l'article 22 du RGPD s'applique : les décisions automatisées à impact significatif sur une personne nécessitent soit un consentement explicite, soit une supervision humaine obligatoire. Dans la pratique : l'IA peut produire un score, un humain valide la décision finale.</p>
+
+        <p><strong>Stocker des transcriptions de conversations avec des clients dans un outil IA cloud.</strong> Si vous utilisez un assistant vocal ou un outil de transcription automatique (type Otter, Fireflies, Granola) pour enregistrer des appels avec des prospects, vous devez informer explicitement la personne que la conversation est enregistrée et traitée par un système automatisé. L'information préalable est obligatoire, le consentement est fortement recommandé.</p>
+
+        <h2>Ce qui est interdit — sans discussion</h2>
+
+        <p>Trois usages sont clairement hors cadre RGPD quelle que soit la plateforme IA utilisée :</p>
+
+        <p><strong>Traiter des données sensibles via une IA grand public.</strong> Les données de santé, situation de handicap, orientation politique ou religieuse — même si elles apparaissent de façon incidente dans un dossier client (une note sur une situation médicale, par exemple) — sont des données sensibles au sens du RGPD (article 9). Leur traitement nécessite une base légale renforcée. Les soumettre à une IA cloud sans encadrement contractuel strict est interdit.</p>
+
+        <p><strong>Enrichir un fichier prospects avec des données collectées via du scraping automatisé sans consentement.</strong> Constituer une base de données en croisant des informations publiques (LinkedIn, Pages Jaunes, sites d'annonces) pour créer des profils personnalisés sans informer les personnes ni obtenir leur consentement est illégal, que l'enrichissement soit fait manuellement ou via IA.</p>
+
+        <p><strong>Contacter automatiquement des prospects après le 11 août 2026 sans base légale de prospection valide.</strong> Dès le 11 août 2026, tout contact commercial non sollicité vers des particuliers sans consentement préalable (opt-in) est interdit. Un workflow IA qui envoie automatiquement des emails ou messages à une base de prospects achetée ou constituée sans opt-in viole à la fois la loi démarchage et le RGPD.</p>
+
+        <div class="warning-box">
+          <strong>Date clé : 11 août 2026.</strong> Si votre CRM contient des prospects issus de listes achetées ou de collecte sans consentement explicite, le risque de double violation (loi démarchage + RGPD) est réel dès cette date. Auditez votre base avant juillet 2026.
+        </div>
+
+        <h2>Les 4 étapes pour sécuriser vos usages IA actuels</h2>
+
+        <h3>1. Cartographier ce que vous faites traiter par l'IA</h3>
+
+        <p>Listez toutes les tâches où vous utilisez l'IA aujourd'hui ou prévoyez de le faire. Pour chaque tâche, répondez à la question : est-ce que des données personnelles sont impliquées ? Cette cartographie prend 30 à 60 minutes. C'est le point de départ de tout le reste.</p>
+
+        <h3>2. Distinguer les outils avec DPA de ceux sans DPA</h3>
+
+        <p>Voici l'état actuel des principaux outils utilisés en agence :</p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Outil</th>
+              <th>DPA disponible ?</th>
+              <th>Entraînement sur vos données ?</th>
+              <th>Usage professionnel sécurisé</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ChatGPT (gratuit / Plus)</td>
+              <td>Non</td>
+              <td>Oui par défaut (désactivable)</td>
+              <td>Données anonymisées uniquement</td>
+            </tr>
+            <tr>
+              <td>ChatGPT Team</td>
+              <td>Oui (DPA OpenAI)</td>
+              <td>Non</td>
+              <td>✓ Acceptable avec DPA signé</td>
+            </tr>
+            <tr>
+              <td>Claude Pro (Anthropic)</td>
+              <td>Non (usage perso)</td>
+              <td>Non par défaut</td>
+              <td>Données anonymisées recommandé</td>
+            </tr>
+            <tr>
+              <td>API Anthropic / Claude</td>
+              <td>Oui (DPA Anthropic)</td>
+              <td>Non</td>
+              <td>✓ Acceptable avec DPA signé</td>
+            </tr>
+            <tr>
+              <td>Microsoft Copilot 365</td>
+              <td>Oui (DPA Microsoft)</td>
+              <td>Non (données isolées par tenant)</td>
+              <td>✓ Acceptable si tenant configuré</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>3. Appliquer la règle d'anonymisation systématique</h3>
+
+        <p>Quel que soit l'outil, intégrer le réflexe d'anonymisation dans les workflows d'équipe. Une session de formation courte (1 heure) suffit pour que l'ensemble de l'équipe comprenne le principe et l'applique. Ce n'est pas une contrainte technique — c'est un réflexe éditorial.</p>
+
+        <h3>4. Documenter dans votre registre de traitement</h3>
+
+        <p>Le RGPD (article 30) impose à toute structure traitant des données personnelles de tenir un registre des activités de traitement. Si vous utilisez l'IA dans un processus qui implique des données personnelles, ce traitement doit y figurer. Pour chaque usage IA documenté, noter : la finalité (ex. : qualification de leads), la base légale (ex. : intérêt légitime), le sous-traitant (ex. : OpenAI via ChatGPT Team), la catégorie de données (ex. : coordonnées de prospects), et la durée de conservation.</p>
+
+        <p>En cas de contrôle CNIL, ce registre est la première pièce demandée. Son absence peut aggraver une sanction même si les traitements eux-mêmes sont conformes.</p>
+
+        <h2>Ce que ça change concrètement dans votre quotidien</h2>
+
+        <p>La conformité RGPD ne ralentit pas l'adoption de l'IA. Elle la structure. Les agences qui intègrent ces règles dès le départ gagnent en deux directions : elles évitent une exposition réglementaire croissante à mesure que l'utilisation de l'IA se généralise dans le secteur, et elles construisent une différenciation commerciale réelle. Dans un secteur où la confiance est un actif central, pouvoir dire à un client « nous utilisons l'IA et voici comment nous protégeons vos données » est un argument commercial, pas une contrainte.</p>
+
+        <p>Pour une agence de 2 à 10 personnes, la mise en conformité complète des usages IA tient en une journée de travail : cartographie, choix des outils, formation de l'équipe, mise à jour du registre. C'est le périmètre exact de ce qu'on installe dans l'offre Éveil.</p>
+
+        <div class="cta-box">
+          <h3>Vous utilisez déjà l'IA dans votre agence et vous n'êtes pas sûr de votre conformité RGPD ?</h3>
+          <p>Un appel de 30 minutes permet de faire le point sur vos usages actuels, identifier les zones de risque réelles et définir les ajustements prioritaires. Aucun jargon juridique — uniquement ce qui compte pour votre agence.</p>
+          <a href="../index.html#contact" class="cta-button">Planifier un appel</a>
+        </div>
+
+        <h2>En résumé</h2>
+
+        <ul>
+          <li><strong>Le principe de base :</strong> soumettre des données personnelles à une IA cloud constitue un traitement RGPD — même sans stockage. Un DPA avec le sous-traitant IA est nécessaire si vous traitez des données identifiables.</li>
+          <li><strong>La règle des 10 secondes :</strong> avant de coller un texte dans une IA, vérifier qu'il ne contient pas de nom, téléphone, email ou situation financière identifiable. Anonymiser sinon.</li>
+          <li><strong>Les usages sûrs :</strong> annonces, comptes rendus anonymisés, scripts génériques, analyse DVF — aucune donnée personnelle, aucun risque RGPD.</li>
+          <li><strong>Les usages à encadrer :</strong> dossiers clients, scoring automatisé, transcriptions d'appels — possibles avec un DPA en place et/ou une supervision humaine.</li>
+          <li><strong>Date clé :</strong> 11 août 2026 — double risque pour les bases de prospects non opt-in (loi démarchage + RGPD). Auditer avant juillet 2026.</li>
+          <li><strong>La mise en conformité :</strong> tient en une journée pour une agence standard — cartographie, choix d'outils, formation, registre.</li>
+        </ul>
+
+        <div class="related-section">
+          <h4>Continuer la lecture</h4>
+          <div class="related-links">
+            <div class="related-link">
+              <a href="article-4.html">Remplacer le démarchage téléphonique avant août 2026 avec l'IA</a>
+            </div>
+            <div class="related-link">
+              <a href="article-5.html">Nettoyer et réactiver votre fichier prospects avec l'IA</a>
+            </div>
+            <div class="related-link">
+              <a href="article-6.html">Quels courriers immobiliers peut-on rédiger avec l'IA en 2026 ?</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="author-bio">
+          <img src="../assets/photos/wassim-rbila.png" alt="Wassim Rbila" class="author-bio-photo">
+          <div class="author-bio-content">
+            <p class="author-bio-name"><a href="../wassim-rbila.html">Wassim Rbila</a></p>
+            <p class="author-bio-role">Fondateur de Domus AI — Spécialiste IA × Immobilier en France</p>
+            <p class="author-bio-text">10 ans d'expérience en IA et data (Betclic, Rakuten, Tesla, Nike). Il forme et accompagne les agences immobilières françaises à l'adoption concrète de l'IA pour gagner du temps sur les tâches répétitives sans complexifier le travail terrain.</p>
+            <a href="../wassim-rbila.html" class="author-bio-link">Voir le profil complet →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <a href="../index.html" class="footer-logo cascade-logo cascade-logo--xs" aria-label="Domus-AI"><span class="cascade-d">D</span><span class="cascade-o">O</span><span class="cascade-m">M</span><span class="cascade-u">U</span><span class="cascade-s">S</span><span class="cascade-ai">·AI</span></a>
+  <span class="footer-copy">© 2026 — Tous droits réservés</span>
+  <ul class="footer-links">
+    <li><a href="../mentions-legales.html">Mentions légales</a></li>
+    <li><a href="mailto:contact@domus-ai.fr">Contact</a></li>
+  </ul>
+</footer>
+
+<script defer src="../assets/site.js"></script>
+</body>
+</html>

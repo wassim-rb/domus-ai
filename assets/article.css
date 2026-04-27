@@ -442,3 +442,138 @@
     font-size: 1rem;
   }
 }
+
+/* ── Author bio ────────────────────────────────────────────── */
+.author-bio {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+  padding: 1.6rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.author-bio-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.author-bio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.author-bio-name {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.author-bio-name a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-border);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.author-bio-name a:hover,
+.author-bio-name a:focus-visible {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+
+.author-bio-role {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.author-bio-text {
+  margin: 0.5rem 0 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary, var(--text-muted));
+  line-height: 1.6;
+}
+
+.author-bio-link {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+}
+
+.author-bio-link:hover,
+.author-bio-link:focus-visible {
+  color: var(--gold-light);
+}
+
+@media (max-width: 540px) {
+  .author-bio {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .author-bio-photo {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* ── Data table ────────────────────────────────────────────── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.data-table thead th {
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--gold-border);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.data-table tbody td {
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+@media (max-width: 640px) {
+  .data-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
